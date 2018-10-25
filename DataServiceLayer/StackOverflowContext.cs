@@ -51,20 +51,15 @@ namespace DataServiceLayer
             modelBuilder.Entity<MarkType>().Property(x => x.Id).HasColumnName("id");
             modelBuilder.Entity<MarkType>().Property(x => x.Type).HasColumnName("type");
 
-            modelBuilder.Entity<Post>().ToTable("posts");
-            modelBuilder.Entity<Post>().Property(x => x.Id).HasColumnName("id");
-            modelBuilder.Entity<Post>().Property(x => x.ParentId).HasColumnName("parentid");
-            modelBuilder.Entity<Post>().Property(x => x.AcceptedAnswerId).HasColumnName("acceptedanswerid");
-            modelBuilder.Entity<Post>().Property(x => x.CreationDate).HasColumnName("creationdate");
-            modelBuilder.Entity<Post>().Property(x => x.Score).HasColumnName("score");
-            modelBuilder.Entity<Post>().Property(x => x.Body).HasColumnName("body");
-            modelBuilder.Entity<Post>().Property(x => x.CloseDate).HasColumnName("closedate");
-            modelBuilder.Entity<Post>().Property(x => x.Title).HasColumnName("title");
-            modelBuilder.Entity<Post>().Property(x => x.AuthorId).HasColumnName("author_id");
-            modelBuilder.Entity<Post>().Property(x => x.LinkPostId).HasColumnName("linkpostid");
-            //modelBuilder.Entity<Post>().Property(x => x.TypeId).HasColumnName("posttypeid");
 
-            modelBuilder.Entity<Question>().HasBaseType<Post>().HasDiscriminator(x => x.TypeId).HasValue(1);
+
+
+            modelBuilder.Entity<Post>().ToTable("posts");
+            //NOTE: set the modelbuilder that we have a value posttypeid of type int, that descriminates into question on value 1 and answer on value 2.
+            // hence no mapping on post.
+            modelBuilder.Entity<Post>().HasDiscriminator<int>("posttypeid")
+                .HasValue<Question>(1)
+                .HasValue<Answer>(2);
 
             modelBuilder.Entity<Question>().Property(x => x.Id).HasColumnName("id");
             modelBuilder.Entity<Question>().Property(x => x.ParentId).HasColumnName("parentid");
@@ -72,12 +67,10 @@ namespace DataServiceLayer
             modelBuilder.Entity<Question>().Property(x => x.CreationDate).HasColumnName("creationdate");
             modelBuilder.Entity<Question>().Property(x => x.Score).HasColumnName("score");
             modelBuilder.Entity<Question>().Property(x => x.Body).HasColumnName("body");
-            modelBuilder.Entity<Question>().Property(x => x.CloseDate).HasColumnName("closedate");
+            modelBuilder.Entity<Question>().Property(x => x.ClosedDate).HasColumnName("closeddate");
             modelBuilder.Entity<Question>().Property(x => x.Title).HasColumnName("title");
             modelBuilder.Entity<Question>().Property(x => x.AuthorId).HasColumnName("author_id");
             modelBuilder.Entity<Question>().Property(x => x.LinkPostId).HasColumnName("linkpostid");
-
-            modelBuilder.Entity<Answer>().HasBaseType<Post>().HasDiscriminator(x => x.TypeId).HasValue(2);
             
             modelBuilder.Entity<Answer>().Property(x => x.Id).HasColumnName("id");
             modelBuilder.Entity<Answer>().Property(x => x.ParentId).HasColumnName("parentid");
@@ -85,7 +78,7 @@ namespace DataServiceLayer
             modelBuilder.Entity<Answer>().Property(x => x.CreationDate).HasColumnName("creationdate");
             modelBuilder.Entity<Answer>().Property(x => x.Score).HasColumnName("score");
             modelBuilder.Entity<Answer>().Property(x => x.Body).HasColumnName("body");
-            modelBuilder.Entity<Answer>().Property(x => x.CloseDate).HasColumnName("closedate");
+            modelBuilder.Entity<Answer>().Property(x => x.ClosedDate).HasColumnName("closeddate");
             modelBuilder.Entity<Answer>().Property(x => x.Title).HasColumnName("title");
             modelBuilder.Entity<Answer>().Property(x => x.AuthorId).HasColumnName("author_id");
             modelBuilder.Entity<Answer>().Property(x => x.LinkPostId).HasColumnName("linkpostid");
