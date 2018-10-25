@@ -4,7 +4,9 @@ using System.Text;
 
 namespace DataServiceLayer.Models
 {
-    class Comments
+    class Marks
     {
+        public int Id { get; set; }
+        public string Type { get; set; }
     }
 }
