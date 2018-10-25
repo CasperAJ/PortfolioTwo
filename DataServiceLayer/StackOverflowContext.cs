@@ -58,7 +58,7 @@ namespace DataServiceLayer
             modelBuilder.Entity<Post>().Property(x => x.CreationDate).HasColumnName("creationdate");
             modelBuilder.Entity<Post>().Property(x => x.Score).HasColumnName("score");
             modelBuilder.Entity<Post>().Property(x => x.Body).HasColumnName("body");
-            modelBuilder.Entity<Post>().Property(x => x.CloseDate).HasColumnName("closedate");
+            modelBuilder.Entity<Post>().Property(x => x.CloseDate).HasColumnName("closeddate");
             modelBuilder.Entity<Post>().Property(x => x.Title).HasColumnName("title");
             modelBuilder.Entity<Post>().Property(x => x.AuthorId).HasColumnName("author_id");
             modelBuilder.Entity<Post>().Property(x => x.LinkPostId).HasColumnName("linkpostid");
