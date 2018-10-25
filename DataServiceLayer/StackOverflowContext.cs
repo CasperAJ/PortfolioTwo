@@ -45,7 +45,7 @@ namespace DataServiceLayer
             modelBuilder.Entity<Comment>().Property(x => x.PostId).HasColumnName("post_id");
 
             modelBuilder.Entity<Mark>().ToTable("marks");
-            modelBuilder.Entity<Mark>().ToTable("marks").HasKey(x => new {x.UserId, x.PostId, x.MarkTypeId});
+            modelBuilder.Entity<Mark>().ToTable("marks").HasKey(x => new {x.UserId, x.PostId, x.Type});
 
             modelBuilder.Entity<MarkType>().ToTable("marktypes");
             modelBuilder.Entity<MarkType>().Property(x => x.Id).HasColumnName("id");

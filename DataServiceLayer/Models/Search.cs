@@ -4,12 +4,12 @@ using System.Text;
 
 namespace DataServiceLayer.Models
 {
-    class Searches
+    public class Search
     {
         public int Id { get; set; }
         public string SearchString { get; set; }
 
-        public Users Users { get; set; }
+        public User User { get; set; }
         public int UserId { get; set; }
     }
 }

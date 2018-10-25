@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataServiceLayer.Models
 {
-    public class Posts
+    public class Post
     {
         public int Id { get; set; }
         public int ParentId { get; set; }
@@ -14,8 +14,8 @@ namespace DataServiceLayer.Models
         public string Body { get; set; }
         public DateTime CloseDate { get; set; }
         public string Title { get; set; }
-        public Authors Author { get; set; }
-        public int AuthorsId { get; set; }
+        public Author Author { get; set; }
+        public int AuthorId { get; set; }
         public int LinkPostId { get; set; }
     }
 }

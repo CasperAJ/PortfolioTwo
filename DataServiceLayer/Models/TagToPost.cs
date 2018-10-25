@@ -4,12 +4,12 @@ using System.Text;
 
 namespace DataServiceLayer.Models
 {
-    public class TagToPosts
+    public class TagToPost
     {
-        public Tags Tags { get; set; }
+        public Tag Tag { get; set; }
         public int TagId { get; set; }
 
-        public Posts Posts { get; set; }
+        public Post Post { get; set; }
         public int PostId { get; set; }
     }
 }
