@@ -4,10 +4,11 @@ using System.Text;
 
 namespace DataServiceLayer.Models
 {
-    public class Post
+    public abstract class Post
     {
         public int Id { get; set; }
         public int ParentId { get; set; }
+        public int TypeId { get; set; }  
         public int AcceptedAnswerId { get; set; }
         public DateTime CreationDate { get; set; }
         public int Score { get; set; }

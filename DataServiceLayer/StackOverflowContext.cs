@@ -62,6 +62,36 @@ namespace DataServiceLayer
             modelBuilder.Entity<Post>().Property(x => x.Title).HasColumnName("title");
             modelBuilder.Entity<Post>().Property(x => x.AuthorId).HasColumnName("author_id");
             modelBuilder.Entity<Post>().Property(x => x.LinkPostId).HasColumnName("linkpostid");
+            //modelBuilder.Entity<Post>().Property(x => x.TypeId).HasColumnName("posttypeid");
+
+            modelBuilder.Entity<Question>().HasBaseType<Post>().HasDiscriminator(x => x.TypeId).HasValue(1);
+
+            modelBuilder.Entity<Question>().Property(x => x.Id).HasColumnName("id");
+            modelBuilder.Entity<Question>().Property(x => x.ParentId).HasColumnName("parentid");
+            modelBuilder.Entity<Question>().Property(x => x.AcceptedAnswerId).HasColumnName("acceptedanswerid");
+            modelBuilder.Entity<Question>().Property(x => x.CreationDate).HasColumnName("creationdate");
+            modelBuilder.Entity<Question>().Property(x => x.Score).HasColumnName("score");
+            modelBuilder.Entity<Question>().Property(x => x.Body).HasColumnName("body");
+            modelBuilder.Entity<Question>().Property(x => x.CloseDate).HasColumnName("closedate");
+            modelBuilder.Entity<Question>().Property(x => x.Title).HasColumnName("title");
+            modelBuilder.Entity<Question>().Property(x => x.AuthorId).HasColumnName("author_id");
+            modelBuilder.Entity<Question>().Property(x => x.LinkPostId).HasColumnName("linkpostid");
+
+            modelBuilder.Entity<Answer>().HasBaseType<Post>().HasDiscriminator(x => x.TypeId).HasValue(2);
+            
+            modelBuilder.Entity<Answer>().Property(x => x.Id).HasColumnName("id");
+            modelBuilder.Entity<Answer>().Property(x => x.ParentId).HasColumnName("parentid");
+            modelBuilder.Entity<Answer>().Property(x => x.AcceptedAnswerId).HasColumnName("acceptedanswerid");
+            modelBuilder.Entity<Answer>().Property(x => x.CreationDate).HasColumnName("creationdate");
+            modelBuilder.Entity<Answer>().Property(x => x.Score).HasColumnName("score");
+            modelBuilder.Entity<Answer>().Property(x => x.Body).HasColumnName("body");
+            modelBuilder.Entity<Answer>().Property(x => x.CloseDate).HasColumnName("closedate");
+            modelBuilder.Entity<Answer>().Property(x => x.Title).HasColumnName("title");
+            modelBuilder.Entity<Answer>().Property(x => x.AuthorId).HasColumnName("author_id");
+            modelBuilder.Entity<Answer>().Property(x => x.LinkPostId).HasColumnName("linkpostid");
+
+
+
 
             modelBuilder.Entity<Search>().ToTable("searches");
             modelBuilder.Entity<Search>().Property(x => x.Id).HasColumnName("id");
