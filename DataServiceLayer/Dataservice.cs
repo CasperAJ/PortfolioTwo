@@ -20,6 +20,7 @@ namespace DataServiceLayer
         public List<Post> GetAllPosts()
         {
             return db.Posts.OrderBy(x=> x.Id).ToList();
+
         }
     }
 }
