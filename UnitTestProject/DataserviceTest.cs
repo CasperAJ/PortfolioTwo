@@ -46,5 +46,40 @@ namespace UnitTestProject
             var comment = service.GetCommentById(674);
             Assert.Equal("Your co-workers are going to hate you.", comment.Text);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // Get author by Id
+        [Fact]
+        public void GetAuthor_VallidReturn()
+        {
+            var service = new DataService();
+            var author = service.GetAuthor(1);
+            Assert.Equal("Jeff Atwood", author.Name);
+            Assert.Equal(new DateTime(2008,07,31,14,22,31), author.CreationDate);
+            Assert.Equal("El Cerrito, CA", author.Location);
+            Assert.Equal(45, author.Age);
+        }
+
     }
 }

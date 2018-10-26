@@ -133,7 +133,7 @@ namespace DataServiceLayer
                 authorObj.CreationDate = authorData.CreationDate;
             }
 
-            return null;
+            return authorObj;
         }
 
     }
