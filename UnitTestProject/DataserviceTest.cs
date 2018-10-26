@@ -66,7 +66,7 @@ namespace UnitTestProject
         {
             var service = new DataService();
             var mark = service.GetAllMarksByUser(1);
-            Assert.Equal(1, mark.MarkType.Id);
+            Assert.Equal(1, mark.Type);
             Assert.Equal(1, mark.UserId);
         }
 
@@ -75,8 +75,8 @@ namespace UnitTestProject
         public void GetMarkByIdForUser_ValidReturn()
         {
             var service = new DataService();
-            var mark = service.GetMarkByIdForUser(20350933, 1);
-            Assert.Equal(1, mark.MarkType.Id);
+            var mark = service.GetMarkByIdForUser(19, 1);
+            Assert.Equal(1, mark.Type);
             Assert.Equal(1, mark.UserId);
         }
 

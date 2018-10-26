@@ -44,9 +44,13 @@ namespace DataServiceLayer
             modelBuilder.Entity<Comment>().Property(x => x.AuthorId).HasColumnName("author_id");
             modelBuilder.Entity<Comment>().Property(x => x.PostId).HasColumnName("post_id");
 
-            // Note mangler op marks?
+
             // Mark binding til userid og postid failer i forhjold til db
             modelBuilder.Entity<Mark>().ToTable("marks");
+            modelBuilder.Entity<Mark>().Property(x => x.PostId).HasColumnName("post_id");
+            modelBuilder.Entity<Mark>().Property(x => x.UserId).HasColumnName("user_id");
+            modelBuilder.Entity<Mark>().Property(x => x.Type).HasColumnName("marktype_id");
+            modelBuilder.Entity<Mark>().Property(x => x.Note).HasColumnName("note");
             modelBuilder.Entity<Mark>().ToTable("marks").HasKey(x => new {x.UserId, x.PostId, x.Type});
 
             modelBuilder.Entity<MarkType>().ToTable("marktypes");

@@ -72,8 +72,8 @@ namespace DataServiceLayer
         public Mark GetAllMarksByUser(int userId)
         {
             //binding failure
-            //return db.Marks.First(x=> x.UserId == userId);
-            return null;
+            return db.Marks.First(x=> x.UserId == userId);
+            //return null;
         }
 
         public Mark GetMarkByIdForUser(int postId, int UserId)
