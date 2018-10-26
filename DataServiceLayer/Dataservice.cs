@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using DataServiceLayer.Models;
 
@@ -114,8 +115,23 @@ namespace DataServiceLayer
         }
 
         //Author
-        public Author GetAuthor(int id)
+        public Author GetAuthor(int authorId)
         {
+            var authorObj = new Author();
+
+            var dataSource = db.Authors;
+            var lingQuery = dataSource.Where(x => x.Id.Equals(authorId))
+                .Select(x => new {x.Id, x.Name, x.Age, x.Location, x.CreationDate});
+
+            foreach (var authorData in lingQuery)
+            {
+                authorObj.Id = authorData.Id;
+                authorObj.Name = authorData.Name;
+                authorObj.Age = authorData.Age;
+                authorObj.Location = authorData.Location;
+                authorObj.CreationDate = authorData.CreationDate;
+            }
+
             return null;
         }
 
