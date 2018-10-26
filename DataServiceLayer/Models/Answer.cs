@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DataServiceLayer.Models
 {
-    class Answer
+    public class Answer : Post
     {
     }
 }
