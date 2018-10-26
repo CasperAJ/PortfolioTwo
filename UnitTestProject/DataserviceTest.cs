@@ -57,6 +57,14 @@ namespace UnitTestProject
             Assert.Equal(65846, comments.Last().AuthorId);
         }
 
+        //Users
+        [Fact]
+        public void GetUserById()
+        {
+            var service = new DataService();
+            var user = service.GetUser(1);
+            Assert.Equal("user01", user.UserName);
+        }
 
 
 

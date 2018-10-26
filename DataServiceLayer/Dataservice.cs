@@ -54,9 +54,9 @@ namespace DataServiceLayer
         }
 
         //Users
-        public User GetUser(int id)
+        public User GetUser(int userid)
         {
-            return null;
+            return db.Users.FirstOrDefault(x=> x.Id == userid);
         }
 
         public bool CreateUser(User user)
