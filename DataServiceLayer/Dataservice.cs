@@ -56,12 +56,20 @@ namespace DataServiceLayer
         //Users
         public User GetUser(int userid)
         {
-            return db.Users.FirstOrDefault(x=> x.Id == userid);
+            return db.Users.FirstOrDefault(x => x.Id == userid);
         }
 
-        public bool CreateUser(User user)
+        public User CreateUser(string username, string password, string email, DateTime creationdate)
         {
-            return false;
+            creationdate = DateTime.Now;
+            var id = db.Users.Last().Id;
+            id += 1;
+            var user = new User() { Id = id, UserName = username, Password = password, Email = email, CreationDate = creationdate };
+
+            db.Users.Add(user);
+            db.SaveChanges();
+
+            return user;
         }
 
         /*
@@ -75,13 +83,13 @@ namespace DataServiceLayer
         public Mark GetAllMarksByUser(int userId)
         {
             //binding failure
-            return db.Marks.First(x=> x.UserId == userId);
+            return db.Marks.First(x => x.UserId == userId);
             //return null;
         }
 
         public Mark GetMarkByIdForUser(int postId, int UserId)
         {
-            return db.Marks.First(x=> x.PostId == postId && x.UserId == UserId);
+            return db.Marks.First(x => x.PostId == postId && x.UserId == UserId);
         }
 
         public bool CreateMark(int postId, int userId)
@@ -110,7 +118,7 @@ namespace DataServiceLayer
 
             //return foundSearch;
 
-            return db.Searches.First(x=> x.SearchString == wantedSearch);
+            return db.Searches.First(x => x.SearchString == wantedSearch);
         }
 
         public bool CreateSearchByString(int userId, string search)
@@ -120,7 +128,7 @@ namespace DataServiceLayer
             newSearch.UserId = userId;
 
             var dataPoint = db.Searches;
-            var insertNewSearch  = dataPoint.Add(newSearch);
+            var insertNewSearch = dataPoint.Add(newSearch);
             db.SaveChanges();
             if (insertNewSearch.GetDatabaseValues() != null)
             {
@@ -141,7 +149,7 @@ namespace DataServiceLayer
             var searchList = new List<Search>();
 
             var dataSource = db.Searches;
-            var query = dataSource.Select(x => new {x.Id, x.SearchString, x.UserId});
+            var query = dataSource.Select(x => new { x.Id, x.SearchString, x.UserId });
 
             foreach (var searchData in query)
             {
@@ -182,7 +190,7 @@ namespace DataServiceLayer
 
             var dataSource = db.Authors;
             var lingQuery = dataSource.Where(x => x.Id.Equals(authorId))
-                .Select(x => new {x.Id, x.Name, x.Age, x.Location, x.CreationDate});
+                .Select(x => new { x.Id, x.Name, x.Age, x.Location, x.CreationDate });
 
             foreach (var authorData in lingQuery)
             {
