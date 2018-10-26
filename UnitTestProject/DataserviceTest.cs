@@ -66,7 +66,17 @@ namespace UnitTestProject
 
 
 
-
+        // Get all searches for user
+        [Fact]
+        public void GetAllSearchesForUser_ValidReturn()
+        {
+            var service = new DataService();
+            var searches = service.GetAllSearchesByUserId(2);
+            Assert.Equal(3,searches.Count);
+            Assert.Equal(2, searches.First().Id);
+            Assert.Equal("sql params csharp", searches.First().SearchString);
+            Assert.Equal(2, searches.First().UserId);
+        }
 
 
         // Get author by Id
