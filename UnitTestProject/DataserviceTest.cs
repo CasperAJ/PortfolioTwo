@@ -62,11 +62,29 @@ namespace UnitTestProject
 
 
 
+        // Get search by search string
+        [Fact]
+        public void GetSearchBySearchString_ValidReturn()
+        {
+            var service = new DataService();
+            var search = service.GetSearchByString("how to do substring in php");
+            Assert.Equal("how to do substring in php", search.SearchString);
+            Assert.Equal(1, search.Id);
+        }
+
+        // Create search with string and userId
+        [Fact]
+        public void CreateSearchByString_ValidReturn()
+        {
+            var service = new DataService();
+            var newSearch = service.CreateSearchByString(1, "This is a test search");
+            Assert.True(newSearch);
+        }
 
 
         // Get all searches
         [Fact]
-        public void GetAllSearches()
+        public void GetAllSearches_ValidReturn()
         {
             var service = new DataService();
             var searches = service.GetAllSearches();

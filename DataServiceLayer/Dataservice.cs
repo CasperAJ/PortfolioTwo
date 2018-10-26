@@ -90,24 +90,54 @@ namespace DataServiceLayer
         }
 
         //Searches
-        public Search GetSearchByString(string search)
+        public Search GetSearchByString(string wantedSearch)
         {
-            return null;
+            var foundSearch = new Search();
+
+            var dataSource = db.Searches;
+            var query = dataSource.Where(x => x.SearchString.Equals(wantedSearch))
+                .Select(x => new {x.SearchString});
+
+            foreach (var searchData in query)
+            {
+                foundSearch.SearchString = searchData.SearchString;
+            }
+
+            //return foundSearch;
+
+            return db.Searches.First(x=> x.SearchString == wantedSearch);
         }
 
         public bool CreateSearchByString(int userId, string search)
         {
+            var newSearch = new Search();
+            newSearch.SearchString = search;
+            newSearch.UserId = userId;
+
+
+            var dataPoint = db.Searches;
+            var insertNewSearch  = dataPoint.Add(newSearch);
+            db.SaveChanges();
+            if (insertNewSearch.GetDatabaseValues() != null)
+            {
+                Search newlyInsertedSearch = (Search)insertNewSearch.GetDatabaseValues().ToObject();
+                //var delteSearch = dataPoint.Find(newlyInsertedSearch.Id);
+                dataPoint.Remove(newlyInsertedSearch);
+                return true;
+            }
             return false;
         }
 
+        // Seach type ? Search er unitype ?
         public List<Search> GetSearchBySearchType(string searchtype)
         {
+
             return null;
         }
 
         public List<Search> GetAllSearches()
         {
-            var searchList = new  List<Search>();
+            var searchList = new List<Search>();
 
             var dataSource = db.Searches;
             var query = dataSource.Select(x => new {x.Id, x.SearchString, x.UserId});
