@@ -45,9 +45,12 @@ namespace DataServiceLayer
             return db.Comments.FirstOrDefault(x => x.Id == id);
         }
 
-        public Comment GetCommentByPostId(int id)
+        public List<Comment> GetCommentsByPostId(int id)
         {
-            return null;
+            var data = db.Comments
+                .Where(x => x.PostId == id);
+
+            return data.ToList();
         }
 
         //Users

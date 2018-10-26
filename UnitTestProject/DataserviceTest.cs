@@ -47,6 +47,16 @@ namespace UnitTestProject
             Assert.Equal("Your co-workers are going to hate you.", comment.Text);
         }
 
+        [Fact]
+        public void GetComments_ByPostId_ReturnsComments()
+        {
+            var service = new DataService();
+            var comments = service.GetCommentsByPostId(39433);
+            Assert.Equal(27, comments.Count);
+            Assert.Equal(1820, comments.First().AuthorId);
+            Assert.Equal(65846, comments.Last().AuthorId);
+        }
+
 
 
 
