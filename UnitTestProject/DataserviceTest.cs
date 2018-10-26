@@ -52,6 +52,7 @@ namespace UnitTestProject
 
 
 
+        
 
 
 
@@ -59,8 +60,25 @@ namespace UnitTestProject
 
 
 
+        // Get all marks for user
+        [Fact]
+        public void GetAllMarksByUser_ValidReturn()
+        {
+            var service = new DataService();
+            var mark = service.GetAllMarksByUser(1);
+            Assert.Equal(1, mark.MarkType.Id);
+            Assert.Equal(1, mark.UserId);
+        }
 
-
+        // Get all marks for user
+        [Fact]
+        public void GetMarkByIdForUser_ValidReturn()
+        {
+            var service = new DataService();
+            var mark = service.GetMarkByIdForUser(20350933, 1);
+            Assert.Equal(1, mark.MarkType.Id);
+            Assert.Equal(1, mark.UserId);
+        }
 
         // Get search by search string
         [Fact]

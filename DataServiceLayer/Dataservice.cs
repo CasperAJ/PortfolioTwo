@@ -69,14 +69,16 @@ namespace DataServiceLayer
         */
 
         //Marks
-        public Mark GetAllMarks()
+        public Mark GetAllMarksByUser(int userId)
         {
+            //binding failure
+            //return db.Marks.First(x=> x.UserId == userId);
             return null;
         }
 
-        public Mark GetMarkById(int id)
+        public Mark GetMarkByIdForUser(int postId, int UserId)
         {
-            return null;
+            return db.Marks.First(x=> x.PostId == postId && x.UserId == UserId);
         }
 
         public bool CreateMark(int postId, int userId)
@@ -92,16 +94,16 @@ namespace DataServiceLayer
         //Searches
         public Search GetSearchByString(string wantedSearch)
         {
-            var foundSearch = new Search();
+            //var foundSearch = new Search();
 
-            var dataSource = db.Searches;
-            var query = dataSource.Where(x => x.SearchString.Equals(wantedSearch))
-                .Select(x => new {x.SearchString});
+            //var dataSource = db.Searches;
+            //var query = dataSource.Where(x => x.SearchString.Equals(wantedSearch))
+            //    .Select(x => new {x.SearchString});
 
-            foreach (var searchData in query)
-            {
-                foundSearch.SearchString = searchData.SearchString;
-            }
+            //foreach (var searchData in query)
+            //{
+            //    foundSearch.SearchString = searchData.SearchString;
+            //}
 
             //return foundSearch;
 
@@ -114,15 +116,11 @@ namespace DataServiceLayer
             newSearch.SearchString = search;
             newSearch.UserId = userId;
 
-
             var dataPoint = db.Searches;
             var insertNewSearch  = dataPoint.Add(newSearch);
             db.SaveChanges();
             if (insertNewSearch.GetDatabaseValues() != null)
             {
-                Search newlyInsertedSearch = (Search)insertNewSearch.GetDatabaseValues().ToObject();
-                //var delteSearch = dataPoint.Find(newlyInsertedSearch.Id);
-                dataPoint.Remove(newlyInsertedSearch);
                 return true;
             }
             return false;
