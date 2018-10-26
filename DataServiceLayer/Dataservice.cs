@@ -59,9 +59,9 @@ namespace DataServiceLayer
             return db.Users.FirstOrDefault(x => x.Id == userid);
         }
 
-        public User CreateUser(string username, string password, string email, DateTime creationdate)
+        public User CreateUser(string username, string password, string email)
         {
-            creationdate = DateTime.Now;
+            var creationdate = DateTime.Now;
             var id = db.Users.Last().Id;
             id += 1;
             var user = new User() { Id = id, UserName = username, Password = password, Email = email, CreationDate = creationdate };
@@ -124,8 +124,13 @@ namespace DataServiceLayer
         public bool CreateSearchByString(int userId, string search)
         {
             var newSearch = new Search();
+            var id = db.Searches.Last().Id;
+            id += 1;
+
+            newSearch.Id = id;
             newSearch.SearchString = search;
             newSearch.UserId = userId;
+
 
             var dataPoint = db.Searches;
             var insertNewSearch = dataPoint.Add(newSearch);

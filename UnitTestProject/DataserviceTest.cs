@@ -70,7 +70,7 @@ namespace UnitTestProject
         public void CreateUser_ByValidId()
         {
             var service = new DataService();
-            var user = service.CreateUser("TestUser01", "12345", "test@test.dk", DateTime.Now);
+            var user = service.CreateUser("TestUser01", "12345", "test@test.dk");
             Assert.True(user.Id > 0);
             Assert.Equal("TestUser01", user.UserName);
         }
