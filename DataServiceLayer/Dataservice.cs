@@ -22,9 +22,9 @@ namespace DataServiceLayer
             return db.Posts.OrderBy(x => x.Id).ToList();
         }
 
-        public List<Post> GetPostById(int id)
+        public Post GetPostById(int id)
         {
-            return null;
+            return db.Posts.FirstOrDefault(x => x.Id == id);
         }
 
         public Post GetAnswerById(int id)
