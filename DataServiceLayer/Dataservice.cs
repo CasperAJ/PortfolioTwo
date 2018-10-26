@@ -27,6 +27,7 @@ namespace DataServiceLayer
             return db.Posts.FirstOrDefault(x => x.Id == id);
         }
 
+        //er ikke sikker hvordan vi gør med answer og questions
         public Post GetAnswerById(int id)
         {
             return null;
@@ -35,12 +36,12 @@ namespace DataServiceLayer
         //Comments
         public List<Comment> GetAllComments()
         {
-            return null;
+            return db.Comments.OrderBy(x => x.Id).ToList();
         }
 
         public Comment GetCommentById(int id)
         {
-            return null;
+            return db.Comments.FirstOrDefault(x => x.Id == id);
         }
 
         public Comment GetCommentByPostId(int id)
