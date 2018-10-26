@@ -64,7 +64,15 @@ namespace UnitTestProject
 
 
 
-
+        // Get all searches
+        [Fact]
+        public void GetAllSearches()
+        {
+            var service = new DataService();
+            var searches = service.GetAllSearches();
+            Assert.Equal(9, searches.Count);
+            Assert.Equal(4, searches.Last().UserId);
+        }
 
         // Get all searches for user
         [Fact]

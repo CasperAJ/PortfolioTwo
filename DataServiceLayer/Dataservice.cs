@@ -105,9 +105,23 @@ namespace DataServiceLayer
             return null;
         }
 
-        public List<Search> GetAllSearches(string search)
+        public List<Search> GetAllSearches()
         {
-            return null;
+            var searchList = new  List<Search>();
+
+            var dataSource = db.Searches;
+            var query = dataSource.Select(x => new {x.Id, x.SearchString, x.UserId});
+
+            foreach (var searchData in query)
+            {
+                var searchObj = new Search();
+                searchObj.Id = searchData.Id;
+                searchObj.SearchString = searchData.SearchString;
+                searchObj.UserId = searchData.UserId;
+                searchList.Add(searchObj);
+            }
+
+            return searchList;
         }
 
         public List<Search> GetAllSearchesByUserId(int userId)
