@@ -95,12 +95,26 @@ namespace UnitTestProject
             Assert.Equal(1, mark.UserId);
         }
 
+        // Get User Mark By MarkType
+        [Fact]
+        public void GetUserMarkByMarkType_ValidReturn()
+        {
+            var service = new DataService();
+            var mark1 = service.GetUserMarkByMarkType(1, 1);
+            Assert.Equal(3,mark1.Count);
+            Assert.Equal(22548689, mark1.Last().PostId);
+
+            var mark2 = service.GetUserMarkByMarkType(1, 2);
+            Assert.Equal(2, mark2.Count);
+            Assert.Equal(24205154, mark2.Last().PostId);
+        }
+
         // Get all marks for user
         [Fact]
         public void GetMarkByIdForUser_ValidReturn()
         {
             var service = new DataService();
-            var mark = service.GetMarkByIdForUser(19, 1);
+            var mark = service.GetMarkByIdForUser(20350933, 1);
             Assert.Equal(1, mark.Type);
             Assert.Equal(1, mark.UserId);
         }

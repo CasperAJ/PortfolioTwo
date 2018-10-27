@@ -45,7 +45,6 @@ namespace DataServiceLayer
             modelBuilder.Entity<Comment>().Property(x => x.PostId).HasColumnName("post_id");
 
 
-            // Mark binding til userid og postid failer i forhjold til db
             modelBuilder.Entity<Mark>().ToTable("marks");
             modelBuilder.Entity<Mark>().Property(x => x.PostId).HasColumnName("post_id");
             modelBuilder.Entity<Mark>().Property(x => x.UserId).HasColumnName("user_id");

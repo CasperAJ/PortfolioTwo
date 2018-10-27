@@ -61,10 +61,10 @@ namespace DataServiceLayer
 
         public User CreateUser(string username, string password, string email)
         {
-            var creationdate = DateTime.Now;
+            var creationDate = DateTime.Now;
             var id = db.Users.Last().Id;
             id += 1;
-            var user = new User() { Id = id, UserName = username, Password = password, Email = email, CreationDate = creationdate };
+            var user = new User() { Id = id, UserName = username, Password = password, Email = email, CreationDate = creationDate };
 
             db.Users.Add(user);
             db.SaveChanges();
@@ -79,17 +79,26 @@ namespace DataServiceLayer
         }
         */
 
-        //Marks
+        //Marks // skal returne en list of marks
         public Mark GetAllMarksByUser(int userId)
         {
-            //binding failure
             return db.Marks.First(x => x.UserId == userId);
-            //return null;
         }
 
-        public Mark GetMarkByIdForUser(int postId, int UserId)
+        public List<Mark> GetUserMarkByMarkType(int userId ,int marktypeId)
         {
-            return db.Marks.First(x => x.PostId == postId && x.UserId == UserId);
+            var markList = new List<Mark>();
+            var query = db.Marks.Where(x => x.UserId == userId && x.Type == marktypeId);
+            foreach (var markData in query)
+            {
+                markList.Add(markData);
+            }
+            return markList;
+        }
+
+        public Mark GetMarkByIdForUser(int postId, int userId)
+        {
+            return db.Marks.First(x => x.PostId == postId && x.UserId == userId);
         }
 
         public bool CreateMark(int postId, int userId)
