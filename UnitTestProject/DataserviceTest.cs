@@ -119,6 +119,18 @@ namespace UnitTestProject
             Assert.Equal(1, mark.UserId);
         }
 
+        // Create new Mark
+        [Fact]
+        public void CreateMark_validReturn()
+        {
+            var service = new DataService();
+            var newMark1 = service.CreateMark(983366, 1, 1, "This is a test note");
+            Assert.True(newMark1);
+
+            var newMark2 = service.CreateMark(65628, 2, 2, "");
+            Assert.True(newMark2);
+        }
+
         // Get search by search string
         [Fact]
         public void GetSearchBySearchString_ValidReturn()

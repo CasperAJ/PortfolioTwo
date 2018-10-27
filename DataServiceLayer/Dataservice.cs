@@ -102,8 +102,21 @@ namespace DataServiceLayer
             return db.Marks.First(x => x.PostId == postId && x.UserId == userId);
         }
 
-        public bool CreateMark(int postId, int userId)
+        public bool CreateMark(int postId, int userId, int markType, string note)
         {
+            var newMark = new Mark();
+            newMark.PostId = postId;
+            newMark.UserId = userId;
+            newMark.Type = markType;
+            newMark.Note = note;
+
+            var dataPoint = db.Marks;
+            var insertNewMark = dataPoint.Add(newMark);
+            db.SaveChanges();
+            if (insertNewMark.GetDatabaseValues() != null)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -155,7 +168,6 @@ namespace DataServiceLayer
         // Seach type ? Search er unitype ?
         public List<Search> GetSearchBySearchType(string searchtype)
         {
-
             return null;
         }
 
