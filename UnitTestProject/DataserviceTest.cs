@@ -75,7 +75,18 @@ namespace UnitTestProject
             Assert.Equal("TestUser01", user.UserName);
         }
 
+        [Fact]
+        public void UpdateUser_WithEmailAndPassword()
+        {
+            var service = new DataService();
+            var user = service.CreateUser("TestUser100", "12356", "test@email.dk");
 
+            var result = service.UpdateUser(user.Id, "newUserTest@email.dk", "newPassword500");
+            Assert.True(result);
+
+            Assert.Equal("newPassword500", user.Password);
+            Assert.Equal("newUserTest@email.dk", user.Email);
+        }
 
         
 

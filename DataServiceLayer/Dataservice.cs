@@ -72,12 +72,23 @@ namespace DataServiceLayer
             return user;
         }
 
-        /*
-        public bool UpdateUser(User user)
+        
+        public bool UpdateUser(int id, string email, string password)
         {
-            return false;
+            var user = db.Users.FirstOrDefault(x => x.Id == id);
+
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.Email = email;
+            user.Password = password;
+            db.SaveChanges();
+
+            return true;
         }
-        */
+        
 
         //Marks
         public List<Mark> GetAllMarksByUser(int userId)
