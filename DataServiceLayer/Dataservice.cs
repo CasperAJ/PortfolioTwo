@@ -79,10 +79,11 @@ namespace DataServiceLayer
         }
         */
 
-        //Marks // skal returne en list of marks
-        public Mark GetAllMarksByUser(int userId)
+        //Marks
+        public List<Mark> GetAllMarksByUser(int userId)
         {
-            return db.Marks.First(x => x.UserId == userId);
+            var markList = db.Marks.Where(x => x.UserId == userId).ToList();
+            return markList;
         }
 
         public List<Mark> GetUserMarkByMarkType(int userId ,int marktypeId)

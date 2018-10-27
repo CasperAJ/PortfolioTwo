@@ -91,8 +91,8 @@ namespace UnitTestProject
         {
             var service = new DataService();
             var mark = service.GetAllMarksByUser(1);
-            Assert.Equal(1, mark.Type);
-            Assert.Equal(1, mark.UserId);
+            Assert.Equal(5, mark.Count);
+            Assert.Equal(24205154, mark.Last().PostId);
         }
 
         // Get User Mark By MarkType
