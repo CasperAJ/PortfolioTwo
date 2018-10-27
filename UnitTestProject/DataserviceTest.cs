@@ -88,14 +88,6 @@ namespace UnitTestProject
             Assert.Equal("newUserTest@email.dk", user.Email);
         }
 
-        
-
-
-
-
-
-
-
         // Get all marks for user
         [Fact]
         public void GetAllMarksByUser_ValidReturn()
