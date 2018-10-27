@@ -120,8 +120,15 @@ namespace DataServiceLayer
             return false;
         }
 
-        public bool DeleteMark(int postId, int userId)
+        public bool DeleteMark(int postId, int userId, int markType)
         {
+            var markToDelete = db.Marks.Find(postId, userId, markType);
+            //var markToDelete = db.Marks.Where(x => x.PostId == postId && x.UserId == userId && x.Type == markType);
+            if (markToDelete != null)
+            {
+                db.Marks.Remove(markToDelete);
+                return true;
+            }
             return false;
         }
 
@@ -147,13 +154,8 @@ namespace DataServiceLayer
         public bool CreateSearchByString(int userId, string search)
         {
             var newSearch = new Search();
-            var id = db.Searches.Last().Id;
-            id += 1;
-
-            newSearch.Id = id;
             newSearch.SearchString = search;
             newSearch.UserId = userId;
-
 
             var dataPoint = db.Searches;
             var insertNewSearch = dataPoint.Add(newSearch);

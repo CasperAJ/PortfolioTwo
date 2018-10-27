@@ -127,8 +127,18 @@ namespace UnitTestProject
             var newMark1 = service.CreateMark(983366, 1, 1, "This is a test note");
             Assert.True(newMark1);
 
-            var newMark2 = service.CreateMark(65628, 2, 2, "");
-            Assert.True(newMark2);
+            //var newMark2 = service.CreateMark(65628, 2, 2, "");
+            //Assert.True(newMark2);
+        }
+
+        // Delete Mark
+        [Fact]
+        public void DeleteMark_ValidReturn()
+        {
+            var service = new DataService();
+            //var mark = service.DeleteMark(20350933, 1, 1);
+            var mark = service.DeleteMark(983366, 1, 1);
+            Assert.True(mark);
         }
 
         // Get search by search string
