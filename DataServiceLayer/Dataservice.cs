@@ -63,9 +63,7 @@ namespace DataServiceLayer
         public User CreateUser(string username, string password, string email)
         {
             var creationDate = DateTime.Now;
-            var id = db.Users.Last().Id;
-            id += 1;
-            var user = new User() { Id = id, UserName = username, Password = password, Email = email, CreationDate = creationDate };
+            var user = new User() {UserName = username, Password = password, Email = email, CreationDate = creationDate };
 
             db.Users.Add(user);
             db.SaveChanges();
