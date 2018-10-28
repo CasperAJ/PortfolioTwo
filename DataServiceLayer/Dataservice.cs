@@ -59,6 +59,7 @@ namespace DataServiceLayer
             return db.Users.FirstOrDefault(x => x.Id == userid);
         }
 
+        // TODO: we need to handle exceptions here.
         public User CreateUser(string username, string password, string email)
         {
             var creationDate = DateTime.Now;
@@ -72,7 +73,7 @@ namespace DataServiceLayer
             return user;
         }
 
-        
+        // TODO: we need to handle exceptions here.
         public bool UpdateUser(int id, string email, string password)
         {
             var user = db.Users.FirstOrDefault(x => x.Id == id);
