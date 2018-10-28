@@ -31,7 +31,7 @@ namespace DataServiceLayer
         //er ikke sikker hvordan vi gør med answer og questions
         public Post GetAnswerById(int id)
         {
-            return null;
+            return db.Answers.FirstOrDefault(x=> x.Id == id);
         }
 
         //Comments
