@@ -140,7 +140,7 @@ namespace UnitTestProject
         {
             var service = new DataService();
             //var mark = service.DeleteMark(20350933, 1, 1);
-            var mark = service.DeleteMark(983366, 1, 1);
+            var mark = service.DeleteMark(19, 1, 1);
             Assert.True(mark);
         }
 

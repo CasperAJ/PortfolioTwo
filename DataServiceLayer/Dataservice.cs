@@ -132,6 +132,7 @@ namespace DataServiceLayer
 
         public bool DeleteMark(int postId, int userId, int markType)
         {
+            //var markToDelete = db.Marks.Find(new { PostId = postId, UserId = userId, MarkType = markType });
             var markToDelete = db.Marks.Find(postId, userId, markType);
             //var markToDelete = db.Marks.Where(x => x.PostId == postId && x.UserId == userId && x.Type == markType);
             if (markToDelete != null)
@@ -145,19 +146,6 @@ namespace DataServiceLayer
         //Searches
         public Search GetSearchByString(string wantedSearch)
         {
-            //var foundSearch = new Search();
-
-            //var dataSource = db.Searches;
-            //var query = dataSource.Where(x => x.SearchString.Equals(wantedSearch))
-            //    .Select(x => new {x.SearchString});
-
-            //foreach (var searchData in query)
-            //{
-            //    foundSearch.SearchString = searchData.SearchString;
-            //}
-
-            //return foundSearch;
-
             return db.Searches.First(x => x.SearchString == wantedSearch);
         }
 
@@ -175,12 +163,6 @@ namespace DataServiceLayer
                 return true;
             }
             return false;
-        }
-
-        // Seach type ? Search er unitype ?
-        public List<Search> GetSearchBySearchType(string searchtype)
-        {
-            return null;
         }
 
         public List<Search> GetAllSearches()
