@@ -19,7 +19,13 @@ namespace PortfolioTwo.Controllers
             _dataservice = dataservice;
         }
 
-        //Missing exception handling for if not found (always returns 200 Ok)
+        [HttpGet]
+        public IActionResult GetAllSearches()
+        {
+            var searches = _dataservice.GetAllSearches();
+            return Ok(searches);
+        }
+
         [HttpGet]
         [Route("{id}")]
         public IActionResult GetSearchesForUser(int id)
