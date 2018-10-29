@@ -28,7 +28,6 @@ namespace DataServiceLayer
             return db.Posts.FirstOrDefault(x => x.Id == id);
         }
 
-        //er ikke sikker hvordan vi gør med answer og questions
         public Post GetAnswerById(int id)
         {
             return db.Answers.FirstOrDefault(x => x.Id == id);
@@ -199,6 +198,11 @@ namespace DataServiceLayer
                 searchObj.SearchString = searchData.SearchString;
                 searchObj.UserId = searchData.UserId;
                 searchList.Add(searchObj);
+            }
+
+            if (searchList.Count == 0)
+            {
+                return null;
             }
 
             return searchList;
