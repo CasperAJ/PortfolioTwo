@@ -29,8 +29,8 @@ namespace PortfolioTwo.Controllers
         }
 
         [HttpGet]
-        [Route("{id}", Name = "GetSinglePost")]
-        public IActionResult Get(int id)
+        [Route("{id}", Name = nameof(GetSingle))]
+        public IActionResult GetSingle(int id)
         {
             var post = _dataservice.GetPostById(id);
             if (post == null) return NotFound();

@@ -10,7 +10,7 @@ namespace DataServiceLayer
         List<Post> GetAllPosts();
         Post GetPostById(int id);
         Post GetAnswerById(int id);
-        List<Comment> GetAllComments();
+        List<Comment> GetAllComments(int page, int pagesize);
         Comment GetCommentById(int id);
         List<Comment> GetCommentsByPostId(int id);
         User GetUser(int userid);

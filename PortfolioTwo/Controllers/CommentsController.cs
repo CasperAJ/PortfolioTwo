@@ -6,7 +6,9 @@ using DataServiceLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using DataServiceLayer.Models;
 using PortfolioTwo.Models;
+using PortfolioTwo.Utility;
 
 namespace PortfolioTwo.Controllers
 {
@@ -22,23 +24,28 @@ namespace PortfolioTwo.Controllers
             _dataService = dataService;
         }
 
-        [HttpGet]
-        public IActionResult GetAllComments()
+        [HttpGet(Name = nameof(GetAllComments))]
+        public IActionResult GetAllComments(int page = 0, int pagesize = 10)
         {
-            var comments = _dataService.GetAllComments().Take(10);
+            var comments = _dataService.GetAllComments(page, pagesize);
             List<CommentViewModel> Commentslist = new List<CommentViewModel>();
-
+            
             foreach (var comment in comments)
             {
                 var toadd = Mapper.Map<CommentViewModel>(comment);
-                toadd.Post = Url.Link("GetSinglePost", new {id = comment.PostId});
+                toadd.Post = LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.GetSingle), comment.PostId);
+                toadd.Author = LinkBuilder.CreateIdentityLink(Url.Link, nameof(AuthorController.GetAuthorById),
+                    comment.AuthorId);
                 Commentslist.Add(toadd);
             }
 
+
+            
+
             var returnobj = new
             {
-                next = "test",
-                prev = "test",
+                next = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllComments), (page+1), pagesize),
+                prev = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllComments), page-1, pagesize),
                 data = Commentslist
             };
 

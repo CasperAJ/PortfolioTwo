@@ -36,9 +36,13 @@ namespace DataServiceLayer
         }
 
         //Comments
-        public List<Comment> GetAllComments()
+        public List<Comment> GetAllComments(int page, int pagesize)
         {
-            return db.Comments.OrderBy(x => x.Id).ToList();
+            return db.Comments
+                .OrderBy(x => x.Id)
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
         }
 
         public Comment GetCommentById(int id)
