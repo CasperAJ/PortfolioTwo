@@ -67,13 +67,7 @@ namespace UnitTestProject
         }
 
 
-
-
-
-
         // Helpers
-
-
         (JArray, HttpStatusCode) GetArray(string url)
         {
             var client = new HttpClient();
