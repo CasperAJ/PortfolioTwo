@@ -132,9 +132,7 @@ namespace DataServiceLayer
 
         public bool DeleteMark(int postId, int userId, int markType)
         {
-            //var markToDelete = db.Marks.Find(new { PostId = postId, UserId = userId, MarkType = markType });
-            var markToDelete = db.Marks.Find(postId, userId, markType);
-            //var markToDelete = db.Marks.Where(x => x.PostId == postId && x.UserId == userId && x.Type == markType);
+            var markToDelete = db.Marks.FirstOrDefault(x => x.PostId == postId && x.UserId == userId && x.Type == markType);
             if (markToDelete != null)
             {
                 db.Marks.Remove(markToDelete);
@@ -146,7 +144,7 @@ namespace DataServiceLayer
         //Searches
         public Search GetSearchByString(string wantedSearch)
         {
-            return db.Searches.First(x => x.SearchString == wantedSearch);
+            return db.Searches.FirstOrDefault(x => x.SearchString == wantedSearch);
         }
 
         public bool CreateSearchByString(int userId, string search)
