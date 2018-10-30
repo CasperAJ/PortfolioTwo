@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataServiceLayer\DataServiceLayer.csproj" />
+    <ProjectReference Include="..\PortfolioTwo\PortfolioTwo.csproj" />
   </ItemGroup>
 
 </Project>
