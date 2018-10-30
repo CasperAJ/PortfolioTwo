@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -12,14 +13,15 @@ namespace UnitTestProject
     public class WebserviceTest
     {
         private const string UsersApi = "http://localhost:5000/api/users";
+        private const string CommentsApi = "http://localhost:5000/api/comments";
 
         [Fact]
         public void ApiUsers_GetUsersByValidId_OK()
         {
-            var (user, statusCode) = GetObject($"{UsersApi}/1");
+            var (user, statusCode) = GetObject($"{UsersApi}/2");
 
             Assert.Equal(HttpStatusCode.OK, statusCode);
-            Assert.Equal("user01", user["userName"]);
+            Assert.Equal("user02", user["userName"]);
 
         }
 
@@ -28,9 +30,9 @@ namespace UnitTestProject
         {
             var newUser = new
             {
-                userName = "Kastanie1",
-                password = "test1",
-                email = "test@email.dk1"
+                userName = "Kastanie3",
+                password = "test3",
+                email = "test@email.dk3"
             };
 
             var (user, statusCode) = PostData(UsersApi, newUser);
@@ -64,6 +66,24 @@ namespace UnitTestProject
 
             Assert.Equal(HttpStatusCode.OK, statusCode);
 
+        }
+
+        [Fact]
+        public void ApiComments_GetAllComments_OK()
+        {
+            var (data, statusCode) = GetArray(CommentsApi);
+
+            Assert.Equal(HttpStatusCode.OK, statusCode);
+            Assert.Equal(32042, data.Count);
+            Assert.Equal(120, data.First()["id"]);
+        }
+
+        [Fact]
+        public void ApiComments_ValidId_OK()
+        {
+            var (comment, statusCode) = GetObject($"{CommentsApi}/120");
+
+            Assert.Equal(HttpStatusCode.OK, statusCode);
         }
 
 
