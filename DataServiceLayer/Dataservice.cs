@@ -212,6 +212,7 @@ namespace DataServiceLayer
         public Author GetAuthor(int authorId)
         {
             var authorObj = new Author();
+            authorObj.Id = 0;
 
             var dataSource = db.Authors;
             var lingQuery = dataSource.Where(x => x.Id.Equals(authorId))
@@ -225,6 +226,9 @@ namespace DataServiceLayer
                 authorObj.Location = authorData.Location;
                 authorObj.CreationDate = authorData.CreationDate;
             }
+
+            if (authorObj.Id == 0) return null;
+
 
             return authorObj;
         }

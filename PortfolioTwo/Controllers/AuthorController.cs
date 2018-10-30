@@ -18,6 +18,7 @@ namespace PortfolioTwo.Controllers
         public IActionResult GetAuthorById(int id)
         {
             var author = DataService.GetAuthor(id);
+            if (author == null) return NotFound();
             return Ok(author);
         }
     }
