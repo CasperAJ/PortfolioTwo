@@ -145,7 +145,7 @@ namespace DataServiceLayer
         //Searches
         public Search GetSearchByString(string wantedSearch)
         {
-            return db.Searches.First(x => x.SearchString == wantedSearch);
+            return db.Searches.FirstOrDefault(x => x.SearchString == wantedSearch);
         }
 
         public bool CreateSearchByString(int userId, string search)
