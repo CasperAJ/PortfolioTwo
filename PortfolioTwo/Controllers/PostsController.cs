@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DataServiceLayer;
 using Microsoft.AspNetCore.Mvc;
+using PortfolioTwo.Models;
+using PortfolioTwo.Utility;
 
 namespace PortfolioTwo.Controllers
 {
@@ -21,11 +24,27 @@ namespace PortfolioTwo.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet(Name = nameof(Get))]
         public IActionResult Get(int page = 0, int pagesize = 10)
         {
             var posts = _dataservice.GetAllPosts(page, pagesize);
-            return Ok(posts);
+            List<PostViewModel> postsList = new List<PostViewModel>();
+
+            foreach (var post in posts)
+            {
+                var toAdd = Mapper.Map<PostViewModel>(post);
+                toAdd.Id = LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.Get), post.Id);
+                toAdd.Author = LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.Get), post.AuthorId);
+                postsList.Add(toAdd);
+            }
+
+            var returnobj = new
+            {
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(Get), page, pagesize),
+                data = postsList
+            };
+
+            return Ok(returnobj);
         }
 
         [HttpGet]
