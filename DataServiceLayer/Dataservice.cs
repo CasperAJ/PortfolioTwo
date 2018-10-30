@@ -28,10 +28,9 @@ namespace DataServiceLayer
             return db.Posts.FirstOrDefault(x => x.Id == id);
         }
 
-        //er ikke sikker hvordan vi gør med answer og questions
         public Post GetAnswerById(int id)
         {
-            return db.Answers.FirstOrDefault(x=> x.Id == id);
+            return db.Answers.FirstOrDefault(x => x.Id == id);
         }
 
         //Comments
@@ -63,7 +62,7 @@ namespace DataServiceLayer
         public User CreateUser(string username, string password, string email)
         {
             var creationDate = DateTime.Now;
-            var user = new User() {UserName = username, Password = password, Email = email, CreationDate = creationDate };
+            var user = new User() { UserName = username, Password = password, Email = email, CreationDate = creationDate };
 
             db.Users.Add(user);
             db.SaveChanges();
@@ -87,7 +86,7 @@ namespace DataServiceLayer
 
             return true;
         }
-        
+
 
         //Marks
         public List<Mark> GetAllMarksByUser(int userId)
@@ -96,7 +95,7 @@ namespace DataServiceLayer
             return markList;
         }
 
-        public List<Mark> GetUserMarkByMarkType(int userId ,int marktypeId)
+        public List<Mark> GetUserMarkByMarkType(int userId, int marktypeId)
         {
             var markList = new List<Mark>();
             var query = db.Marks.Where(x => x.UserId == userId && x.Type == marktypeId);
@@ -197,6 +196,11 @@ namespace DataServiceLayer
                 searchObj.SearchString = searchData.SearchString;
                 searchObj.UserId = searchData.UserId;
                 searchList.Add(searchObj);
+            }
+
+            if (searchList.Count == 0)
+            {
+                return null;
             }
 
             return searchList;
