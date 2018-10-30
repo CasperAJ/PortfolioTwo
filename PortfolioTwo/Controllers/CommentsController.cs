@@ -28,7 +28,6 @@ namespace PortfolioTwo.Controllers
             return Ok(comments);
         }
 
-
         [HttpGet("{id}")]
         public IActionResult GetCommentById(int id)
         {
