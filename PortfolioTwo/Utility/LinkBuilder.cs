@@ -15,12 +15,12 @@ namespace PortfolioTwo.Utility
 
         public static object CreatePageLink(Func<string, object, string> method, string route, int page, int pagesize)
         {
-            var test = new
+            return new
             {
                 next = method.Invoke(route, new { page = page+1, pagesize }),
-                prev = page == 0 ? null : method.Invoke(route, new { page = page-1, pagesize })
+                prev = page == 0 ? null : method.Invoke(route, new { page = page-1, pagesize }),
             };
-            return test;
+
         }
 
 

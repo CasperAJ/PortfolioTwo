@@ -33,14 +33,15 @@ namespace PortfolioTwo.Controllers
             foreach (var comment in comments)
             {
                 var toadd = Mapper.Map<CommentViewModel>(comment);
+
+                //TODO: Remember to delete line....
+                //toadd.Post = Url.Link(nameof(PostsController.GetSingle), new { id = comment.PostId});
+
                 toadd.Post = LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.GetSingle), comment.PostId);
                 toadd.Author = LinkBuilder.CreateIdentityLink(Url.Link, nameof(AuthorController.GetAuthorById),
                     comment.AuthorId);
                 Commentslist.Add(toadd);
             }
-
-
-            
 
             var returnobj = new
             {

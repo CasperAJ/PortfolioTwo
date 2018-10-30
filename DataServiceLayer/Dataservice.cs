@@ -17,6 +17,7 @@ namespace DataServiceLayer
         public DataService()
         {
             db = new StackOverflowContext();
+
         }
 
         //Posts
@@ -36,7 +37,7 @@ namespace DataServiceLayer
         }
 
         //Comments
-        public List<Comment> GetAllComments(int page, int pagesize)
+        public List<Comment> GetAllComments(int page=0, int pagesize=10)
         {
             return db.Comments
                 .OrderBy(x => x.Id)
