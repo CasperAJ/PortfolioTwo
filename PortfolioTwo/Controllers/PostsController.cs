@@ -22,9 +22,9 @@ namespace PortfolioTwo.Controllers
 
 
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(int page = 0, int pagesize = 10)
         {
-            var posts = _dataservice.GetAllPosts();
+            var posts = _dataservice.GetAllPosts(page, pagesize);
             return Ok(posts);
         }
 

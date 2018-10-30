@@ -61,9 +61,9 @@ namespace PortfolioTwo.Controllers
         }
 
         [HttpGet("postid/{id}")]
-        public IActionResult GetCommentsByPostId(int id)
+        public IActionResult GetCommentsByPostId(int id, int page = 0, int pagesize = 10)
         {
-            var comment = _dataService.GetCommentsByPostId(id);
+            var comment = _dataService.GetCommentsByPostId(id, page, pagesize);
 
             return Ok(comment);
         }

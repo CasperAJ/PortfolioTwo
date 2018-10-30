@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DataServiceLayer;
 using DataServiceLayer.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace PortfolioTwo.Controllers
 {
@@ -20,17 +21,17 @@ namespace PortfolioTwo.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllSearches()
+        public IActionResult GetAllSearches(int page = 0, int pagesize = 10)
         {
-            var searches = _dataservice.GetAllSearches();
+            var searches = _dataservice.GetAllSearches(page, pagesize);
             return Ok(searches);
         }
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult GetSearchesForUser(int id)
+        public IActionResult GetSearchesForUser(int id, int page = 0, int pagesize = 10) 
         {
-            var searches = _dataservice.GetAllSearchesByUserId(id);
+            var searches = _dataservice.GetAllSearchesByUserId(id, page, pagesize);
 
             if (searches == null)
             {
@@ -41,9 +42,9 @@ namespace PortfolioTwo.Controllers
 
         [HttpGet]
         [Route("searchstring/{wantedsearch}")]
-        public IActionResult GetSearchBySearchString(string wantedsearch)
+        public IActionResult GetSearchBySearchString(string wantedsearch, int page = 0, int pagesize = 10)
         {
-            var data = _dataservice.GetSearchByString(wantedsearch);
+            var data = _dataservice.GetSearchByString(wantedsearch, page, pagesize);
 
             if (data.Count == 0)
             {

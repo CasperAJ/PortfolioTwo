@@ -21,9 +21,12 @@ namespace DataServiceLayer
         }
 
         //Posts
-        public List<Post> GetAllPosts()
+        public List<Post> GetAllPosts(int page = 0, int pagesize = 10)
         {
-            return db.Posts.OrderBy(x => x.Id).ToList();
+            return db.Posts.OrderBy(x => x.Id)
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
         }
 
         public Post GetPostById(int id)
@@ -51,10 +54,12 @@ namespace DataServiceLayer
             return db.Comments.FirstOrDefault(x => x.Id == id);
         }
 
-        public List<Comment> GetCommentsByPostId(int id)
+        public List<Comment> GetCommentsByPostId(int id, int page = 0, int pagesize = 10)
         {
             var data = db.Comments
-                .Where(x => x.PostId == id);
+                .Where(x => x.PostId == id)
+                .Skip(page * pagesize)
+                .Take(pagesize);
 
             return data.ToList();
         }
@@ -96,20 +101,24 @@ namespace DataServiceLayer
 
 
         //Marks
-        public List<Mark> GetAllMarksByUser(int userId)
+        public List<Mark> GetAllMarksByUser(int userId, int page = 0, int pagesize = 10)
         {
-            var markList = db.Marks.Where(x => x.UserId == userId).ToList();
+            var markList = db.Marks.Where(x => x.UserId == userId)
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
             return markList;
         }
 
-        public List<Mark> GetUserMarkByMarkType(int userId, int marktypeId)
+        public List<Mark> GetUserMarkByMarkType(int userId, int marktypeId, int page = 0, int pagesize = 10)
         {
             var markList = new List<Mark>();
-            var query = db.Marks.Where(x => x.UserId == userId && x.Type == marktypeId);
+            var query = db.Marks.Where(x => x.UserId == userId && x.Type == marktypeId).Skip(page * pagesize).Take(pagesize);
             foreach (var markData in query)
             {
                 markList.Add(markData);
             }
+
             return markList;
         }
 
@@ -148,9 +157,12 @@ namespace DataServiceLayer
         }
 
         //Searches
-        public List<Search> GetSearchByString(string wantedSearch)
+        public List<Search> GetSearchByString(string wantedSearch, int page = 0, int pagesize = 10)
         {
-           return db.Searches.Where(x => x.SearchString.Contains(wantedSearch)).ToList();       
+           return db.Searches.Where(x => x.SearchString.Contains(wantedSearch))
+               .Skip(page * pagesize)
+               .Take(pagesize)
+               .ToList();       
         }
 
         public bool CreateSearchByString(int userId, string search)
@@ -169,12 +181,12 @@ namespace DataServiceLayer
             return false;
         }
 
-        public List<Search> GetAllSearches()
+        public List<Search> GetAllSearches(int page = 0, int pagesize = 10)
         {
             var searchList = new List<Search>();
 
             var dataSource = db.Searches;
-            var query = dataSource.Select(x => new { x.Id, x.SearchString, x.UserId });
+            var query = dataSource.Select(x => new { x.Id, x.SearchString, x.UserId }).Skip(page * pagesize).Take(pagesize);
 
             foreach (var searchData in query)
             {
@@ -188,13 +200,15 @@ namespace DataServiceLayer
             return searchList;
         }
 
-        public List<Search> GetAllSearchesByUserId(int userId)
+        public List<Search> GetAllSearchesByUserId(int userId, int page = 0, int pagesize = 10)
         {
             var searchList = new List<Search>();
 
             var dataSource = db.Searches;
             var query = dataSource.Where(x => x.UserId.Equals(userId))
-                .Select(x => new { x.Id, x.SearchString, x.UserId });
+                .Select(x => new { x.Id, x.SearchString, x.UserId })
+                .Skip(page * pagesize)
+                .Take(pagesize);
 
             foreach (var searchData in query)
             {

@@ -21,9 +21,9 @@ namespace PortfolioTwo.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(int id, int page = 0, int pagesize = 10)
         {
-            var markings = _dataservice.GetAllMarksByUser(id);
+            var markings = _dataservice.GetAllMarksByUser(id, page, pagesize);
             return Ok(markings);
 
         }
