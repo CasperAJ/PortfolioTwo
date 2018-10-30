@@ -13,9 +13,9 @@ namespace PortfolioTwo.Controllers
     public class PostsController : ControllerBase
     {
 
-        private DataService _dataservice;
+        private IDataService _dataservice;
 
-        public PostsController(DataService dataservice)
+        public PostsController(IDataService dataservice)
         {
             _dataservice = dataservice;
         }

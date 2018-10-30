@@ -12,9 +12,9 @@ namespace PortfolioTwo.Controllers
     [ApiController]
     public class SearchesController : Controller
     {
-        private DataService _dataservice;
+        private IDataService _dataservice;
 
-        public SearchesController(DataService dataservice)
+        public SearchesController(IDataService dataservice)
         {
             _dataservice = dataservice;
         }

@@ -13,9 +13,9 @@ namespace PortfolioTwo.Controllers
     public class CommentsController : ControllerBase
     {
 
-        public DataService _dataService;
+        public IDataService _dataService;
 
-        public CommentsController(DataService dataService)
+        public CommentsController(IDataService dataService)
         {
             _dataService = dataService;
         }

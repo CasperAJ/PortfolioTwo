@@ -12,9 +12,9 @@ namespace PortfolioTwo.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private DataService _dataservice;
+        private IDataService _dataservice;
 
-        public UsersController(DataService dataservice)
+        public UsersController(IDataService dataservice)
         {
             _dataservice = dataservice;
         }

@@ -12,9 +12,9 @@ namespace PortfolioTwo.Controllers
     [ApiController]
     public class MarkingsController : ControllerBase
     {
-        private DataService _dataservice;
+        private IDataService _dataservice;
 
-        public MarkingsController(DataService dataservice)
+        public MarkingsController(IDataService dataservice)
         {
             _dataservice = dataservice;
         }

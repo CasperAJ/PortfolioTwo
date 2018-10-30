@@ -8,7 +8,9 @@ using DataServiceLayer.Models;
 
 namespace DataServiceLayer
 {
-    public class DataService
+    
+
+    public class DataService : IDataService
     {
         private StackOverflowContext db;
 

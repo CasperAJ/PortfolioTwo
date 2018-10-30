@@ -18,7 +18,7 @@ namespace PortfolioTwo
         {
 
             services.AddMvc();
-            services.AddSingleton(new DataService());
+            services.AddSingleton<IDataService, DataService>();
 
         }
 
