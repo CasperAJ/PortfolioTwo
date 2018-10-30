@@ -21,7 +21,7 @@ namespace DataServiceLayer
         Mark GetMarkByIdForUser(int postId, int userId);
         bool CreateMark(int postId, int userId, int markType, string note);
         bool DeleteMark(int postId, int userId, int markType);
-        Search GetSearchByString(string wantedSearch);
+        List<Search> GetSearchByString(string wantedSearch);
         bool CreateSearchByString(int userId, string search);
         List<Search> GetAllSearches();
         List<Search> GetAllSearchesByUserId(int userId);
