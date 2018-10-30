@@ -39,6 +39,19 @@ namespace PortfolioTwo.Controllers
             return Ok(searches);
         }
 
+        [HttpGet]
+        [Route("searchstring/{wantedsearch}")]
+        public IActionResult GetSearchBySearchString(string wantedsearch)
+        {
+            var data = _dataservice.GetSearchByString(wantedsearch);
+
+            if (data.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(data);
+        }
+
         [HttpPost]
         public IActionResult CreateSearch(Search search)
         {
@@ -46,5 +59,7 @@ namespace PortfolioTwo.Controllers
 
             return Ok();
         }
+
+
     }
 }
