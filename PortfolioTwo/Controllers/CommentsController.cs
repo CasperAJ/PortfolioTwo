@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using DataServiceLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using PortfolioTwo.Models;
 
 namespace PortfolioTwo.Controllers
 {
@@ -23,9 +25,24 @@ namespace PortfolioTwo.Controllers
         [HttpGet]
         public IActionResult GetAllComments()
         {
-            var comments = _dataService.GetAllComments();
+            var comments = _dataService.GetAllComments().Take(10);
+            List<CommentViewModel> Commentslist = new List<CommentViewModel>();
 
-            return Ok(comments);
+            foreach (var comment in comments)
+            {
+                var toadd = Mapper.Map<CommentViewModel>(comment);
+                toadd.Post = Url.Link("GetSinglePost", new {id = comment.PostId});
+                Commentslist.Add(toadd);
+            }
+
+            var returnobj = new
+            {
+                next = "test",
+                prev = "test",
+                data = Commentslist
+            };
+
+            return Ok(returnobj);
         }
 
         [HttpGet("{id}")]

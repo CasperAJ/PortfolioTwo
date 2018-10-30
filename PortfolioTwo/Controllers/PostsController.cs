@@ -29,7 +29,7 @@ namespace PortfolioTwo.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
+        [Route("{id}", Name = "GetSinglePost")]
         public IActionResult Get(int id)
         {
             var post = _dataservice.GetPostById(id);

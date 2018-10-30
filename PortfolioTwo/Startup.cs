@@ -23,6 +23,7 @@ namespace PortfolioTwo
             services.AddMvc();
             services.AddSingleton<IDataService, DataService>();
 
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +50,7 @@ namespace PortfolioTwo
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Author, AuthorViewModel>();
-                
+                cfg.CreateMap<Comment, CommentViewModel>();
             });
         }
 
