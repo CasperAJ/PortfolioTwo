@@ -141,9 +141,9 @@ namespace DataServiceLayer
         }
 
         //Searches
-        public Search GetSearchByString(string wantedSearch)
+        public List<Search> GetSearchByString(string wantedSearch)
         {
-            return db.Searches.FirstOrDefault(x => x.SearchString == wantedSearch);
+           return db.Searches.Where(x => x.SearchString.Contains(wantedSearch)).ToList();       
         }
 
         public bool CreateSearchByString(int userId, string search)

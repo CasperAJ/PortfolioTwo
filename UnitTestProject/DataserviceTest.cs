@@ -144,14 +144,14 @@ namespace UnitTestProject
             Assert.True(mark);
         }
 
-        // Get search by search string
-        [Fact]
+        //Get search by search string
+       [Fact]
         public void GetSearchBySearchString_ValidReturn()
         {
             var service = new DataService();
-            var search = service.GetSearchByString("how to do substring in php");
-            Assert.Equal("how to do substring in php", search.SearchString);
-            Assert.Equal(1, search.Id);
+            var search = service.GetSearchByString("how");
+            Assert.Equal("how to do substring in php", search.First().SearchString);
+            Assert.Equal(2, search.Count);
         }
 
         // Create search with string and userId
