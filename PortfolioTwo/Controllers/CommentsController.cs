@@ -44,8 +44,7 @@ namespace PortfolioTwo.Controllers
 
             var returnobj = new
             {
-                next = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllComments), (page+1), pagesize),
-                prev = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllComments), page-1, pagesize),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllComments), page, pagesize),
                 data = Commentslist
             };
 
