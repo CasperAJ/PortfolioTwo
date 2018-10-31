@@ -29,6 +29,14 @@ namespace UnitTestProject
             Assert.Equal("What is the fastest way to get the value of π?", post.Title);
         }
 
+        [Fact]
+        public void GetPost_InvalidId_ReturnNull()
+        {
+            var service = new DataService();
+            var post = service.GetPostById(-1);
+            Assert.Null(post);
+        }
+
         //Comments
         [Fact]
         public void GetAllComments_NoArguments()

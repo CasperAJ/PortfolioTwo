@@ -31,7 +31,7 @@ namespace DataServiceLayer
 
         public Post GetPostById(int id)
         {
-            return db.Posts.FirstOrDefault(x => x.Id == id);
+             return db.Posts.FirstOrDefault(x => x.Id == id);
         }
 
         public Post GetAnswerById(int id)
