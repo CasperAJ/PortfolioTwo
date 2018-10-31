@@ -14,6 +14,7 @@ namespace UnitTestProject
     {
         private const string UsersApi = "http://localhost:5000/api/users";
         private const string CommentsApi = "http://localhost:5000/api/comments";
+        private const string SearchesApi = "http://localhost:5000/api/searches";
 
         [Fact]
         public void ApiUsers_GetUsersByValidId_OK()
@@ -86,6 +87,12 @@ namespace UnitTestProject
             Assert.Equal(HttpStatusCode.OK, statusCode);
         }
 
+        [Fact]
+        public void ApiSearches_StringNotContained_EmptyListOfSearchesAndNotFound()
+        {
+            var (searches, statusCode) = GetArray($"{SearchesApi}/searchstring/GETJSONOBJECT");
+            Assert.Equal(HttpStatusCode.NotFound, statusCode);
+        }
 
         // Helpers
         (JArray, HttpStatusCode) GetArray(string url)
