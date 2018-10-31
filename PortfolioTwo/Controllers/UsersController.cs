@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DataServiceLayer;
 using DataServiceLayer.Models;
 using Microsoft.AspNetCore.Mvc;
+using PortfolioTwo.Models;
+using PortfolioTwo.Utility;
 
 namespace PortfolioTwo.Controllers
 {
@@ -20,13 +23,22 @@ namespace PortfolioTwo.Controllers
         }
 
         [HttpGet]
-        [Route("{id}")]
-        public IActionResult Get(int id)
+        [Route("{id}", Name = nameof(GetUsers))]
+        public IActionResult GetUsers(int id)
         {
             var user = _dataservice.GetUser(id);
             if (user == null) return NotFound();
+            var model = Mapper.Map<UserViewModel>(user);
+            //model.path = Url.Link(nameof(GetUsers))
+            model.path = LinkBuilder.CreateIdentityLink(Url.Link, nameof(UsersController.GetUsers), user.Id);
 
-            return Ok(user);
+
+
+
+
+
+
+            return Ok(model);
         }
 
         // TODO: change these to use viewmodels later with automapper.

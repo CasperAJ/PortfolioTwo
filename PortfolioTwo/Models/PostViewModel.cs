@@ -7,7 +7,7 @@ namespace PortfolioTwo.Models
 {
     public class PostViewModel
     {
-        public string Id { get; set; }
+        public string path { get; set; }
         public int? ParentId { get; set; }
         public int? AcceptedAnswerId { get; set; }
 

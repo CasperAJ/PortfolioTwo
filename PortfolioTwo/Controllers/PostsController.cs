@@ -33,8 +33,8 @@ namespace PortfolioTwo.Controllers
             foreach (var post in posts)
             {
                 var toAdd = Mapper.Map<PostViewModel>(post);
-                toAdd.Id = LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.Get), post.Id);
-                toAdd.Author = LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.Get), post.AuthorId);
+                toAdd.path = LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.Get), post.Id);
+                toAdd.Author = LinkBuilder.CreateIdentityLink(Url.Link, nameof(AuthorController.GetAuthorById), post.AuthorId);
                 postsList.Add(toAdd);
             }
 
