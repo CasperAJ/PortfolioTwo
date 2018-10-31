@@ -53,6 +53,7 @@ namespace PortfolioTwo
             {
                 cfg.CreateMap<Author, AuthorViewModel>();
                 cfg.CreateMap<Comment, CommentViewModel>();
+                cfg.CreateMap<Search, SearchViewModel>();
             });
         }
 

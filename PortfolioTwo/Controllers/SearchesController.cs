@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DataServiceLayer;
 using DataServiceLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using PortfolioTwo.Models;
+using PortfolioTwo.Utility;
 
 namespace PortfolioTwo.Controllers
 {
-    [Route("api/searches")]
+    [Route("api/[controller]")]
     [ApiController]
     public class SearchesController : Controller
     {
@@ -20,11 +23,26 @@ namespace PortfolioTwo.Controllers
             _dataservice = dataservice;
         }
 
-        [HttpGet]
+        [HttpGet(Name = nameof(GetAllSearches))]
         public IActionResult GetAllSearches(int page = 0, int pagesize = 10)
         {
             var searches = _dataservice.GetAllSearches(page, pagesize);
-            return Ok(searches);
+            List<SearchViewModel> searchList = new List<SearchViewModel>();
+
+            foreach (var search in searches)
+            {
+                var toAdd = Mapper.Map<SearchViewModel>(search);
+                toAdd.Path = LinkBuilder.CreateIdentityLink(Url.Link, nameof(SearchesController.GetAllSearches), search.Id);
+                searchList.Add(toAdd);
+            }
+
+            var returnobj = new
+            {
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllSearches), page, pagesize),
+                data = searchList
+            };
+
+            return Ok(returnobj);
         }
 
         [HttpGet]
@@ -32,12 +50,26 @@ namespace PortfolioTwo.Controllers
         public IActionResult GetSearchesForUser(int id, int page = 0, int pagesize = 10) 
         {
             var searches = _dataservice.GetAllSearchesByUserId(id, page, pagesize);
+            List<SearchViewModel> searchList = new List<SearchViewModel>();
 
             if (searches == null)
             {
                 return NotFound();
             }
-            return Ok(searches);
+
+            foreach (var search in searches)
+            {
+                var toAdd = Mapper.Map<SearchViewModel>(search);
+                toAdd.Path = LinkBuilder.CreateIdentityLink(Url.Link, nameof(SearchesController.GetSearchesForUser), search.Id);
+                searchList.Add(toAdd);
+            }
+
+            var returnobj = new
+            {
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetSearchesForUser), page, pagesize),
+                data = searchList
+            };
+            return Ok(returnobj);
         }
 
         [HttpGet]
@@ -50,6 +82,7 @@ namespace PortfolioTwo.Controllers
             {
                 return NotFound();
             }
+
             return Ok(data);
         }
 

@@ -186,7 +186,7 @@ namespace DataServiceLayer
             var searchList = new List<Search>();
 
             var dataSource = db.Searches;
-            var query = dataSource.Select(x => new { x.Id, x.SearchString, x.UserId }).Skip(page * pagesize).Take(pagesize);
+            var query = dataSource.Select(x => new { x.Id, x.SearchString, x.UserId, x.User }).Skip(page * pagesize).Take(pagesize);
 
             foreach (var searchData in query)
             {
@@ -206,7 +206,7 @@ namespace DataServiceLayer
 
             var dataSource = db.Searches;
             var query = dataSource.Where(x => x.UserId.Equals(userId))
-                .Select(x => new { x.Id, x.SearchString, x.UserId })
+                .Select(x => new { x.Id, x.SearchString, x.UserId})
                 .Skip(page * pagesize)
                 .Take(pagesize);
 
