@@ -54,6 +54,9 @@ namespace PortfolioTwo.Controllers
             var post = _dataservice.GetPostById(id);
             if (post == null) return NotFound();
 
+
+
+
             return Ok(post);
         }
 
