@@ -45,8 +45,7 @@ namespace PortfolioTwo.Controllers
             return Ok(returnobj);
         }
 
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}", Name = nameof(GetSearchesForUser))]
         public IActionResult GetSearchesForUser(int id, int page = 0, int pagesize = 10) 
         {
             var searches = _dataservice.GetAllSearchesByUserId(id, page, pagesize);
@@ -72,18 +71,31 @@ namespace PortfolioTwo.Controllers
             return Ok(returnobj);
         }
 
-        [HttpGet]
-        [Route("searchstring/{wantedsearch}")]
+        [HttpGet("searchstring/{wantedsearch}", Name = nameof(GetSearchBySearchString))]
         public IActionResult GetSearchBySearchString(string wantedsearch, int page = 0, int pagesize = 10)
         {
             var data = _dataservice.GetSearchByString(wantedsearch, page, pagesize);
+            List<SearchViewModel> searchList = new List<SearchViewModel>();
 
             if (data.Count == 0)
             {
                 return NotFound();
             }
 
-            return Ok(data);
+            foreach (var search in data)
+            {
+                var toAdd = Mapper.Map<SearchViewModel>(search);
+                toAdd.Path = LinkBuilder.CreateIdentityLink(Url.Link, nameof(SearchesController.GetSearchBySearchString), search.Id);
+                searchList.Add(toAdd);
+            }
+
+            var returnobj = new
+            {
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetSearchBySearchString), page, pagesize),
+                data = searchList
+            };
+
+            return Ok(returnobj);
         }
 
         [HttpPost]
