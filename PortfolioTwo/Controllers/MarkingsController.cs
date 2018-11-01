@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using DataServiceLayer;
 using DataServiceLayer.Models;
 using Microsoft.AspNetCore.Mvc;
+using PortfolioTwo.Models;
+using PortfolioTwo.Utility;
 
 namespace PortfolioTwo.Controllers
 {
@@ -21,10 +24,36 @@ namespace PortfolioTwo.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public IActionResult Get(int id, int page = 0, int pagesize = 10)
+        public IActionResult GetMarkById(int postId, int userId, int marktypeId)
         {
-            var markings = _dataservice.GetAllMarksByUser(id, page, pagesize);
+            var markings = _dataservice.GetMarkByIdForUser(postId, userId, marktypeId);
             return Ok(markings);
+        }
+
+        [HttpGet]
+        [Route("{id}", Name = nameof(GetAllMarksByUserId))]
+        public IActionResult GetAllMarksByUserId(int userId, int page = 0, int pagesize = 10)
+        {
+            var markings = _dataservice.GetAllMarksByUser(userId, page, pagesize);
+            List<MarkingViewModel> markingsList = new List<MarkingViewModel>();
+
+            foreach (var mark in markings)
+            {
+                var markToAdd = Mapper.Map<MarkingViewModel>(mark);
+                markToAdd.Post =
+                    LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.GetSingle), mark.PostId);
+                //markToAdd.Path = LinkBuilder.CreateIdentityLink(Url.Link, nameof(GetMarkById), )
+                markingsList.Add(markToAdd);
+            }
+
+            var returnObj = new
+            {
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllMarksByUserId), page, pagesize),
+                data = markingsList
+            };
+
+            return Ok(returnObj);
+
 
         }
 
