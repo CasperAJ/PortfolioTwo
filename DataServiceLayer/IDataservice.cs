@@ -18,7 +18,7 @@ namespace DataServiceLayer
         bool UpdateUser(int id, string email, string password);
         List<Mark> GetAllMarksByUser(int userId, int page, int pagesize);
         List<Mark> GetUserMarkByMarkType(int userId, int marktypeId, int page, int pagesize);
-        Mark GetMarkByIdForUser(int postId, int userId);
+        Mark GetMarkByIdForUser(int postId, int userId, int marktypeId);
         bool CreateMark(int postId, int userId, int markType, string note);
         bool DeleteMark(int postId, int userId, int markType);
         List<Search> GetSearchByString(string wantedSearch, int page, int pagesize);

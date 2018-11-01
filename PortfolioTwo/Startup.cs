@@ -56,6 +56,7 @@ namespace PortfolioTwo
                 cfg.CreateMap<Search, SearchViewModel>();
                 cfg.CreateMap<User, UserViewModel>();
                 cfg.CreateMap<Post, PostViewModel>();
+                cfg.CreateMap<Mark, MarkingViewModel>();
             });
         }
 

@@ -122,9 +122,9 @@ namespace DataServiceLayer
             return markList;
         }
 
-        public Mark GetMarkByIdForUser(int postId, int userId)
+        public Mark GetMarkByIdForUser(int postId, int userId, int markTypeId)
         {
-            return db.Marks.First(x => x.PostId == postId && x.UserId == userId);
+            return db.Marks.First(x => x.PostId == postId && x.UserId == userId && x.Type == markTypeId);
         }
 
         public bool CreateMark(int postId, int userId, int markType, string note)
