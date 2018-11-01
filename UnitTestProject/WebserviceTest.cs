@@ -90,7 +90,7 @@ namespace UnitTestProject
         [Fact]
         public void ApiSearches_StringNotContained_EmptyListOfSearchesAndNotFound()
         {
-            var (searches, statusCode) = GetArray($"{SearchesApi}/searchstring/GETJSONOBJECT");
+            var (searches, statusCode) = GetObject($"{SearchesApi}/searchstring/GETJSONOBJECT");
             Assert.Equal(HttpStatusCode.NotFound, statusCode);
         }
 
