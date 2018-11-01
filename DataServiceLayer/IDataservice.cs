@@ -14,7 +14,8 @@ namespace DataServiceLayer
         Comment GetCommentById(int id);
         List<Comment> GetCommentsByPostId(int id, int page, int pagesize);
         User GetUser(int userid);
-        User CreateUser(string username, string password, string email);
+        User GetUserByUserName(string userName);
+        User CreateUser(string username, string password, string salt, string email);
         bool UpdateUser(int id, string email, string password);
         List<Mark> GetAllMarksByUser(int userId, int page, int pagesize);
         List<Mark> GetUserMarkByMarkType(int userId, int marktypeId, int page, int pagesize);
