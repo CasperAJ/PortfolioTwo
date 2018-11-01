@@ -159,7 +159,7 @@ namespace DataServiceLayer
         //Searches
         public List<Search> GetSearchByString(string wantedSearch, int page = 0, int pagesize = 10)
         {
-           return db.Searches.Where(x => x.SearchString.Contains(wantedSearch))
+           return db.Searches.Where(x => x.SearchString.ToLower().Contains(wantedSearch.ToLower()))
                .Skip(page * pagesize)
                .Take(pagesize)
                .ToList();       
