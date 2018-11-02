@@ -16,9 +16,11 @@ namespace UnitTestProject
         {
             var service = new DataService();
             var posts = service.GetAllPosts();
-            Assert.Equal(13629, posts.Count);
+            Assert.Equal(10, posts.Count);
             Assert.Equal(19, posts.First().Id);
-            
+
+            //Test prior to paging
+            //Assert.Equal(13629, posts.Count);
         }
 
         [Fact]
@@ -44,7 +46,10 @@ namespace UnitTestProject
             var service = new DataService();
             var comment = service.GetAllComments();
             Assert.Equal(120, comment.First().Id);
-            Assert.Equal(32042, comment.Count);
+            Assert.Equal(10, comment.Count);
+
+            //Test prior to paging
+            //Assert.Equal(32042, comment.Count);
         }
 
         [Fact]
@@ -60,9 +65,12 @@ namespace UnitTestProject
         {
             var service = new DataService();
             var comments = service.GetCommentsByPostId(39433);
-            Assert.Equal(27, comments.Count);
-            Assert.Equal(1820, comments.First().AuthorId);
-            Assert.Equal(65846, comments.Last().AuthorId);
+            Assert.Equal(10, comments.Count);
+            Assert.Equal(70616, comments.First().AuthorId);
+            Assert.Equal(4052, comments.Last().AuthorId);
+
+            //Test prior to paging
+            //Assert.Equal(27, comments.Count
         }
 
         //Users
@@ -147,8 +155,7 @@ namespace UnitTestProject
         public void DeleteMark_ValidReturn()
         {
             var service = new DataService();
-            //var mark = service.DeleteMark(20350933, 1, 1);
-            var mark = service.DeleteMark(19, 1, 1);
+            var mark = service.DeleteMark(983366, 1, 1);
             Assert.True(mark);
         }
 
