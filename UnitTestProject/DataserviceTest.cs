@@ -125,7 +125,7 @@ namespace UnitTestProject
         public void GetMarkByIdForUser_ValidReturn()
         {
             var service = new DataService();
-            var mark = service.GetMarkByIdForUser(20350933, 1);
+            var mark = service.GetMarkByIdForUser(20350933, 1, 1);
             Assert.Equal(1, mark.Type);
             Assert.Equal(1, mark.UserId);
         }

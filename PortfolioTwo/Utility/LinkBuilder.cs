@@ -23,7 +23,8 @@ namespace PortfolioTwo.Utility
 
         }
 
-
+        //NOTE: Apparently this also works on pages wheres an id is need, ex GetCommentsByPostId, because Url.Link passed the request url.
+        // less work for us i guess.
         public static string CreateIdentityLink(Func<string, object, string> method, string route, int id)
         {
             return method.Invoke(route, new { id });
