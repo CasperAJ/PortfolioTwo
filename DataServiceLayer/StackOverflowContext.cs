@@ -108,6 +108,7 @@ namespace DataServiceLayer
             modelBuilder.Entity<User>().Property(x => x.Id).HasColumnName("id");
             modelBuilder.Entity<User>().Property(x => x.UserName).HasColumnName("username");
             modelBuilder.Entity<User>().Property(x => x.Password).HasColumnName("password");
+            modelBuilder.Entity<User>().Property(x => x.Salt).HasColumnName("salt");
             modelBuilder.Entity<User>().Property(x => x.Email).HasColumnName("email");
             modelBuilder.Entity<User>().Property(x => x.CreationDate).HasColumnName("creationdate");
 

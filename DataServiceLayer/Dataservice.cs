@@ -70,11 +70,23 @@ namespace DataServiceLayer
             return db.Users.FirstOrDefault(x => x.Id == userid);
         }
 
+        public User GetUserByUserName(string userName)
+        {
+            return db.Users.FirstOrDefault(x => x.UserName == userName);
+        }
+
         // TODO: we need to handle exceptions here.
-        public User CreateUser(string username, string password, string email)
+        public User CreateUser(string username, string password, string salt, string email)
         {
             var creationDate = DateTime.Now;
-            var user = new User() { UserName = username, Password = password, Email = email, CreationDate = creationDate };
+            var user = new User()
+            {
+                UserName = username,
+                Password = password,
+                Salt = salt,
+                Email = email,
+                CreationDate = creationDate
+            };
 
             db.Users.Add(user);
             db.SaveChanges();

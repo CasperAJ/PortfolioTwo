@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataServiceLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortfolioTwo.Models;
 using PortfolioTwo.Utility;
@@ -23,7 +25,7 @@ namespace PortfolioTwo.Controllers
             _dataservice = dataservice;
         }
 
-
+        [Authorize]
         [HttpGet(Name = nameof(Get))]
         public IActionResult Get(int page = 0, int pagesize = 10)
         {
