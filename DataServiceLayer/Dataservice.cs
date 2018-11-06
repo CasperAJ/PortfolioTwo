@@ -29,6 +29,11 @@ namespace DataServiceLayer
                 .ToList();
         }
 
+        public int GetNumberOfPosts()
+        {
+            return db.Posts.Count();
+        }
+
         public Post GetPostById(int id)
         {
              return db.Posts.FirstOrDefault(x => x.Id == id);
@@ -49,6 +54,11 @@ namespace DataServiceLayer
                 .ToList();
         }
 
+        public int GetNumberOfComments()
+        {
+            return db.Comments.Count();
+        }
+
         public Comment GetCommentById(int id)
         {
             return db.Comments.FirstOrDefault(x => x.Id == id);
@@ -62,6 +72,11 @@ namespace DataServiceLayer
                 .Take(pagesize);
 
             return data.ToList();
+        }
+
+        public int GetNumberOfCommentsByPostId(int id)
+        {
+            return db.Comments.Count(x => x.PostId == id);
         }
 
         //Users
@@ -122,6 +137,11 @@ namespace DataServiceLayer
             return markList;
         }
 
+        public int GetNumberOfMarksByUser(int id)
+        {
+            return db.Marks.Count(x => x.UserId == id);
+        }
+
         public List<Mark> GetUserMarkByMarkType(int userId, int marktypeId, int page = 0, int pagesize = 10)
         {
             var markList = new List<Mark>();
@@ -177,6 +197,11 @@ namespace DataServiceLayer
                .ToList();       
         }
 
+        public int GetNumberOfSearchesByString(string wantedSearch)
+        {
+            return db.Searches.Count(x => x.SearchString.ToLower().Contains(wantedSearch.ToLower()));
+        }
+
         public bool CreateSearchByString(int userId, string search)
         {
             var newSearch = new Search();
@@ -212,6 +237,11 @@ namespace DataServiceLayer
             return searchList;
         }
 
+        public int GetNumberOfSearches()
+        {
+            return db.Searches.Count();
+        }
+
         public List<Search> GetAllSearchesByUserId(int userId, int page = 0, int pagesize = 10)
         {
             var searchList = new List<Search>();
@@ -237,6 +267,11 @@ namespace DataServiceLayer
             }
 
             return searchList;
+        }
+
+        public int GetNumberOfSearchByUser(int id)
+        {
+            return db.Searches.Count(x => x.UserId == id);
         }
 
         //Author

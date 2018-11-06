@@ -38,7 +38,7 @@ namespace PortfolioTwo.Controllers
 
             var returnobj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllSearches), page, pagesize),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllSearches), page, pagesize, _dataservice.GetNumberOfSearches()),
                 data = searchList
             };
 
@@ -65,7 +65,7 @@ namespace PortfolioTwo.Controllers
 
             var returnobj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetSearchesForUser), page, pagesize),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetSearchesForUser), page, pagesize, _dataservice.GetNumberOfSearchByUser(id)),
                 data = searchList
             };
             return Ok(returnobj);
@@ -91,7 +91,7 @@ namespace PortfolioTwo.Controllers
 
             var returnobj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetSearchBySearchString), page, pagesize),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetSearchBySearchString), page, pagesize, _dataservice.GetNumberOfSearchesByString(wantedsearch)),
                 data = searchList
             };
 

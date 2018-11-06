@@ -13,18 +13,19 @@ namespace PortfolioTwo.Utility
 
 
 
-        public static object CreatePageLink(Func<string, object, string> method, string route, int page, int pagesize)
+        public static object CreatePageLink(Func<string, object, string> method, string route, int page, int pagesize, int numberOfRecords)
         {
+
+            var numberOfPages = (int) Math.Ceiling((double) numberOfRecords / pagesize);
+
             return new
             {
-                next = method.Invoke(route, new { page = page+1, pagesize }),
+                next = page >= numberOfPages - 1 ? null : method.Invoke(route, new { page = page+1, pagesize }),
                 prev = page == 0 ? null : method.Invoke(route, new { page = page-1, pagesize }),
             };
 
         }
 
-        //NOTE: Apparently this also works on pages wheres an id is need, ex GetCommentsByPostId, because Url.Link passed the request url.
-        // less work for us i guess.
         public static string CreateIdentityLink(Func<string, object, string> method, string route, int id)
         {
             return method.Invoke(route, new { id });

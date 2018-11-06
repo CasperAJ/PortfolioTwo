@@ -48,7 +48,7 @@ namespace PortfolioTwo.Controllers
 
             var returnObj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllMarksByUserId), page, pagesize),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllMarksByUserId), page, pagesize, _dataservice.GetNumberOfMarksByUser(userId)),
                 data = markingsList
             };
 

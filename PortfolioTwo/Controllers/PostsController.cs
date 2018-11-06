@@ -12,7 +12,7 @@ using PortfolioTwo.Utility;
 
 namespace PortfolioTwo.Controllers
 {
-    // TODO: implements viewmodels here.
+    // TODO: implements questions and asnwers here.
     [Route("api/posts")]
     [ApiController]
     public class PostsController : ControllerBase
@@ -42,7 +42,7 @@ namespace PortfolioTwo.Controllers
 
             var returnobj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(Get), page, pagesize),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(Get), page, pagesize, _dataservice.GetNumberOfPosts()),
                 data = postsList
             };
 

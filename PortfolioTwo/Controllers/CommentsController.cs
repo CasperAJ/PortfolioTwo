@@ -34,8 +34,6 @@ namespace PortfolioTwo.Controllers
             {
                 var toadd = Mapper.Map<CommentViewModel>(comment);
 
-                //TODO: Remember to delete line....
-                //toadd.Post = Url.Link(nameof(PostsController.GetSingle), new { id = comment.PostId});
                 toadd.Path = LinkBuilder.CreateIdentityLink(Url.Link, nameof(GetCommentById), comment.Id);
                 toadd.Post = LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.GetSingle), comment.PostId);
                 toadd.Author = LinkBuilder.CreateIdentityLink(Url.Link, nameof(AuthorController.GetAuthorById),
@@ -45,7 +43,7 @@ namespace PortfolioTwo.Controllers
 
             var returnobj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllComments), page, pagesize),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllComments), page, pagesize, _dataService.GetNumberOfComments()),
                 data = Commentslist
             };
 
@@ -89,7 +87,7 @@ namespace PortfolioTwo.Controllers
 
             var returnobj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetCommentsByPostId), page, pagesize),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetCommentsByPostId), page, pagesize, _dataService.GetNumberOfCommentsByPostId(id)),
                 data = Commentslist
             };
 

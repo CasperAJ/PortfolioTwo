@@ -27,11 +27,11 @@ namespace PortfolioTwo.Controllers
             var author = DataService.GetAuthor(id);
             if (author == null) return NotFound();
 
-            var ViewModel = Mapper.Map<AuthorViewModel>(author);
-            ViewModel.Path = Url.Link(nameof(GetAuthorById), new {id = author.Id});
+            var viewModel = Mapper.Map<AuthorViewModel>(author);
+            viewModel.Path = Url.Link(nameof(GetAuthorById), new {id = author.Id});
 
 
-            return Ok(ViewModel);
+            return Ok(viewModel);
         }
     }
 }
