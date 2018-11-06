@@ -83,6 +83,8 @@ namespace PortfolioTwo
                 cfg.CreateMap<User, UserViewModel>();
                 cfg.CreateMap<Post, PostViewModel>();
                 cfg.CreateMap<Mark, MarkingViewModel>();
+                cfg.CreateMap<Answer, AnswerViewModel>();
+                cfg.CreateMap<Question, QuestionViewModel>();
             });
         }
 

@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace PortfolioTwo.Models
 {
-    public class PostViewModel
+    public class QuestionViewModel
     {
         public string path { get; set; }
-        public string Parent { get; set; }
+        public string Answers { get; set; }
+
         public string AcceptedAnswer { get; set; }
 
         public DateTime? CreationDate { get; set; }

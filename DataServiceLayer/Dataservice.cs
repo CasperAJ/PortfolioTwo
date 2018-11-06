@@ -39,9 +39,30 @@ namespace DataServiceLayer
              return db.Posts.FirstOrDefault(x => x.Id == id);
         }
 
-        public Post GetAnswerById(int id)
+        //NOTE: there is no paging on this one, as of now,
+        // its undecided whether paging should be on the questions children,
+        // when presenting in the frontend.
+        public List<Answer> GetAnswersById(int id)
         {
-            return db.Answers.FirstOrDefault(x => x.Id == id);
+            return db.Answers.Where(x => x.ParentId == id).ToList();
+        }
+
+        public List<Question> GetQuestions(int page = 0, int pagesize = 10)
+        {
+            return db.Questions
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
+        }
+
+        public int GetNumberOfQuestions()
+        {
+            return db.Questions.Count();
+        }
+
+        public Question GetQuestionById(int id)
+        {
+            return db.Questions.FirstOrDefault(x => x.Id == id);
         }
 
         //Comments

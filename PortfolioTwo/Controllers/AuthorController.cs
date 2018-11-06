@@ -6,12 +6,14 @@ using DataServiceLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using PortfolioTwo.Models;
 
 namespace PortfolioTwo.Controllers
 {
     [Route("api/author")]
     [ApiController]
+    [Authorize]
     public class AuthorController : ControllerBase
     {
         private IDataService DataService;

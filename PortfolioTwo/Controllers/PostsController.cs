@@ -12,9 +12,10 @@ using PortfolioTwo.Utility;
 
 namespace PortfolioTwo.Controllers
 {
-    // TODO: implements questions and asnwers here.
+
     [Route("api/posts")]
     [ApiController]
+    [Authorize]
     public class PostsController : ControllerBase
     {
 
@@ -25,7 +26,6 @@ namespace PortfolioTwo.Controllers
             _dataservice = dataservice;
         }
 
-        //[Authorize]
         [HttpGet(Name = nameof(Get))]
         public IActionResult Get(int page = 0, int pagesize = 10)
         {
@@ -49,26 +49,79 @@ namespace PortfolioTwo.Controllers
             return Ok(returnobj);
         }
 
-        [HttpGet]
-        [Route("{id}", Name = nameof(GetSingle))]
+        [HttpGet("{id}", Name = nameof(GetSingle))]
         public IActionResult GetSingle(int id)
         {
             var post = _dataservice.GetPostById(id);
             if (post == null) return NotFound();
 
+            var model = Mapper.Map<PostViewModel>(post);
 
+            model.AcceptedAnswer = post.AcceptedAnswerId == null
+                ? null
+                : LinkBuilder.CreateIdentityLink(Url.Link, nameof(GetSingle), (int)post.AcceptedAnswerId);
+            model.Parent = post.ParentId == null ? null : LinkBuilder.CreateIdentityLink(Url.Link, nameof(GetSingle), (int)post.ParentId);
+            model.LinkPost = post.LinkPostId == null ? null : LinkBuilder.CreateIdentityLink(Url.Link, nameof(GetSingle), (int)post.LinkPostId);
 
-
-            return Ok(post);
+            return Ok(model);
         }
 
-
-        [HttpGet]
-        [Route("{id}/children")]
+        /// <summary>
+        /// Get the children (answers) to a given post.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("{id}/children", Name = nameof(GetAnswers))]
         public IActionResult GetAnswers(int id)
         {
-            var posts = _dataservice.GetAnswerById(id);
-            return Ok(posts);
+            var answers = _dataservice.GetAnswersById(id);
+
+            var viewList = new List<AnswerViewModel>();
+
+            foreach (var answer in answers)
+            {
+                var model = Mapper.Map<AnswerViewModel>(answer);
+
+                // parent id will (should) never be null on answers.
+                model.Parent = LinkBuilder.CreateIdentityLink(Url.Link, nameof(GetSingle), (int)answer.ParentId);
+                model.Comments = LinkBuilder.CreateIdentityLink(Url.Link,
+                    nameof(CommentsController.GetCommentsByPostId), answer.Id);
+
+                viewList.Add(model);
+            }
+
+            return Ok(viewList);
+        }
+
+        [HttpGet("/questions", Name = nameof(GetQuestions))]
+        public IActionResult GetQuestions(int page = 0, int pagesize = 10)
+        {
+            var questions = _dataservice.GetQuestions(page, pagesize);
+
+            var listOfQuestions = new List<QuestionViewModel>();
+
+            foreach (var question in questions)
+            {
+                var model = Mapper.Map<QuestionViewModel>(question);
+
+                model.Answers = LinkBuilder.CreateIdentityLink(Url.Link, nameof(GetAnswers), question.Id);
+                model.AcceptedAnswer = question.AcceptedAnswerId == null
+                    ? null : LinkBuilder.CreateIdentityLink(Url.Link, nameof(GetSingle), (int)question.AcceptedAnswerId);
+                model.LinkPost = question.LinkPostId == null
+                    ? null : LinkBuilder.CreateIdentityLink(Url.Link, nameof(GetSingle), (int)question.LinkPostId);
+
+                listOfQuestions.Add(model);
+            }
+
+            var returnObj = new
+            {
+                data = listOfQuestions,
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetQuestions), page, pagesize, _dataservice.GetNumberOfQuestions())
+            };
+
+
+            return Ok(returnObj);
+
         }
 
 

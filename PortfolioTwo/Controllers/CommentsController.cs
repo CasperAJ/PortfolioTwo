@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using DataServiceLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using PortfolioTwo.Models;
 using PortfolioTwo.Utility;
 
@@ -14,6 +15,7 @@ namespace PortfolioTwo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CommentsController : ControllerBase
     {
 

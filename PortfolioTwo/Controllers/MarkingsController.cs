@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DataServiceLayer;
 using DataServiceLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PortfolioTwo.Models;
 using PortfolioTwo.Utility;
@@ -13,6 +14,7 @@ namespace PortfolioTwo.Controllers
 {
     [Route("api/markings")]
     [ApiController]
+    [Authorize]
     public class MarkingsController : ControllerBase
     {
         private IDataService _dataservice;

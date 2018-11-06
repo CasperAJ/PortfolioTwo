@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DataServiceLayer;
 using DataServiceLayer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using PortfolioTwo.Models;
@@ -14,6 +15,7 @@ namespace PortfolioTwo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SearchesController : Controller
     {
         private IDataService _dataservice;
