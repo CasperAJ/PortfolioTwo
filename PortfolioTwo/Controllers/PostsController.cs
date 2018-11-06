@@ -25,7 +25,7 @@ namespace PortfolioTwo.Controllers
             _dataservice = dataservice;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet(Name = nameof(Get))]
         public IActionResult Get(int page = 0, int pagesize = 10)
         {

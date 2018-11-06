@@ -78,7 +78,7 @@ namespace PortfolioTwo.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody]User user)
+        public IActionResult Login([FromBody]UserViewModel user)
         {
             if (string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password))
             {

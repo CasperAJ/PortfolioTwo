@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using DataServiceLayer;
 using DataServiceLayer.Models;
+using PortfolioTwo.Services;
 using Xunit;
 
 namespace UnitTestProject
@@ -86,16 +87,31 @@ namespace UnitTestProject
         public void CreateUser_ByValidId()
         {
             var service = new DataService();
-            var user = service.CreateUser("TestUser01", "12345", "test@test.dk");
+
+            var username = "NewTestUser1";
+            var password = "test";
+            var email = "NewTestUser1@h.com";
+            var size = 256;
+            var salt = PasswordService.GenerateSalt(size);
+            var pwd = PasswordService.HashPassword(password, salt, size);
+            
+            var user = service.CreateUser(username, pwd, salt, email);
             Assert.True(user.Id > 0);
-            Assert.Equal("TestUser01", user.UserName);
+            Assert.Equal("NewTestUser1", user.UserName);
         }
 
         [Fact]
         public void UpdateUser_WithEmailAndPassword()
         {
             var service = new DataService();
-            var user = service.CreateUser("TestUser100", "12356", "test@email.dk");
+            var username = "NewTestUser2";
+            var password = "test";
+            var email = "NewTestUser2@h.com";
+            var size = 256;
+            var salt = PasswordService.GenerateSalt(size);
+            var pwd = PasswordService.HashPassword(password, salt, size);
+
+            var user = service.CreateUser(username, pwd, salt, email);
 
             var result = service.UpdateUser(user.Id, "newUserTest@email.dk", "newPassword500");
             Assert.True(result);
