@@ -37,7 +37,6 @@ namespace PortfolioTwo.Controllers
             var user = _dataService.GetUser(id);
             if (user == null) return NotFound();
             var model = Mapper.Map<UserViewModel>(user);
-            //model.path = Url.Link(nameof(GetUsers))
             model.path = LinkBuilder.CreateIdentityLink(Url.Link, nameof(UsersController.GetUsers), user.Id);
 
 
@@ -49,23 +48,29 @@ namespace PortfolioTwo.Controllers
             return Ok(model);
         }
 
-        // TODO: change these to use viewmodels later with automapper.
-        // TODO: when exception handling is added to the dataservice, add badrequest return here.
+
         [HttpPost]
         public IActionResult Create([FromBody]UserViewModel user)
         {
+
+            if (string.IsNullOrEmpty(user.Email) || string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password))
+            {
+                return BadRequest();
+            }
+
             int.TryParse(_configuration["security:pwdsize"], out var size);
             var salt = PasswordService.GenerateSalt(size);
             var pwd = PasswordService.HashPassword(user.Password, salt, size);
+
             var newuser = _dataService.CreateUser(user.UserName, pwd, salt, user.Email);
 
-            if (newuser == null) return BadRequest();
+            if (newuser == null) return StatusCode(500);
 
             return Created("",newuser);
         }
 
-        // TODO: change these to use viewmodels later with automapper.
-        // TODO: when exception handling is added to the dataservice, add badrequest return here.
+        //Note: later on password updates will be handling differently.
+        //this will suffice for now.
         [HttpPut]
         [Route("{id}")]
         public IActionResult Update(int id, UserViewModel user)

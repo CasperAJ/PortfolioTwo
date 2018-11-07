@@ -24,12 +24,18 @@ namespace PortfolioTwo.Controllers
             _dataservice = dataservice;
         }
 
-        [HttpGet]
-        [Route("{id}")]
+        [HttpGet("{id}", Name = nameof(GetMarkById))]
         public IActionResult GetMarkById(int postId, int userId, int marktypeId)
         {
-            var markings = _dataservice.GetMarkByIdForUser(postId, userId, marktypeId);
-            return Ok(markings);
+            var mark = _dataservice.GetMarkByIdForUser(postId, userId, marktypeId);
+            if (mark == null) return NotFound();
+
+            var model = Mapper.Map<MarkingViewModel>(mark);
+
+            model.Post = LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.GetSingle), mark.PostId);
+
+
+            return Ok(model);
         }
 
         [HttpGet]
@@ -43,8 +49,8 @@ namespace PortfolioTwo.Controllers
             {
                 var markToAdd = Mapper.Map<MarkingViewModel>(mark);
                 markToAdd.Post =
-                    LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.GetSingle), mark.PostId);
-                //markToAdd.Path = LinkBuilder.CreateIdentityLink(Url.Link, nameof(GetMarkById), )
+                LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.GetSingle), mark.PostId);
+
                 markingsList.Add(markToAdd);
             }
 
@@ -59,11 +65,23 @@ namespace PortfolioTwo.Controllers
 
         }
 
-        // TODO: implement exception checking here.
+
         [HttpPost]
         public IActionResult Create(Mark mark)
         {
+
+            if (mark.PostId == 0 || mark.UserId == 0 || mark.Type == 0)
+            {
+                return BadRequest();
+            }
+
             var newmark = _dataservice.CreateMark(mark.PostId, mark.UserId, mark.Type, mark.Note);
+
+            if (!newmark)
+            {
+                return StatusCode(500);
+            }
+
             return Created("", newmark);
         }
 

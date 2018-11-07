@@ -9,9 +9,10 @@ namespace PortfolioTwo.Models
     {
         public string Path { get; set; }
         public int Type { get; set; }
-        public int PostId { get; set; }
         public string Post { get; set; }
-        public int UserId { get; set; }
+        
+        // at this point there is no "point", in setting the user, because we only look at markings based on the user.
+        //public string User { get; set; }
         public string Note { get; set; }
 
     }
