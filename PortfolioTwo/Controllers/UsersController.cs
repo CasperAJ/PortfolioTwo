@@ -52,13 +52,14 @@ namespace PortfolioTwo.Controllers
         // TODO: change these to use viewmodels later with automapper.
         // TODO: when exception handling is added to the dataservice, add badrequest return here.
         [HttpPost]
-        public IActionResult Create([FromBody]User user)
+        public IActionResult Create([FromBody]UserViewModel user)
         {
             int.TryParse(_configuration["security:pwdsize"], out var size);
             var salt = PasswordService.GenerateSalt(size);
             var pwd = PasswordService.HashPassword(user.Password, salt, size);
             var newuser = _dataService.CreateUser(user.UserName, pwd, salt, user.Email);
 
+            if (newuser == null) return BadRequest();
 
             return Created("",newuser);
         }
@@ -67,9 +68,9 @@ namespace PortfolioTwo.Controllers
         // TODO: when exception handling is added to the dataservice, add badrequest return here.
         [HttpPut]
         [Route("{id}")]
-        public IActionResult Update(int id, User user)
+        public IActionResult Update(int id, UserViewModel user)
         {
-            if (_dataService.UpdateUser(user.Id, user.Email, user.Password))
+            if (_dataService.UpdateUser(id, user.Email, user.Password))
             {
                 return Ok();
             }
