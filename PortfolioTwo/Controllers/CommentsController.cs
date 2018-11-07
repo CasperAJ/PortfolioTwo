@@ -56,6 +56,7 @@ namespace PortfolioTwo.Controllers
         public IActionResult GetCommentById(int id)
         {
             var comment = _dataService.GetCommentById(id);
+            if (comment == null) return NotFound();
 
             var viewmodel = Mapper.Map<CommentViewModel>(comment);
 
