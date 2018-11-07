@@ -37,5 +37,12 @@ namespace DataServiceLayer
         List<Search> GetAllSearchesByUserId(int userId, int page, int pagesize);
         int GetNumberOfSearchByUser(int id);
         Author GetAuthor(int authorId);
+
+        List<Tag> GetAllTags(int page, int pagesize);
+        Tag GetTagById(int id);
+        List<TagToPost> GetAllTagsFromPostId(int postId, int page, int pagesize);
+        int GetNumberOfTags();
+        int GetNumberOfTagsFromPostId(int postId);
+        TagToPost GetTagToPostFromId(int postId, int tagId);
     }
 }

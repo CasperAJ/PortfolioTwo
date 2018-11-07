@@ -20,6 +20,47 @@ namespace DataServiceLayer
 
         }
 
+
+        //tags
+
+        public List<Tag> GetAllTags(int page, int pagesize)
+        {
+            return db.Tags
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
+        }
+
+        public Tag GetTagById(int id)
+        {
+            return db.Tags.FirstOrDefault(x => x.Id == id);
+        }
+
+        public List<TagToPost> GetAllTagsFromPostId(int postId, int page, int pagesize)
+        {
+            return db.TagToPosts.Where(x => x.PostId == postId)
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
+        }
+
+
+        public TagToPost GetTagToPostFromId(int postId, int tagId)
+        {
+            return db.TagToPosts.Where(x => x.TagId == tagId).FirstOrDefault(x => x.PostId == postId);
+        }
+
+        public int GetNumberOfTags()
+        {
+            return db.Tags.Count();
+        }
+
+        public int GetNumberOfTagsFromPostId(int postId)
+        {
+            return db.TagToPosts.Count(x => x.PostId == postId);
+        }
+
+
         //Posts
         public List<Post> GetAllPosts(int page = 0, int pagesize = 10)
         {
