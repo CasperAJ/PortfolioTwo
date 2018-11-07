@@ -111,7 +111,7 @@ namespace DataServiceLayer
             return db.Users.FirstOrDefault(x => x.UserName == userName);
         }
 
-        // TODO: we need to handle exceptions here.
+
         public User CreateUser(string username, string password, string salt, string email)
         {
             var creationDate = DateTime.Now;
@@ -125,12 +125,19 @@ namespace DataServiceLayer
             };
 
             db.Users.Add(user);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            
 
             return user;
         }
 
-        // TODO: we need to handle exceptions here.
         public bool UpdateUser(int id, string email, string password)
         {
             var user = db.Users.FirstOrDefault(x => x.Id == id);
@@ -142,7 +149,16 @@ namespace DataServiceLayer
 
             user.Email = email;
             user.Password = password;
-            db.SaveChanges();
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
 
             return true;
         }
