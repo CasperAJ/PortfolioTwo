@@ -15,7 +15,7 @@ namespace PortfolioTwo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+//    [Authorize]
     public class SearchesController : Controller
     {
         private IDataService _dataservice;
@@ -106,6 +106,32 @@ namespace PortfolioTwo.Controllers
             _dataservice.CreateSearchByString(search.UserId, search.SearchString);
 
             return Ok();
+        }
+
+        [HttpPost("testsearch/test")]
+        public IActionResult Testsearch(Search search)
+        {
+            // TODO: REMEMBER TO IMPLEMENT USERS SEARCH INTO SEARCH HISTORY TABLE
+            var results = _dataservice.SearchBestRank(search.SearchString);
+
+            return Ok(results);
+        }
+
+        [HttpPost("testsearch/cloud")]
+        public IActionResult TestCloud(Search search)
+        {
+            //var results = _dataservice.WordCloudSimple(search.SearchString);
+            var results = _dataservice.WordCloudTFIDF(search.SearchString);
+
+            return Ok(results);
+        }
+
+        [HttpGet("testsearch/assoc/{term}")]
+        public IActionResult Testassoc(string term)
+        {
+            var results = _dataservice.WordAssociationSearch(term);
+
+            return Ok(results);
         }
 
 
