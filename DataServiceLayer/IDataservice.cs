@@ -44,5 +44,14 @@ namespace DataServiceLayer
         int GetNumberOfTags();
         int GetNumberOfTagsFromPostId(int postId);
         TagToPost GetTagToPostFromId(int postId, int tagId);
+
+        List<Post> SearchExact(string search);
+        List<PostTFIDF> SearchBestTFIDF(string searchterms);
+        List<PostRank> SearchBestRank(string searchterms);
+
+        List<CloudSimple> WordCloudSimple(string searchterms);
+        List<CloudTFIDF> WordCloudTFIDF(string searchterms);
+
+        List<WordAssociation> WordAssociationSearch(string searchterm);
     }
 }

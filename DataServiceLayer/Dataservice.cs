@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using DataServiceLayer.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataServiceLayer
 {
@@ -17,6 +19,156 @@ namespace DataServiceLayer
         public DataService()
         {
             db = new StackOverflowContext();
+
+        }
+
+        // searches
+        // NOTE: try this ==> context.Database.ExecuteSqlCommand("CreateStudents @p0, @p1", parameters: new[] { "Bill", "Gates" });
+        public List<Post> SearchExact(string searchterms)
+        {
+            var terms = searchterms.Split(" ");
+            var command = "select * from ExactMatch(";
+
+            var counter = 1;
+            foreach (var term in terms)
+            {
+                if (counter == terms.Length)
+                {
+                    command = command + "'" + term + "'";
+                }
+                else
+                {
+                    command = command + "'" + term + "',";
+                }
+
+                counter++;
+            }
+
+            command = command + ");";
+            var matchresult = db.ExactSearchResults.FromSql(command).ToList();
+
+            var results = db.Posts.Where(x => matchresult.Select(r => r.Id).Contains(x.Id)).ToList();
+            return results;
+
+        }
+
+        // NOTE: try this ==> context.Database.ExecuteSqlCommand("CreateStudents @p0, @p1", parameters: new[] { "Bill", "Gates" });
+        public List<PostTFIDF> SearchBestTFIDF(string searchterms)
+        {
+            var terms = searchterms.Split(" ");
+            var command = "select * from BestMatchtfidf(";
+
+            var counter = 1;
+            foreach (var term in terms)
+            {
+                if (counter == terms.Length)
+                {
+                    command = command + "'" + term + "'";
+                }
+                else
+                {
+                    command = command + "'" + term + "',";
+                }
+
+                counter++;
+            }
+
+            command = command + ");";
+            var matchresult = db.BestSearchResultTFIDFs.FromSql(command).ToList();
+            return matchresult;
+
+        }
+
+        // NOTE: try this ==> context.Database.ExecuteSqlCommand("CreateStudents @p0, @p1", parameters: new[] { "Bill", "Gates" });
+        public List<PostRank> SearchBestRank(string searchterms)
+        {
+            var terms = searchterms.Split(" ");
+            var command = "select * from BestMatchSimple(";
+
+            var counter = 1;
+            foreach (var term in terms)
+            {
+                if (counter == terms.Length)
+                {
+                    command = command + "'" + term + "'";
+                }
+                else
+                {
+                    command = command + "'" + term + "',";
+                }
+
+                counter++;
+            }
+
+            command = command + ");";
+            var matchresult = db.BestSearchResultRanks.FromSql(command).ToList();
+            return matchresult;
+
+        }
+
+
+
+        public List<CloudSimple> WordCloudSimple(string searchterms)
+        {
+
+            var terms = searchterms.Split(" ");
+            var command = "select * from simpleCloud(";
+
+            var counter = 1;
+            foreach (var term in terms)
+            {
+                if (counter == terms.Length)
+                {
+                    command = command + "'" + term + "'";
+                }
+                else
+                {
+                    command = command + "'" + term + "',";
+                }
+
+                counter++;
+            }
+
+            command = command + ");";
+            var matchresult = db.CloudSimples.FromSql(command).ToList();
+            return matchresult;
+
+        }
+
+        public List<CloudTFIDF> WordCloudTFIDF(string searchterms)
+        {
+
+            var terms = searchterms.Split(" ");
+            var command = "select * from tfidfCloud(";
+
+            var counter = 1;
+            foreach (var term in terms)
+            {
+                if (counter == terms.Length)
+                {
+                    command = command + "'" + term + "'";
+                }
+                else
+                {
+                    command = command + "'" + term + "',";
+                }
+
+                counter++;
+            }
+
+            command = command + ");";
+            var matchresult = db.CloudTfidfs.FromSql(command).ToList();
+            return matchresult;
+
+        }
+
+        public List<WordAssociation> WordAssociationSearch(string searchterm)
+        {
+
+            var command = "select * from SearchAssoc('" + searchterm + "');";
+
+            var matchresult = db.WordAssociations.FromSql(command).ToList();
+            return matchresult;
 
         }
 

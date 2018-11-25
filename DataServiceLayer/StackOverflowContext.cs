@@ -21,6 +21,14 @@ namespace DataServiceLayer
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Question> Questions { get; set; }
 
+        //search
+        public DbQuery<ExactSearchResult> ExactSearchResults { get; set; }
+        public DbQuery<PostTFIDF> BestSearchResultTFIDFs { get; set; }
+        public DbQuery<PostRank> BestSearchResultRanks { get; set; }
+        public DbQuery<CloudSimple> CloudSimples { get; set; }
+        public DbQuery<CloudTFIDF> CloudTfidfs { get; set; }
+        public DbQuery<WordAssociation> WordAssociations { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -111,6 +119,42 @@ namespace DataServiceLayer
             modelBuilder.Entity<User>().Property(x => x.Salt).HasColumnName("salt");
             modelBuilder.Entity<User>().Property(x => x.Email).HasColumnName("email");
             modelBuilder.Entity<User>().Property(x => x.CreationDate).HasColumnName("creationdate");
+
+            // searches
+            modelBuilder.Query<ExactSearchResult>().Property(x => x.Id).HasColumnName("id");
+
+            modelBuilder.Query<CloudSimple>().Property(x => x.Word).HasColumnName("word");
+            modelBuilder.Query<CloudSimple>().Property(x => x.Rank).HasColumnName("rank");
+
+            modelBuilder.Query<CloudTFIDF>().Property(x => x.Word).HasColumnName("word");
+            modelBuilder.Query<CloudTFIDF>().Property(x => x.Rank).HasColumnName("rank");
+
+            modelBuilder.Query<WordAssociation>().Property(x => x.Word2).HasColumnName("word2");
+            modelBuilder.Query<WordAssociation>().Property(x => x.Grade).HasColumnName("grade");
+
+            modelBuilder.Query<PostTFIDF>().Property(x => x.Id).HasColumnName("id");
+            modelBuilder.Query<PostTFIDF>().Property(x => x.ParentId).HasColumnName("parentid");
+            modelBuilder.Query<PostTFIDF>().Property(x => x.AcceptedAnswerId).HasColumnName("acceptedanswerid");
+            modelBuilder.Query<PostTFIDF>().Property(x => x.CreationDate).HasColumnName("creationdate");
+            modelBuilder.Query<PostTFIDF>().Property(x => x.Score).HasColumnName("score");
+            modelBuilder.Query<PostTFIDF>().Property(x => x.Body).HasColumnName("body");
+            modelBuilder.Query<PostTFIDF>().Property(x => x.ClosedDate).HasColumnName("closeddate");
+            modelBuilder.Query<PostTFIDF>().Property(x => x.Title).HasColumnName("title");
+            modelBuilder.Query<PostTFIDF>().Property(x => x.AuthorId).HasColumnName("author_id");
+            modelBuilder.Query<PostTFIDF>().Property(x => x.LinkPostId).HasColumnName("linkpostid");
+            modelBuilder.Query<PostTFIDF>().Property(x => x.Rank).HasColumnName("rank");
+
+            modelBuilder.Query<PostRank>().Property(x => x.Id).HasColumnName("id");
+            modelBuilder.Query<PostRank>().Property(x => x.ParentId).HasColumnName("parentid");
+            modelBuilder.Query<PostRank>().Property(x => x.AcceptedAnswerId).HasColumnName("acceptedanswerid");
+            modelBuilder.Query<PostRank>().Property(x => x.CreationDate).HasColumnName("creationdate");
+            modelBuilder.Query<PostRank>().Property(x => x.Score).HasColumnName("score");
+            modelBuilder.Query<PostRank>().Property(x => x.Body).HasColumnName("body");
+            modelBuilder.Query<PostRank>().Property(x => x.ClosedDate).HasColumnName("closeddate");
+            modelBuilder.Query<PostRank>().Property(x => x.Title).HasColumnName("title");
+            modelBuilder.Query<PostRank>().Property(x => x.AuthorId).HasColumnName("author_id");
+            modelBuilder.Query<PostRank>().Property(x => x.LinkPostId).HasColumnName("linkpostid");
+            modelBuilder.Query<PostRank>().Property(x => x.Rank).HasColumnName("rank");
 
         }
 
