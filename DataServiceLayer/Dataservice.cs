@@ -23,7 +23,7 @@ namespace DataServiceLayer
         }
 
         // searches
-        // NOTE: try this ==> context.Database.ExecuteSqlCommand("CreateStudents @p0, @p1", parameters: new[] { "Bill", "Gates" });
+
         public List<Post> SearchExact(string searchterms)
         {
             var terms = searchterms.Split(" ");
@@ -52,7 +52,6 @@ namespace DataServiceLayer
 
         }
 
-        // NOTE: try this ==> context.Database.ExecuteSqlCommand("CreateStudents @p0, @p1", parameters: new[] { "Bill", "Gates" });
         public List<PostTFIDF> SearchBestTFIDF(string searchterms)
         {
             var terms = searchterms.Split(" ");
@@ -79,7 +78,7 @@ namespace DataServiceLayer
 
         }
 
-        // NOTE: try this ==> context.Database.ExecuteSqlCommand("CreateStudents @p0, @p1", parameters: new[] { "Bill", "Gates" });
+
         public List<PostRank> SearchBestRank(string searchterms)
         {
             var terms = searchterms.Split(" ");
@@ -160,6 +159,13 @@ namespace DataServiceLayer
             var matchresult = db.CloudTfidfs.FromSql(command).ToList();
             return matchresult;
 
+        }
+
+        public List<ForceNode> ForceGraph(string term, int grade)
+        {
+            var command = "select generate_force_graph_input('"+ term +"', "+ grade +")";
+            var result = db.ForceGraphs.FromSql(command).ToList();
+            return result;
         }
 
         public List<WordAssociation> WordAssociationSearch(string searchterm)

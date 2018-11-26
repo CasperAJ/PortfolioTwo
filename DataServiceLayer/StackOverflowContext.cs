@@ -28,6 +28,7 @@ namespace DataServiceLayer
         public DbQuery<CloudSimple> CloudSimples { get; set; }
         public DbQuery<CloudTFIDF> CloudTfidfs { get; set; }
         public DbQuery<WordAssociation> WordAssociations { get; set; }
+        public DbQuery<ForceNode> ForceGraphs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -131,6 +132,8 @@ namespace DataServiceLayer
 
             modelBuilder.Query<WordAssociation>().Property(x => x.Word2).HasColumnName("word2");
             modelBuilder.Query<WordAssociation>().Property(x => x.Grade).HasColumnName("grade");
+
+            modelBuilder.Query<ForceNode>().Property(x => x.Node).HasColumnName("generate_force_graph_input");
 
             modelBuilder.Query<PostTFIDF>().Property(x => x.Id).HasColumnName("id");
             modelBuilder.Query<PostTFIDF>().Property(x => x.ParentId).HasColumnName("parentid");

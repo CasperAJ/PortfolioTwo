@@ -53,5 +53,7 @@ namespace DataServiceLayer
         List<CloudTFIDF> WordCloudTFIDF(string searchterms);
 
         List<WordAssociation> WordAssociationSearch(string searchterm);
+
+        List<ForceNode> ForceGraph(string term, int grade);
     }
 }

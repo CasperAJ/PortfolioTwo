@@ -108,25 +108,51 @@ namespace PortfolioTwo.Controllers
             return Ok();
         }
 
-        [HttpPost("testsearch/test")]
-        public IActionResult Testsearch(Search search)
+        [HttpPost("bestrank")]
+        public IActionResult BestRank(Search search)
         {
-            // TODO: REMEMBER TO IMPLEMENT USERS SEARCH INTO SEARCH HISTORY TABLE
             var results = _dataservice.SearchBestRank(search.SearchString);
 
             return Ok(results);
         }
 
-        [HttpPost("testsearch/cloud")]
-        public IActionResult TestCloud(Search search)
+        [HttpPost("exact")]
+        public IActionResult Exact(Search search)
         {
-            //var results = _dataservice.WordCloudSimple(search.SearchString);
+            var results = _dataservice.SearchExact(search.SearchString);
+
+            return Ok(results);
+        }
+
+        [HttpPost("besttfidf")]
+        public IActionResult BestTFIDF(Search search)
+        {
+            var results = _dataservice.SearchBestTFIDF(search.SearchString);
+
+            return Ok(results);
+        }
+
+
+        [HttpPost("cloud/simple")]
+        public IActionResult CloudSimple(Search search)
+        {
+
+            var results = _dataservice.WordCloudSimple(search.SearchString);
+
+            return Ok(results);
+        }
+
+
+
+        [HttpPost("cloud/tfidf")]
+        public IActionResult CloudTFIDF(Search search)
+        {
             var results = _dataservice.WordCloudTFIDF(search.SearchString);
 
             return Ok(results);
         }
 
-        [HttpGet("testsearch/assoc/{term}")]
+        [HttpGet("assoc/{term}")]
         public IActionResult Testassoc(string term)
         {
             var results = _dataservice.WordAssociationSearch(term);
@@ -134,6 +160,17 @@ namespace PortfolioTwo.Controllers
             return Ok(results);
         }
 
+        [HttpGet("force/{term}/{grade}")]
+        public IActionResult TestForce(string term, int grade)
+        {
+            var results = _dataservice.ForceGraph(term, grade);
+            var data = "";
+            foreach (var node in results)
+            {
+                data += node.Node;
+            }
+            return Ok(data);
+        }
 
     }
 }
