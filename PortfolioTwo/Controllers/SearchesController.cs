@@ -16,7 +16,7 @@ namespace PortfolioTwo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-//    [Authorize]
+    [Authorize]
     public class SearchesController : Controller
     {
         private IDataService _dataservice;
