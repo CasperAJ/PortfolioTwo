@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataServiceLayer;
@@ -30,7 +31,7 @@ namespace PortfolioTwo.Controllers
         {
             var searches = _dataservice.GetAllSearches(page, pagesize);
             List<SearchViewModel> searchList = new List<SearchViewModel>();
-
+            
             foreach (var search in searches)
             {
                 var toAdd = Mapper.Map<SearchViewModel>(search);
@@ -115,7 +116,8 @@ namespace PortfolioTwo.Controllers
         [HttpPost("bestrank")]
         public IActionResult BestRank(Search search, int page = 0, int pagesize = 10)
         {
-            var results = _dataservice.SearchBestRank(search.SearchString, page, pagesize);
+            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var results = _dataservice.SearchBestRank(search.SearchString, int.Parse(userid), page, pagesize);
 
             return Ok(results);
         }
@@ -123,7 +125,8 @@ namespace PortfolioTwo.Controllers
         [HttpPost("exact")]
         public IActionResult Exact(Search search, int page = 0, int pagesize = 10)
         {
-            var results = _dataservice.SearchExact(search.SearchString, page, pagesize);
+            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var results = _dataservice.SearchExact(search.SearchString, int.Parse(userid), page, pagesize);
 
             return Ok(results);
         }
@@ -131,7 +134,9 @@ namespace PortfolioTwo.Controllers
         [HttpPost("besttfidf")]
         public IActionResult BestTFIDF(Search search, int page = 0, int pagesize = 10)
         {
-            var results = _dataservice.SearchBestTFIDF(search.SearchString, page, pagesize);
+            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var results = _dataservice.SearchBestTFIDF(search.SearchString, int.Parse(userid), page, pagesize);
 
             return Ok(results);
         }

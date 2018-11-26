@@ -24,10 +24,10 @@ namespace DataServiceLayer
 
         // searches
 
-        public List<Post> SearchExact(string searchterms, int page, int pagesize)
+        public List<Post> SearchExact(string searchterms, int userid, int page, int pagesize)
         {
             var terms = searchterms.Split(" ");
-            var command = "select * from ExactMatch(";
+            var command = "select * from ExactMatch("+ userid + ", ";
 
             var counter = 1;
             foreach (var term in terms)
@@ -55,10 +55,10 @@ namespace DataServiceLayer
 
         }
 
-        public List<PostTFIDF> SearchBestTFIDF(string searchterms, int page, int pagesize)
+        public List<PostTFIDF> SearchBestTFIDF(string searchterms, int userid, int page, int pagesize)
         {
             var terms = searchterms.Split(" ");
-            var command = "select * from BestMatchtfidf(";
+            var command = "select * from BestMatchtfidf(" + userid + ", ";
 
             var counter = 1;
             foreach (var term in terms)
@@ -85,10 +85,10 @@ namespace DataServiceLayer
         }
 
 
-        public List<PostRank> SearchBestRank(string searchterms, int page, int pagesize)
+        public List<PostRank> SearchBestRank(string searchterms, int userid, int page, int pagesize)
         {
             var terms = searchterms.Split(" ");
-            var command = "select * from BestMatchSimple(";
+            var command = "select * from BestMatchSimple(" + userid + ", ";
 
             var counter = 1;
             foreach (var term in terms)
