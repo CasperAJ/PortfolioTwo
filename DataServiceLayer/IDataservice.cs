@@ -45,9 +45,9 @@ namespace DataServiceLayer
         int GetNumberOfTagsFromPostId(int postId);
         TagToPost GetTagToPostFromId(int postId, int tagId);
 
-        List<Post> SearchExact(string search);
-        List<PostTFIDF> SearchBestTFIDF(string searchterms);
-        List<PostRank> SearchBestRank(string searchterms);
+        List<Post> SearchExact(string search, int page, int pagesize);
+        List<PostTFIDF> SearchBestTFIDF(string searchterms, int page, int pagesize);
+        List<PostRank> SearchBestRank(string searchterms, int page, int pagesize);
 
         List<CloudSimple> WordCloudSimple(string searchterms);
         List<CloudTFIDF> WordCloudTFIDF(string searchterms);

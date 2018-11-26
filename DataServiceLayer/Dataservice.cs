@@ -24,7 +24,7 @@ namespace DataServiceLayer
 
         // searches
 
-        public List<Post> SearchExact(string searchterms)
+        public List<Post> SearchExact(string searchterms, int page, int pagesize)
         {
             var terms = searchterms.Split(" ");
             var command = "select * from ExactMatch(";
@@ -47,12 +47,15 @@ namespace DataServiceLayer
             command = command + ");";
             var matchresult = db.ExactSearchResults.FromSql(command).ToList();
 
-            var results = db.Posts.Where(x => matchresult.Select(r => r.Id).Contains(x.Id)).ToList();
+            var results = db.Posts.Where(x => matchresult.Select(r => r.Id).Contains(x.Id))
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
             return results;
 
         }
 
-        public List<PostTFIDF> SearchBestTFIDF(string searchterms)
+        public List<PostTFIDF> SearchBestTFIDF(string searchterms, int page, int pagesize)
         {
             var terms = searchterms.Split(" ");
             var command = "select * from BestMatchtfidf(";
@@ -72,14 +75,17 @@ namespace DataServiceLayer
                 counter++;
             }
 
-            command = command + ");";
-            var matchresult = db.BestSearchResultTFIDFs.FromSql(command).ToList();
+            command = command + ")";
+            var matchresult = db.BestSearchResultTFIDFs.FromSql(command)
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
             return matchresult;
 
         }
 
 
-        public List<PostRank> SearchBestRank(string searchterms)
+        public List<PostRank> SearchBestRank(string searchterms, int page, int pagesize)
         {
             var terms = searchterms.Split(" ");
             var command = "select * from BestMatchSimple(";
@@ -99,8 +105,11 @@ namespace DataServiceLayer
                 counter++;
             }
 
-            command = command + ");";
-            var matchresult = db.BestSearchResultRanks.FromSql(command).ToList();
+            command = command + ")";
+            var matchresult = db.BestSearchResultRanks.FromSql(command)
+                .Skip(page * pagesize)
+                .Take(pagesize)
+                .ToList();
             return matchresult;
 
         }

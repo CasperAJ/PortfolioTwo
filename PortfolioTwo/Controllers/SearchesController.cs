@@ -108,26 +108,30 @@ namespace PortfolioTwo.Controllers
             return Ok();
         }
 
+
+
+
+
         [HttpPost("bestrank")]
-        public IActionResult BestRank(Search search)
+        public IActionResult BestRank(Search search, int page = 0, int pagesize = 10)
         {
-            var results = _dataservice.SearchBestRank(search.SearchString);
+            var results = _dataservice.SearchBestRank(search.SearchString, page, pagesize);
 
             return Ok(results);
         }
 
         [HttpPost("exact")]
-        public IActionResult Exact(Search search)
+        public IActionResult Exact(Search search, int page = 0, int pagesize = 10)
         {
-            var results = _dataservice.SearchExact(search.SearchString);
+            var results = _dataservice.SearchExact(search.SearchString, page, pagesize);
 
             return Ok(results);
         }
 
         [HttpPost("besttfidf")]
-        public IActionResult BestTFIDF(Search search)
+        public IActionResult BestTFIDF(Search search, int page = 0, int pagesize = 10)
         {
-            var results = _dataservice.SearchBestTFIDF(search.SearchString);
+            var results = _dataservice.SearchBestTFIDF(search.SearchString, page, pagesize);
 
             return Ok(results);
         }
