@@ -62,6 +62,10 @@ namespace PortfolioTwo
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseHttpsRedirection();
+
+            app.UseFileServer();
+
             app.UseAuthentication();
 
             app.UseMvc();

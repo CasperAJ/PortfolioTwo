@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+<div>
+
+    HelloS
+    <div data-bind="template: {name: currentTemplate }"></div>
+    
+
+    <script type="text/html" id="posts-template">
+        <div data-bind="foreach: posts">
+            <fieldset>
+                <legend data-bind="text: title ? title : 'Title: No Title' "> </legend>
+                <h6 data-bind="text: acceptedAnswer"></h6>
+                <h6 data-bind="text: author"></h6>
+                <h6 data-bind="text: body"></h6>
+                <h6 data-bind="text: closedDate"></h6>
+                <h6 data-bind="text: creationDate "></h6>
+                <h6 data-bind="text: linkPost"></h6>
+                <h6 data-bind="text: parent "></h6>
+                <h6 data-bind="text: path "></h6>
+                <h6 data-bind="text: score "></h6>
+            </fieldset>
+        </div>
+
+        <!--<a data-bind="attr: { href: prev }">Prev</a>--> 
+        <!--<a data-bind="attr: {href: next}">Next</a>-->
+        <input type="button" value="Prev" data-bind="click: function ( data ) {clickNext(prev(), data) }, disable: prevPredicate"/> 
+        <button data-bind="click: function ( data ) {clickNext(next(), data) }">Next</button> 
+
+    </script>
+   
+    
+    
+    
+   
+    
+    
+
+</div>
+
+    
+
+<script data-main="js/main.js" src="js/lib/requirejs/require.js"></script>
+</body>
+</html>
