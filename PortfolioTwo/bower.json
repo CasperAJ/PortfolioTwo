@@ -5,7 +5,8 @@
     "requirejs": "2.3.1",
     "jQuery": "3.3.1",
     "bootstrap": "v4.1.3",
-    "knockout": "v3.4.2"
+    "knockout": "v3.4.2",
+    "text": "requirejs-text#2.0.15"
   },
   "resolutions": {
     "jQuery": "3.3.1"

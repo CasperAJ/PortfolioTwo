@@ -1,0 +1,10 @@
+﻿<div data-bind="foreach: posts">
+    <post params="{post: $data}"></post>
+    
+  
+</div>
+  
+<input type="button" value="Prev" data-bind="click: function ( data ) {clickNextPrev(prev(), data) }"/>
+<!--<input type="button" value="Prev" data-bind="click: function ( data ) {clickNext(prev(), data) }, disable: prevPredicate"/>-->
+<button data-bind="click: function ( data ) {clickNextPrev(next(), data) }">Next</button>
+<!--<button data-bind="click: function ( data ) {clickNext(next(), data) }">Next</button>-->
