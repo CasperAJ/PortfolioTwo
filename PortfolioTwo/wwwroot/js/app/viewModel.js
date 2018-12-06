@@ -12,12 +12,12 @@
 
 
     $.getJSON("api/posts", function(response) {
-        console.log(response);
+        //console.log(response);
         posts(response.data);
         next(response.paging.next);
         prev(response.paging.prev);
-        console.log(response.paging.next);
-        console.log(response.paging.prev);
+        //console.log(response.paging.next);
+        //console.log(response.paging.prev);
 
         if (response.paging.prev === null) {
             prevPredicate = ko.observable(true);
@@ -31,8 +31,8 @@
         }
 
 
-        console.log(response.paging.next);
-        console.log(response.paging.prev);
+        //console.log(response.paging.next);
+        //console.log(response.paging.prev);
     });
 
 
