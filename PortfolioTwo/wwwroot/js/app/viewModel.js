@@ -1,72 +1,72 @@
 ﻿define(['jquery', 'knockout'], function($, ko) {
 
 
-    var prev = ko.observable();
-    var prevPredicate = ko.observable(true);
-    var next = ko.observable(); 
-    var nextPredicate = ko.observable(true);
+    //var prev = ko.observable();
+    //var prevPredicate = ko.observable(true);
+    //var next = ko.observable(); 
+    //var nextPredicate = ko.observable(true);
     
-    var posts = ko.observableArray([]);
+    //var posts = ko.observableArray([]);
 
-    var currentTemplate = ko.observable("posts-template");
-
-
-    $.getJSON("api/posts", function(response) {
-        //console.log(response);
-        posts(response.data);
-        next(response.paging.next);
-        prev(response.paging.prev);
-        //console.log(response.paging.next);
-        //console.log(response.paging.prev);
-
-        if (response.paging.prev === null) {
-            prevPredicate = ko.observable(true);
-        } else {
-            prevPredicate = ko.observable(false);
-        }
-        if (response.paging.next === null) {
-            prevPredicate = ko.observable(true);
-        } else {
-            prevPredicate = ko.observable(false);
-        }
+    //var currentTemplate = ko.observable("posts-template");
 
 
-        //console.log(response.paging.next);
-        //console.log(response.paging.prev);
-    });
+    //$.getJSON("api/posts", function(response) {
+    //    //console.log(response);
+    //    posts(response.data);
+    //    next(response.paging.next);
+    //    prev(response.paging.prev);
+    //    //console.log(response.paging.next);
+    //    //console.log(response.paging.prev);
+
+    //    if (response.paging.prev === null) {
+    //        prevPredicate = ko.observable(true);
+    //    } else {
+    //        prevPredicate = ko.observable(false);
+    //    }
+    //    if (response.paging.next === null) {
+    //        prevPredicate = ko.observable(true);
+    //    } else {
+    //        prevPredicate = ko.observable(false);
+    //    }
 
 
-    var clickNext = function (Api) {
-        console.log("Hello");
-        console.log(Api);
-        if (Api === null) {
-            console.log(Api);
-        } else {
-            myApiString = Api.replace("http://localhost:5000/", "");
-            console.log(myApiString);
-            $.getJSON(myApiString, function (response) {
-                console.log(response);
-                posts(response.data);
-                next(response.paging.next);
-                prev(response.paging.prev);
+    //    //console.log(response.paging.next);
+    //    //console.log(response.paging.prev);
+    //});
 
-                if (response.paging.prev === null) {
-                    prevPredicate = ko.observable(true);
-                } else {
-                    prevPredicate = ko.observable(false);
-                }
-                if (response.paging.next === null) { 
-                    prevPredicate = ko.observable(true);
-                } else {
-                    prevPredicate = ko.observable(false);
-                }
 
-                console.log(response.paging.next);
-                console.log(response.paging.prev);
-            });
-        }
+    //var clickNext = function (Api) {
+    //    console.log("Hello");
+    //    console.log(Api);
+    //    if (Api === null) {
+    //        console.log(Api);
+    //    } else {
+    //        myApiString = Api.replace("http://localhost:5000/", "");
+    //        console.log(myApiString);
+    //        $.getJSON(myApiString, function (response) {
+    //            console.log(response);
+    //            posts(response.data);
+    //            next(response.paging.next);
+    //            prev(response.paging.prev);
+
+    //            if (response.paging.prev === null) {
+    //                prevPredicate = ko.observable(true);
+    //            } else {
+    //                prevPredicate = ko.observable(false);
+    //            }
+    //            if (response.paging.next === null) { 
+    //                prevPredicate = ko.observable(true);
+    //            } else {
+    //                prevPredicate = ko.observable(false);
+    //            }
+
+    //            console.log(response.paging.next);
+    //            console.log(response.paging.prev);
+    //        });
+    //    }
         
-    };
+    //};
 
 
 
@@ -76,13 +76,13 @@
 
 
     return {
-        posts,
-        next,
-        prev,
-        clickNext,
-        prevPredicate,
-        nextPredicate,
-        currentTemplate
+        //posts,
+        //next,
+        //prev,
+        //clickNext,
+        //prevPredicate,
+        //nextPredicate,
+        //currentTemplate
     };
 });
 

@@ -6,7 +6,14 @@
         });
     };
 
+    var getPostDetails = function (data, callback) {
+        $.getJSON(data, function (response) {
+            callback(response);
+        });
+    };
+
     return {
-        getPosts
+        getPosts,
+        getPostDetails
     };
 });

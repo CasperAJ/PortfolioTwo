@@ -13,14 +13,14 @@ require.config({
 require(['knockout'], function (ko) {
     ko.components.register("posts-list",
         {
-            viewModel: { require: 'components/posts/postsList/postsList' },
-            template: { require: 'text!components/posts/postsList/postsListView.html' }
+            viewModel: { require: 'components/postsList/postsList' },
+            template: { require: 'text!components/postsList/postsListView.html' }
         });
 
     ko.components.register("post",
         {
-            viewModel: { require: 'components/posts/posts/post' },
-            template: { require: 'text!components/posts/posts/postView.html' }
+            viewModel: { require: 'components/posts/post' },
+            template: { require: 'text!components/posts/postView.html' }
         });
 
 });

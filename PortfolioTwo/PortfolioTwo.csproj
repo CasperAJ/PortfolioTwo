@@ -19,4 +19,13 @@
     <Folder Include="wwwroot\js\lib\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\js\components\posts\post.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="wwwroot\js\components\posts\postView.html">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>
