@@ -5,7 +5,8 @@ require.config({
         jquery: 'lib/jQuery/dist/jquery',
         knockout: 'lib/knockout/dist/knockout',
         text: 'lib/text/text',
-        dataService : 'services/dataService'
+        dataService : 'services/dataService',
+        postman: 'services/postman'
     }
 });
 
@@ -25,6 +26,31 @@ require(['knockout'], function (ko) {
 
 });
 
-require(['knockout', 'app/viewModel'], function (ko, vm) {
+
+// vm and observers
+require(['knockout', 'app', 'postman'], function (ko, vm, postman) {
+
+    // registrations of subscriptions
+
+    postman.subscribe("changeComponent", function(){
+        console.log("hit");
+        if (vm.currentComponent() === 'posts-list') {
+            vm.currentComponent("post");
+        }
+        else {
+            vm.currentComponent('post-list');
+        };
+    });
+
+    postman.subscribe("currentPostChanged", function(link) {
+        vm.currentPost(link);
+    });
+
+    postman.subscribe("postListStateChanged", function(link) {
+        vm.currentListting(link);
+    });
+
+
+
     ko.applyBindings(vm);
 });

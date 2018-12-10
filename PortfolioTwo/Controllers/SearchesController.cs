@@ -16,7 +16,7 @@ namespace PortfolioTwo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class SearchesController : Controller
     {
         private IDataService _dataservice;
@@ -112,14 +112,21 @@ namespace PortfolioTwo.Controllers
 
 
 
-
+        
         [HttpPost("bestrank")]
         public IActionResult BestRank(Search search, int page = 0, int pagesize = 10)
         {
-            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userid = "2";
             var results = _dataservice.SearchBestRank(search.SearchString, int.Parse(userid), page, pagesize);
 
-            return Ok(results);
+            var returnobj = new
+            {
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(BestRank), page, pagesize,100),
+                data = results
+            };
+
+            return Ok(returnobj);
         }
 
         [HttpPost("exact")]

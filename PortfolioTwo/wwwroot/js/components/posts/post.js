@@ -1,49 +1,23 @@
-﻿define(['knockout', 'dataService'], function (ko, ds) {
-    return function (params) {
-        
-        var acceptedAnswer =params.post.acceptedAnswer;
-        var author = params.post.author;
-        var body = params.post.body;
-        var closedDate = params.post.closedDate;
-        var creationDate = params.post.creationDate;
-        var linkPost = params.post.linkPost;
-        var parent = params.post.parent;
-        var path = params.post.path;
-        var score = params.post.score;
-        var title = params.post.title;
+﻿define(["jquery", "knockout", 'dataService', 'postman', 'app'], function($, ko, ds, postman, vm) {
+    return function(params){
+        var answers = ko.observableArray([]);
+        var singlePost = ko.observable();
 
-        var postDetailsPath = ko.observable("");
-        var postDetailsPathConfiguretPath = ko.observable("");
+        ds.getSinglePost(function(data) {
+            console.log(data);
+            singlePost(data);
+        });
+            
 
-         var clickPostDetails = function (p) {
-             postDetailsPath = p.path;
-             postDetailsPathConfiguretPath = postDetailsPath.replace("http://localhost:5000/", "");
-             console.log(postDetailsPathConfiguretPath);
-             console.log("Helloo");
-             //ds.getPostDetails(postDetailsPathConfiguretPath(), function (data) {
-             //        console.log("******");
-             //        console.log(data);
-             //        console.log("******");
-             //    });
-           
-         };
+        var ChangeLayout = function(){
+            postman.publish("changeComponent");
+        };
 
 
-      
-
-        
         return {
-            clickPostDetails,
-            acceptedAnswer,
-            author,
-            body,
-            closedDate,
-            creationDate,
-            linkPost,
-            parent,
-            path,
-            score,
-            title
+            singlePost,
+            answers,
+            ChangeLayout  
         };
     };
 });

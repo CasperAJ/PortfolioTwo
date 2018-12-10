@@ -1,18 +1,7 @@
-﻿ <!--<fieldset>
-    <legend data-bind="text: title ? title : 'Title: No Title'"> </legend>
-    <h6 data-bind="text: acceptedAnswer"></h6>
-    <h6 data-bind="text: author"></h6>
-    <h6 data-bind="text: body"></h6>
-    <h6 data-bind="text: closedDate"></h6>
-    <h6 data-bind="text: creationDate"></h6>
-    <h6 data-bind="text: linkPost"></h6>
-    <h6 data-bind="text: parent"></h6>
-    <h6 data-bind="text: path"></h6>
-    <h6 data-bind="text: score"></h6>
-</fieldset>-->
-<!--HEllo-->
-<ul class="list-group">
-    <li class="list-group-item" data-bind="click: clickPostDetails, text: title ? title : 'Title: No Title'">
-    </li>
-</ul>
+﻿<div class="row">
+    <div class="col-md-8" data-bind="with: singlePost">
+        <h3 data-bind="text: title"></h3>
+        <div data-bind="html: body"></div>
+    </div>
+</div>
 
