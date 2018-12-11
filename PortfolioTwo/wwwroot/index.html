@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title></title>
     <link href="js/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 </head>
 <body>
 
@@ -24,19 +25,20 @@
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <div class="dropdown show" style="margin-right: 10px">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    SearchType
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">Best Rank</a>
-                    <a class="dropdown-item" href="#">TF</a>
-                    <a class="dropdown-item" href="#">IDF</a>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Search</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Exact Match</a>
+                        <a class="dropdown-item" href="#">Best Match</a>
+                        <a class="dropdown-item" href="#">Ranked Match</a>
+                    </div>
+                </div>
+                <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-success" type="button"><i class="fas fa-search"></i></button>
                 </div>
             </div>
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-
-                    success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 </nav>
