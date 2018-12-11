@@ -3,10 +3,16 @@
         var answers = ko.observableArray([]);
         var singlePost = ko.observable();
 
-        ds.getSinglePost(function(data) {
-            console.log(data);
-            singlePost(data);
+        var GetAnswers = ds.GetAnswers(function(data) {
+            answers(data);
         });
+
+        ds.getSinglePost(function(data) {
+            singlePost(data);
+            GetAnswers();
+        });
+
+        
             
 
         var ChangeLayout = function(){

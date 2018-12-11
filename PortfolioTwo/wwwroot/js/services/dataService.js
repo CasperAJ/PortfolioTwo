@@ -29,12 +29,16 @@
     // };
 
     var getSinglePost = function(callback){
+        console.log("from dataservice");
+        console.log(vm.currentPost());
         $.getJSON(vm.currentPost(), function(data) {
            callback(data);
         });
     }
 
-    var GetAnswers = function(url, callback){
+    var GetAnswers = function(callback){
+        var postid = vm.currentPost().split("/").slice(-1)[0];
+        var url = 'api/posts/' + postid + '/children';
         $.getJSON(url, function(data) {
             callback(data);
         });

@@ -9,6 +9,8 @@ namespace DataServiceLayer
 {
     public class StackOverflowContext : DbContext
     {
+
+
         public DbSet<Author> Authors { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Mark> Marks { get; set; }
