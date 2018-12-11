@@ -1,11 +1,20 @@
-﻿<div data-bind="foreach: posts">
-    <div class="col-md-4">
-        <p data-bind="click: $parent.showPost, text: title"></p>
-    </div>
-    
-  
-</div>
-  
-<button data-bind="click: function ( data ) {clickNextPrev(prev(), data) }, enable: prevEnable">Prev</button>
-<button data-bind="click: function ( data ) {clickNextPrev(next(), data) }, enable: nextEnable">Next</button>
+﻿<head>
+    <link href="../../lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../../css/style.css" rel="stylesheet" />
+</head>
 
+<div class="jumbotron jumbotron-fluid jumbotron2">
+    <div class="container">
+        <div data-bind="foreach: posts">
+            <div class="col-md-4">
+                <p data-bind="click: $parent.showPost, text: title"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<button class="btn btn-outline-dark my-2 my-sm-0" data-bind="click: function ( data ) {clickNextPrev(prev(), data) }, enable: prevEnable">Prev</button>
+<button class="btn btn-outline-dark my-2 my-sm-0" data-bind="click: function ( data ) {clickNextPrev(next(), data) }, enable: nextEnable">Next</button>
+
+<!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
