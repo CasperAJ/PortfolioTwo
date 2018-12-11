@@ -3,14 +3,15 @@
     <link href="../../../css/style.css" rel="stylesheet" />
 </head>
 
-<div class="jumbotron jumbotron-fluid jumbotron2">
-    <div class="container">
-        <div data-bind="foreach: posts">
-            <div class="col-md-4">
+<div class="jumbotron jumbotron-fluid jumbotron2 container">
+
+        
+        <div class="row" data-bind="foreach: posts">
+            <div class="col-md-4" style="border: 1px solid black;">
                 <p data-bind="click: $parent.showPost, text: title"></p>
             </div>
         </div>
-    </div>
+
 </div>
 
 

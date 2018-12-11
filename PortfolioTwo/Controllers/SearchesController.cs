@@ -113,16 +113,19 @@ namespace PortfolioTwo.Controllers
 
 
         
-        [HttpPost("bestrank")]
+        [HttpPost("bestrank", Name = nameof(BestRank))]
         public IActionResult BestRank(Search search, int page = 0, int pagesize = 10)
         {
             //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var userid = "2";
-            var results = _dataservice.SearchBestRank(search.SearchString, int.Parse(userid), page, pagesize);
+            var numberOfPosts = 0;
+            var results = _dataservice.SearchBestRank(search.SearchString, int.Parse(userid), page, pagesize, out numberOfPosts);
+
+
 
             var returnobj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(BestRank), page, pagesize,100),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(BestRank), page, pagesize, numberOfPosts),
                 data = results
             };
 
