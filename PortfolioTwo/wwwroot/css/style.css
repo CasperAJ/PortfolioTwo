@@ -1,6 +1,12 @@
 ﻿body {
 }
 
+.navbar2 {
+    margin-bottom: 20px;
+    background-color: #0A1C51;
+}
+
+
 .jumbotron2 {
     height: 600px;
     background-color: #95CAEB;
@@ -8,6 +14,5 @@
     border-width: 1px;
     border-color: royalblue;
 }
-
 
 

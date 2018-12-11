@@ -7,9 +7,9 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #0A1C51">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="nav nav-pills">
+    <nav class="navbar navbar-expand-lg navbar-light navbar2">
+        <div class="" id="navbarSupportedContent" style="width: 100%">
+            <ul class="nav nav-pills mr-auto" style="float: left;">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Home</a>
                 </li>
@@ -23,31 +23,32 @@
                     <a class="nav-link" href="#">MyProfile</a>
                 </li>
             </ul>
-            <ul class="navbar-nav mr-auto"></ul>
-            <form class="form-inline my-2 my-lg-0">
+            <form class="float-right form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
     </nav>
-    
+
     <div class="container">
         <div class="row">
-            <div class="col-md-1 text-center">
-                <h3>Raw</h3>
-                <p>Billede 1, Billede </p>
-                <p>bla. bla. bla. </p>
-            </div>
             <div class="col-md-10">
                 <div data-bind="component: {name: currentComponent }"></div>
             </div>
-            <div class="col-md-1 text-center">
-                <h3>Searches</h3>
-                <p>Liste af tidligere søgte posts</p>
-                <p>bla bla bla bla</p>
-            </div>
+            <div class="col-md-2">
+                <div>
+                    <h3>Your Previous searches</h3>
+                    <p>Liste af tidligere søgte posts</p>
+                    <p>bla bla bla bla</p>
+                </div>
+                <div style="margin-top: 100px">
+                    <h3>Relevant Posts</h3>
+                    <p>Liste af tidligere søgte posts</p>
+                    <p>bla bla bla bla</p>
+                </div>
             </div>
         </div>
+    </div>
 
     <!-- <posts-list></posts-list> -->
 
