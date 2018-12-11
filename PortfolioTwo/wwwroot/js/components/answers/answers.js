@@ -5,6 +5,7 @@ define(["jquery", "knockout", 'dataService', 'postman', 'app'], function($, ko, 
 
         ds.GetAnswers(function(data) {
             answers(data);
+
         });
 
         return {

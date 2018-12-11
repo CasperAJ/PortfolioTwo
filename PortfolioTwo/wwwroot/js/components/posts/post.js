@@ -12,10 +12,15 @@
             postman.publish("changeComponent");
         };
 
+        var BackToList = function(){
+            postman.publish("changeComponent", "posts-list");
+        }
+
 
         return {
             singlePost,
-            ChangeLayout  
+            ChangeLayout,
+            BackToList  
         };
     };
 });

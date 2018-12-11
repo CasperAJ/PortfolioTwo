@@ -45,9 +45,17 @@
     };
 
 
+    var GetComments = function(callback, url){
+        $.getJSON(url, function(data) {
+            callback(data);
+        });
+    };
+
+
     return {
         getPosts,
         getSinglePost,
-        GetAnswers
+        GetAnswers,
+        GetComments
     };
 });
