@@ -24,7 +24,7 @@ namespace DataServiceLayer
 
         // searches
 
-        public List<Post> SearchExact(string searchterms, int userid, int page, int pagesize)
+        public List<Post> SearchExact(string searchterms, int userid, int page, int pagesize, out int numberOfResults)
         {
             var terms = searchterms.Split(" ");
             var command = "select * from ExactMatch("+ userid + ", ";
@@ -47,15 +47,33 @@ namespace DataServiceLayer
             command = command + ");";
             var matchresult = db.ExactSearchResults.FromSql(command).ToList();
 
-            var results = db.Posts.Where(x => matchresult.Select(r => r.Id).Contains(x.Id))
-                .Skip(page * pagesize)
-                .Take(pagesize)
-                .ToList();
-            return results;
+            var results = db.Posts.Where(x => matchresult.Select(r => r.Id).Contains(x.Id)).ToList();
+
+
+            var resultlist = new List<Post>();
+            foreach (var match in results)
+            {
+                if (match.ParentId != null || match.ParentId != 0)
+                {
+                    var parentPost = db.Posts.FirstOrDefault(x => x.Id == match.ParentId);
+                    if (parentPost != null)
+                    {
+                        resultlist.Add(parentPost);
+                    }
+                }
+                else
+                {
+                    resultlist.Add(match);
+                }
+            }
+
+            numberOfResults = resultlist.Count();
+            return resultlist.Skip(page * pagesize).Take(pagesize).ToList();
+
 
         }
 
-        public List<PostTFIDF> SearchBestTFIDF(string searchterms, int userid, int page, int pagesize)
+        public List<PostTFIDF> SearchBestTFIDF(string searchterms, int userid, int page, int pagesize, out int numberOfResults)
         {
             var terms = searchterms.Split(" ");
             var command = "select * from BestMatchtfidf(" + userid + ", ";
@@ -76,11 +94,40 @@ namespace DataServiceLayer
             }
 
             command = command + ")";
-            var matchresult = db.BestSearchResultTFIDFs.FromSql(command)
-                .Skip(page * pagesize)
-                .Take(pagesize)
-                .ToList();
-            return matchresult;
+            var matchresult = db.BestSearchResultTFIDFs.FromSql(command).ToList();
+            var resultlist = new List<PostTFIDF>();
+            foreach (var match in matchresult)
+            {
+                if (match.ParentId != null || match.ParentId != 0)
+                {
+                    var parentPost = db.Posts.FirstOrDefault(x => x.Id == match.ParentId);
+                    if (parentPost != null)
+                    {
+                        var newPostRank = new PostTFIDF()
+                        {
+                            Id = parentPost.Id,
+                            AcceptedAnswerId = parentPost.AcceptedAnswerId,
+                            CreationDate = parentPost.CreationDate,
+                            Score = parentPost.Score,
+                            Body = parentPost.Body,
+                            ClosedDate = parentPost.ClosedDate,
+                            Title = parentPost.Title,
+                            Author = parentPost.Author,
+                            AuthorId = parentPost.AuthorId,
+                            LinkPostId = parentPost.LinkPostId,
+                            Rank = match.Rank
+                        };
+                        resultlist.Add(newPostRank);
+                    }
+                }
+                else
+                {
+                    resultlist.Add(match);
+                }
+            }
+
+            numberOfResults = resultlist.Count();
+            return resultlist.Skip(page * pagesize).Take(pagesize).ToList();
 
         }
 

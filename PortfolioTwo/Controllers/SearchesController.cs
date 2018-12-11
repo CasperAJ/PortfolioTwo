@@ -132,23 +132,37 @@ namespace PortfolioTwo.Controllers
             return Ok(returnobj);
         }
 
-        [HttpPost("exact")]
+        [HttpPost("exact", Name = nameof(Exact))]
         public IActionResult Exact(Search search, int page = 0, int pagesize = 10)
         {
             var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var results = _dataservice.SearchExact(search.SearchString, int.Parse(userid), page, pagesize);
+            var numberOfPosts = 0;
+            var results = _dataservice.SearchExact(search.SearchString, int.Parse(userid), page, pagesize, out numberOfPosts);
 
-            return Ok(results);
+            var returnobj = new
+            {
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(Exact), page, pagesize, numberOfPosts),
+                data = results
+            };
+
+            return Ok(returnobj);
         }
 
-        [HttpPost("besttfidf")]
+        [HttpPost("besttfidf", Name = nameof(BestTFIDF))]
         public IActionResult BestTFIDF(Search search, int page = 0, int pagesize = 10)
         {
             var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            var results = _dataservice.SearchBestTFIDF(search.SearchString, int.Parse(userid), page, pagesize);
+            var numberOfPosts = 0;
+            var results = _dataservice.SearchBestTFIDF(search.SearchString, int.Parse(userid), page, pagesize, out numberOfPosts);
 
-            return Ok(results);
+            var returnobj = new
+            {
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(BestTFIDF), page, pagesize, numberOfPosts),
+                data = results
+            };
+
+            return Ok(returnobj);
         }
 
 
