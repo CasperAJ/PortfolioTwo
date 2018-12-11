@@ -7,28 +7,39 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light navbar2">
-        <div class="" id="navbarSupportedContent" style="width: 100%">
-            <ul class="nav nav-pills mr-auto" style="float: left;">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">MySearches</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Tags</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">MyProfile</a>
-                </li>
-            </ul>
-            <form class="float-right form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-lg navbar-light navbar2">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">My Searches</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">My Marks</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <div class="dropdown show" style="margin-right: 10px">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    SearchType
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="#">Best Rank</a>
+                    <a class="dropdown-item" href="#">TF</a>
+                    <a class="dropdown-item" href="#">IDF</a>
+                </div>
+            </div>
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-
+                    success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
 
     <div class="container">
         <div class="row">
@@ -52,7 +63,10 @@
 
     <!-- <posts-list></posts-list> -->
 
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script data-main="js/main.js" src="js/lib/requirejs/require.js"></script>
 
-    <script data-main="js/main.js" src="js/lib/requirejs/require.js"></script>
 </body>
 </html>
