@@ -3,7 +3,8 @@
         var posts = ko.observableArray();
         var next = ko.observable();
         var prev = ko.observable();
-        var getPostsApi = ko.observable("api/Searches/bestrank");
+        //var getPostsApi = ko.observable("api/Searches/bestrank");
+        var getPostsApi = ko.observable(vm.currentListting());
 
         // computed
         var prevEnable = ko.computed(function(){
@@ -20,10 +21,10 @@
         };
 
         var showPost = function (data) {
-            var postlink = 'http://localhost:5000/api/posts/' + data.id;
-            vm.currentPost(postlink);
+            var postlink = 'api/posts/' + data.id;
+            //vm.currentPost(postlink);
             postman.publish("currentPostChanged", postlink);
-            postman.publish("changeComponent");
+            postman.publish("changeComponent", 'post');
 
         };
 

@@ -32,7 +32,8 @@ namespace PortfolioTwo
         {
 
             services.AddMvc();
-            services.AddSingleton<IDataService, DataService>();
+            //services.AddSingleton<IDataService, DataService>();
+            services.AddTransient<IDataService, DataService>();
             
 
             var key = Encoding.UTF8.GetBytes(Configuration["security:key"]);

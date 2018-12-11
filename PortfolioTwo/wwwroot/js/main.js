@@ -23,7 +23,12 @@ require(['knockout'], function (ko) {
             viewModel: { require: 'components/posts/post' },
             template: { require: 'text!components/posts/postView.html' }
         });
-
+    
+    ko.components.register('answers',
+        {
+            viewModel: { require: 'components/answers/answers'},
+            template: { require: 'text!components/answers/answersView.html'}
+        });
 });
 
 
@@ -32,14 +37,17 @@ require(['knockout', 'app', 'postman'], function (ko, vm, postman) {
 
     // registrations of subscriptions
 
-    postman.subscribe("changeComponent", function(){
-        console.log("hit");
-        if (vm.currentComponent() === 'posts-list') {
-            vm.currentComponent("post");
-        }
-        else {
-            vm.currentComponent('post-list');
-        };
+    // postman.subscribe("changeComponent", function(){
+    //     if (vm.currentComponent() === 'posts-list') {
+    //         vm.currentComponent("post");
+    //     }
+    //     else {
+    //         vm.currentComponent('post-list');
+    //     };
+    // });
+
+    postman.subscribe("changeComponent", function(newcomponent){
+        vm.currentComponent(newcomponent);
     });
 
     postman.subscribe("currentPostChanged", function(link) {
