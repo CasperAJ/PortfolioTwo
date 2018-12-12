@@ -126,6 +126,7 @@ namespace DataServiceLayer
                 }
             }
 
+            resultlist = resultlist.OrderByDescending(x => x.Rank).ToList();
             numberOfResults = resultlist.Count();
             return resultlist.Skip(page * pagesize).Take(pagesize).ToList();
 
@@ -187,7 +188,7 @@ namespace DataServiceLayer
                     resultlist.Add(match);
                 }
             }
-
+            resultlist = resultlist.OrderByDescending(x => x.Rank).ToList();
             numberOfResults = resultlist.Count();
             return resultlist.Skip(page * pagesize).Take(pagesize).ToList();
 

@@ -151,9 +151,10 @@ namespace PortfolioTwo.Controllers
         [HttpPost("besttfidf", Name = nameof(BestTFIDF))]
         public IActionResult BestTFIDF(Search search, int page = 0, int pagesize = 10)
         {
-            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             var numberOfPosts = 0;
+            var userid = "2";
             var results = _dataservice.SearchBestTFIDF(search.SearchString, int.Parse(userid), page, pagesize, out numberOfPosts);
 
             var returnobj = new
