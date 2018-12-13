@@ -10,10 +10,10 @@
 
 .jumbotron2 {
     height: 600px;
-    background-color: #95CAEB;
+    background-color: #F4F1BB;
     border-style: solid;
     border-width: 1px;
-    border-color: royalblue;
+    border-color: #9BC1BC;
 }
 
 
@@ -31,14 +31,14 @@
 }
 
 .AnswerStyle2 {
-    background-color: #a7bfe8;
+    background-color: #F4F1BB;
     margin-bottom: 3em;
     border-radius: 25px;
     padding: 2em;
 }
 
 .commentStyle2 {
-    background-color: #e5d7a0;
+    background-color: #EDB59A;
     border-radius: 2em;
     width: 100%;
     padding: 1em;
