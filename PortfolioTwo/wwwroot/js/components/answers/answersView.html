@@ -4,10 +4,10 @@
 </head>
 <div class="container">
     <div class="row AnswerStyle2">
-        <div data-bind="foreach: answers">
+        <div class="col-md-12" data-bind="foreach: answers">
             <div class="col-md-10">
                 <p data-bind="html: body"></p>
-                <div class="col-md-10 commentStyle2" data-bind="component: { name: 'comments', params: {url: $data.comments}}"></div>
+                <div class="col-md-12 commentStyle2" data-bind="component: { name: 'comments', params: {url: $data.comments}}"></div>
             </div>
         </div>
 
