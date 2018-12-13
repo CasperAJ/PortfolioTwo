@@ -1,0 +1,9 @@
+<div class="container">
+    <div class="row">
+        <div data-bind="foreach: markings">
+            <div class="col-xs-12">
+                <p data-bind="text: postTitle, click: $parent.goToPost"></p>
+            </div>
+        </div>
+    </div>
+</div>

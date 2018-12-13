@@ -7,6 +7,8 @@ define(['knockout'], function (ko) {
     var currentPostData = ko.observableArray(); 
     var currentListSearchValue = ko.observable("solutions");
     var currentPostList = ko.observable();
+    var userid = ko.observable("2");
+
     return {
         title,
         currentComponent,
@@ -15,6 +17,7 @@ define(['knockout'], function (ko) {
         currentNavbar,
         currentPostData,
         currentListSearchValue,
-        currentPostList
+        currentPostList,
+        userid
     };
 });

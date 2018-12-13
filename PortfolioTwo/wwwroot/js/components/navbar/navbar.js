@@ -2,7 +2,7 @@
     return function (params) {
        var inputSearch = ko.observable('h');
         var dropdownButton = ko.observable({ name: "Select Search", link: "api/Searches/bestrank" }); 
-        console.log(params);
+
         var searchMode = ko.observableArray([
             { name: "Exact Match", link: "api/Searches/exact" },
             { name: "Best Match", link: "api/Searches/bestrank" },
@@ -12,7 +12,6 @@
 
         var clickSearch = function() {
             vm.currentListSearchValue(inputSearch());
-            console.log(dropdownButton().link);
             postman.publish("postListStateChanged", dropdownButton().link);
             postman.publish("searchActivated");
             postman.publish("changeComponent", 'posts-list');
@@ -24,6 +23,10 @@
             dropdownButton(data);
         };
 
+        var changeComponent = function(){
+            postman.publish('changeComponent', 'markings');
+        }
+
 
         return {
             inputSearch,
@@ -31,6 +34,7 @@
             searchMode,
             changeDropdown,
             dropdownButton,
+            changeComponent
         };
     };
 });

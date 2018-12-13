@@ -3,7 +3,7 @@
     var debug = true;
     var subscribe = function (event, callback) {
         var subscriber = { event, callback };
-        if (debug) console.log("subscribe: " + JSON.stringify(subscriber));
+        //if (debug) console.log("subscribe: " + JSON.stringify(subscriber));
 
         subscribers.push(subscriber);
 
@@ -16,7 +16,7 @@
     };
 
     var publish = function (event, data) {
-        if (debug) console.log("publish: " + JSON.stringify({ event, data }));
+        //if (debug) console.log("publish: " + JSON.stringify({ event, data }));
         subscribers.forEach(function (s) {
             if (event === s.event) s.callback(data);
         });

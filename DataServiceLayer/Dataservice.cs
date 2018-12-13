@@ -458,6 +458,7 @@ namespace DataServiceLayer
             var markList = db.Marks.Where(x => x.UserId == userId)
                 .Skip(page * pagesize)
                 .Take(pagesize)
+                .Include(x => x.Post)
                 .ToList();
             return markList;
         }
@@ -481,7 +482,7 @@ namespace DataServiceLayer
 
         public Mark GetMarkByIdForUser(int postId, int userId, int markTypeId)
         {
-            return db.Marks.First(x => x.PostId == postId && x.UserId == userId && x.Type == markTypeId);
+            return db.Marks.FirstOrDefault(x => x.PostId == postId && x.UserId == userId && x.Type == markTypeId);
         }
 
         public bool CreateMark(int postId, int userId, int markType, string note)

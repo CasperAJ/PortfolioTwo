@@ -1,10 +1,5 @@
 ﻿define(['jquery', 'app'], function ($, vm) {
 
-    // var getPosts = function (data, callback) {   
-    //     $.getJSON(data, function(response) {
-    //         callback(response);
-    //     });
-    // };
 
     var getPosts = function (callback) {
 
@@ -18,23 +13,13 @@
             contentType:"application/json",
             dataType:"json",
             success: function(data){
-                console.log(data);
               callback(data);
             }
           });
     }
     
 
-
-    // var getPostDetails = function (data, callback) {
-    //     $.getJSON(data, function (response) {
-    //         callback(response);
-    //     });
-    // };
-
     var getSinglePost = function(callback){
-        console.log("from dataservice");
-        console.log(vm.currentPost());
         $.getJSON(vm.currentPost(), function(data) {
            callback(data);
         });
@@ -55,11 +40,18 @@
         });
     };
 
+    var GetMarks = function(callback) {
+        $.getJSON("api/markings/"+vm.userid()+"/user", function(data){
+            callback(data);
+        });
+    }
+
 
     return {
         getPosts,
         getSinglePost,
         GetAnswers,
-        GetComments
+        GetComments,
+        GetMarks
     };
 });

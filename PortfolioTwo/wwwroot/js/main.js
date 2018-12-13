@@ -41,6 +41,12 @@ require(['knockout'], function (ko) {
             viewModel: { require: 'components/comments/comments'},
             template: { require: 'text!components/comments/commentsView.html'}
         });
+
+    ko.components.register('markings',
+        {
+            viewModel: { require: 'components/markings/markings'},
+            template: { require: 'text!components/markings/markingsView.html'}
+        });
 });
 
 

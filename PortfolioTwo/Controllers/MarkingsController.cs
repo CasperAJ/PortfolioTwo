@@ -14,7 +14,7 @@ namespace PortfolioTwo.Controllers
 {
     [Route("api/markings")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class MarkingsController : ControllerBase
     {
         private IDataService _dataservice;
@@ -24,7 +24,8 @@ namespace PortfolioTwo.Controllers
             _dataservice = dataservice;
         }
 
-        [HttpGet("{id}", Name = nameof(GetMarkById))]
+        //TODO: routing doesnt make sense. fix.
+        [HttpGet("{id}",Name = nameof(GetMarkById))]
         public IActionResult GetMarkById(int postId, int userId, int marktypeId)
         {
             var mark = _dataservice.GetMarkByIdForUser(postId, userId, marktypeId);
@@ -39,10 +40,10 @@ namespace PortfolioTwo.Controllers
         }
 
         [HttpGet]
-        [Route("{id}", Name = nameof(GetAllMarksByUserId))]
-        public IActionResult GetAllMarksByUserId(int userId, int page = 0, int pagesize = 10)
+        [Route("{id}/user", Name = nameof(GetAllMarksByUserId))]
+        public IActionResult GetAllMarksByUserId(int id, int page = 0, int pagesize = 10)
         {
-            var markings = _dataservice.GetAllMarksByUser(userId, page, pagesize);
+            var markings = _dataservice.GetAllMarksByUser(id, page, pagesize);
             List<MarkingViewModel> markingsList = new List<MarkingViewModel>();
 
             foreach (var mark in markings)
@@ -51,12 +52,15 @@ namespace PortfolioTwo.Controllers
                 markToAdd.Post =
                 LinkBuilder.CreateIdentityLink(Url.Link, nameof(PostsController.GetSingle), mark.PostId);
 
+                markToAdd.PostTitle = mark.Post.Title;
+
+
                 markingsList.Add(markToAdd);
             }
 
             var returnObj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllMarksByUserId), page, pagesize, _dataservice.GetNumberOfMarksByUser(userId)),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllMarksByUserId), page, pagesize, _dataservice.GetNumberOfMarksByUser(id)),
                 data = markingsList
             };
 
