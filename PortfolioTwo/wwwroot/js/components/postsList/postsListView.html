@@ -5,7 +5,7 @@
 
 <div class="jumbotron jumbotron-fluid jumbotron2 container">
 
-    <h1 style="margin-bottom: 25px">Posts</h1>
+    <h1 style="margin-bottom: 1em; text-align: center;">Posts</h1>
     
     <!--<table class="table table-striped">
         <tbody>
@@ -19,8 +19,8 @@
 
 
     <div class="row row2" data-bind="foreach: posts">
-            <div class="col-md-12" style="border: 1px solid #9BC1BC;">
-                <p data-bind="click: $parent.showPost, text: title"></p>
+            <div class="col-md-12" style="margin: 0.2em">
+                <button class="btn btn-outline-dark btn-sm btn-block" data-bind="click: $parent.showPost, text: title"></button>
             </div>
     </div>
 

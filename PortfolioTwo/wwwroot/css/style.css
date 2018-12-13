@@ -38,9 +38,20 @@
 }
 
 .commentStyle2 {
-    background-color: #EDB59A;
+    background-color: #EDE6C0;
     border-radius: 2em;
     width: 100%;
     padding: 1em;
 }
 
+.markStyle2 {
+    background-color: #F4F1BB;
+}
+
+.btn-outline-dark {
+    background-color: #9BC1BC;
+}
+
+    .btn-outline-dark:hover {
+        background-color: #5CA4A9;
+    }

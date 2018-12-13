@@ -6,12 +6,12 @@
 <div class="container" data-bind="foreach: markings">
     <div class="row">
         <div class="col-md-3">
-            <div class="card" style="width: 18rem; margin: 1em;">
+            <div class="card markStyle2" style="width: 18rem; margin: 1em;">
                 <div class="card-body">
                     <div>
                         <h5 data-bind="text: postTitle"></h5>
                         <p data-bind="text: note"></p>
-                        <button class="card-link" data-bind="click: $parent.goToPost">See Post</button>
+                        <button class="btn btn-outline-dark my-2 my-sm-0" style="background-color: #9BC1BC" data-bind="click: $parent.goToPost">See Post</button>
                     </div>
                 </div>
             </div>
