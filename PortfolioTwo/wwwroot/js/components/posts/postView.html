@@ -1,6 +1,11 @@
-﻿<button class="btn btn-primary" data-bind="click: BackToList"><i class="fas fa-long-arrow-alt-left"></i></button>
+﻿<head>
+    <link href="../../lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../../css/style.css" rel="stylesheet" />
+</head>
+
+<button class="btn btn-primary" data-bind="click: BackToList"><i class="fas fa-long-arrow-alt-left"></i></button>
 <div class="row">
-    <div class="col-md-8" data-bind="with: singlePost">
+    <div class="col-md-10" data-bind="with: singlePost">
         <h3 data-bind="text: title"></h3>
         <div data-bind="html: body"></div>
     </div>

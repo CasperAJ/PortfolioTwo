@@ -24,3 +24,19 @@
 .navbar-light .navbar-nav .nav-link:hover {
     color: #A1C3D8;
 }
+
+.row2 {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.AnswerStyle2 {
+    background-color: #a7bfe8;
+    margin-bottom: 3em;
+    border-radius: 25px;
+}
+
+.commentStyle2 {
+    background-color: #e5d7a0; 
+    border-radius: 25px;
+}
