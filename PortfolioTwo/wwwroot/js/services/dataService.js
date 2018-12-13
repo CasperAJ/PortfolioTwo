@@ -6,12 +6,15 @@
     //     });
     // };
 
-    var getPosts = function (url, data, callback) {
-        console.log(url, data);
+    var getPosts = function (callback) {
+
+        var jsondata = {
+            searchstring: vm.currentListSearchValue()
+        };
         $.ajax({
-            url:url,
+            url:vm.currentListting(),
             type:"POST",
-            data:JSON.stringify(data),
+            data:JSON.stringify(jsondata),
             contentType:"application/json",
             dataType:"json",
             success: function(data){

@@ -62,9 +62,7 @@ require(['knockout', 'app', 'postman'], function (ko, vm, postman) {
         vm.navbar();
     });
 
-    postman.subscribe("currentNavbar", function (newNavbar) {
-        vm.currentNavbar(currentNavbar);
-    });
+
 
     postman.subscribe("changeComponent", function(newcomponent){
         vm.currentComponent(newcomponent);
@@ -76,7 +74,9 @@ require(['knockout', 'app', 'postman'], function (ko, vm, postman) {
 
     postman.subscribe("postListStateChanged", function(link) {
         vm.currentListting(link);
+        
     });
+    
 
 
 

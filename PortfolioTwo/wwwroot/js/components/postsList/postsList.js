@@ -3,8 +3,8 @@
         var posts = ko.observableArray();
         var next = ko.observable();
         var prev = ko.observable();
-        //var getPostsApi = ko.observable("api/Searches/bestrank");
         var getPostsApi = ko.observable(vm.currentListting());
+        var searchValue = ko.observable(vm.currentListSearchValue());
 
         // computed
         var prevEnable = ko.computed(function(){
@@ -33,7 +33,7 @@
                 searchstring: "solutions"
             };
             
-            ds.getPosts(getPostsApi(), jsondata, function (data) {
+            ds.getPosts(function (data) {
                 posts(data.data);
                 postman.publish("postListStateChanged", getPostsApi());
                 next(data.paging.next);
@@ -41,10 +41,13 @@
             });    
         }
 
+       postman.subscribe("searchActivated", function(){
+           console.log("search updated hit");
+           callPosts();
+       });
+
         callPosts();
 
-        console.log();
-        console.log(vm.currentPostData, "**************************************KKOOOKOKOKO");
 
         return {
             posts,

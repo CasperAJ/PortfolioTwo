@@ -135,7 +135,9 @@ namespace PortfolioTwo.Controllers
         [HttpPost("exact", Name = nameof(Exact))]
         public IActionResult Exact(Search search, int page = 0, int pagesize = 10)
         {
-            var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userid = "2";
+
             var numberOfPosts = 0;
             var results = _dataservice.SearchExact(search.SearchString, int.Parse(userid), page, pagesize, out numberOfPosts);
 

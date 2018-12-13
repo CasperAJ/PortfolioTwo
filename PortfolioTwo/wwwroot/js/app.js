@@ -5,13 +5,16 @@ define(['knockout'], function (ko) {
     var currentListting = ko.observable("api/Searches/bestrank");
     var currentNavbar = ko.observable("navbar");
     var currentPostData = ko.observableArray(); 
-
+    var currentListSearchValue = ko.observable("solutions");
+    var currentPostList = ko.observable();
     return {
         title,
         currentComponent,
         currentPost,
         currentListting,
         currentNavbar,
-        currentPostData
+        currentPostData,
+        currentListSearchValue,
+        currentPostList
     };
 });
