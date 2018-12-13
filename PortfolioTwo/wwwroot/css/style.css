@@ -1,6 +1,13 @@
 ﻿body {
 }
 
+.navbar2 {
+    margin-bottom: 20px;
+    background-color: #0A1C51;
+    color: white;
+}
+
+
 .jumbotron2 {
     height: 600px;
     background-color: #95CAEB;
@@ -10,4 +17,10 @@
 }
 
 
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
 
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #A1C3D8;
+}
