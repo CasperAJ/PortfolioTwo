@@ -17,16 +17,18 @@
         <form class="form-inline my-2 my-lg-0">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Search</button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Exact Match</a>
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bind="text: dropdownButton().name"></button>
+                    <div class="dropdown-menu" data-bind="foreach: searchMode">
+                        <a class="dropdown-item" href="#" data-bind="click: $parent.changeDropdown,text:name"></a>
+
+                        <!--<a class="dropdown-item" href="#">Exact Match</a>
                         <a class="dropdown-item" href="#">Best Match</a>
-                        <a class="dropdown-item" href="#">Ranked Match</a>
+                        <a class="dropdown-item" href="#">Ranked Match</a>-->
                     </div>
                 </div>
-                <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                <input type="text" class="form-control" aria-label="Text input with dropdown button" data-bind="value: inputSearch">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-success" type="button"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-outline-success" type="button" data-bind="click:clickSearch" ><i class="fas fa-search"></i></button>
                 </div>
             </div>
         </form>

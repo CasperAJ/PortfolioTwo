@@ -6,7 +6,8 @@
     //     });
     // };
 
-    var getPosts = function(url, data, callback){
+    var getPosts = function (url, data, callback) {
+        console.log(url, data);
         $.ajax({
             url:url,
             type:"POST",
