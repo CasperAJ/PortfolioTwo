@@ -34,11 +34,13 @@
     background-color: #a7bfe8;
     margin-bottom: 3em;
     border-radius: 25px;
+    padding: 2em;
 }
 
 .commentStyle2 {
     background-color: #e5d7a0;
-    border-radius: 7%;
+    border-radius: 2em;
     width: 100%;
+    padding: 1em;
 }
 

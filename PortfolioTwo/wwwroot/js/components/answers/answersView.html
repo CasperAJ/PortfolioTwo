@@ -3,9 +3,9 @@
     <link href="../../../css/style.css" rel="stylesheet" />
 </head>
 <div class="container">
-    <div class="row AnswerStyle2">
+    <div class="row">
         <div class="col-md-12" data-bind="foreach: answers">
-            <div class="col-md-10">
+            <div class="col-md-10 AnswerStyle2">
                 <p data-bind="html: body"></p>
                 <div class="col-md-12 commentStyle2" data-bind="component: { name: 'comments', params: {url: $data.comments}}"></div>
             </div>

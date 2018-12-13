@@ -1,10 +1,18 @@
-<div class="container">
+<head>
+    <link href="../../lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../../css/style.css" rel="stylesheet" />
+</head>
+
+<div class="container" data-bind="foreach: markings">
     <div class="row">
-        <div data-bind="foreach: markings">
-            <div style="border: 0.5em solid black;" class="col-xs-12">
-                <div data-bind="click: $parent.goToPost">
-                <p data-bind="text: postTitle"></p>
-                <p data-bind="text: note"></p>
+        <div class="col-md-3">
+            <div class="card" style="width: 18rem; margin: 1em;">
+                <div class="card-body">
+                    <div>
+                        <h5 data-bind="text: postTitle"></h5>
+                        <p data-bind="text: note"></p>
+                        <button class="card-link" data-bind="click: $parent.goToPost">See Post</button>
+                    </div>
                 </div>
             </div>
         </div>
