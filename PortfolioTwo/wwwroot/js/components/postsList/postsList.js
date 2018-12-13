@@ -42,7 +42,9 @@
         }
 
         callPosts();
-        
+
+        console.log();
+        console.log(vm.currentPostData, "**************************************KKOOOKOKOKO");
 
         return {
             posts,

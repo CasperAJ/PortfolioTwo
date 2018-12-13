@@ -23,6 +23,12 @@ require(['knockout'], function (ko) {
             viewModel: { require: 'components/posts/post' },
             template: { require: 'text!components/posts/postView.html' }
         });
+
+    ko.components.register("navbar",
+        {
+            viewModel: { require: 'components/navbar/navbar' },
+            template: { require: 'text!components/navbar/navbarView.html' }
+        });
     
     ko.components.register('answers',
         {
@@ -51,6 +57,14 @@ require(['knockout', 'app', 'postman'], function (ko, vm, postman) {
     //         vm.currentComponent('post-list');
     //     };
     // });
+
+    postman.subscribe("navbar", function () {
+        vm.navbar();
+    });
+
+    postman.subscribe("currentNavbar", function (newNavbar) {
+        vm.currentNavbar(currentNavbar);
+    });
 
     postman.subscribe("changeComponent", function(newcomponent){
         vm.currentComponent(newcomponent);
