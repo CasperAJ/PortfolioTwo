@@ -25,9 +25,18 @@
     };
 
     var getSinglePost = function(callback){
-        $.getJSON(vm.currentPost(), function(data) {
-           callback(data);
-        });
+        $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("bearer", vm.token());
+            },
+            url:vm.currentListting(),
+            type:"GET",
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
     }
 
     var GetAnswers = function(callback){
