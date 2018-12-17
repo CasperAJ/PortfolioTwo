@@ -10,10 +10,10 @@
 
 .jumbotron2 {
     height: 600px;
-    background-color: #95CAEB;
+    background-color: #F4F1BB;
     border-style: solid;
     border-width: 1px;
-    border-color: royalblue;
+    border-color: #9BC1BC;
 }
 
 
@@ -24,3 +24,34 @@
 .navbar-light .navbar-nav .nav-link:hover {
     color: #A1C3D8;
 }
+
+.row2 {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.AnswerStyle2 {
+    background-color: #F4F1BB;
+    margin-bottom: 3em;
+    border-radius: 25px;
+    padding: 2em;
+}
+
+.commentStyle2 {
+    background-color: #EDE6C0;
+    border-radius: 2em;
+    width: 100%;
+    padding: 1em;
+}
+
+.markStyle2 {
+    background-color: #F4F1BB;
+}
+
+.btn-outline-dark {
+    background-color: #9BC1BC;
+}
+
+    .btn-outline-dark:hover {
+        background-color: #5CA4A9;
+    }

@@ -1,17 +1,19 @@
-﻿<button class="btn btn-primary" data-bind="click: BackToList"><i class="fas fa-long-arrow-alt-left"></i></button>
+﻿<button class="btn btn-outline-dark" data-bind="click: BackToList"><i class="fas fa-long-arrow-alt-left"></i></button>
 
 <div data-bind="ifnot: marking">
-    <button class="btn btn-primary" data-bind="click: MarkPost"><i class="far fa-heart"></i></button>
+    <button class="btn btn-outline-dark" data-bind="click: MarkPost"><i class="far fa-heart"></i></button>
 </div>
 
 <div data-bind="if: marking">
-    <button class="btn btn-primary" data-bind="click: UnMarkPost"><i class="fas fa-heart"></i></button>
+    <button class="btn btn-outline-dark" data-bind="click: UnMarkPost"><i class="fas fa-heart"></i></button>
 </div>
 
 <div class="row">
-    <div class="col-md-8" data-bind="with: singlePost">
+    <div data-bind="with: singlePost">
+        <div class="col-md-10 offset-md-1">
         <h3 data-bind="text: title"></h3>
-        <div data-bind="html: body"></div>
+            <div data-bind="html: body"></div>
+        </div>
     </div>
 </div>
 

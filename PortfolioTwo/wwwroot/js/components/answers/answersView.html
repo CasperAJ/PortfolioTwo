@@ -1,10 +1,13 @@
+<head>
+    <link href="../../lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="../../../css/style.css" rel="stylesheet" />
+</head>
 <div class="container">
     <div class="row">
-
-        <div data-bind="foreach: answers">
-            <div class="col-xs-12" style="background-color: blue; margin-bottom: 3em;">
+        <div class="col-md-12" data-bind="foreach: answers" style="margin-left: 3.5em">
+            <div class="col-md-10 AnswerStyle2">
                 <p data-bind="html: body"></p>
-                <div style="background-color: yellow;" data-bind="component: { name: 'comments', params: {url: $data.comments}}"></div>
+                <div class="col-md-12 commentStyle2" data-bind="component: { name: 'comments', params: {url: $data.comments}}"></div>
             </div>
         </div>
 

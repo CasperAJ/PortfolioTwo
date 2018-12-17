@@ -5,12 +5,24 @@
 
 <div class="jumbotron jumbotron-fluid jumbotron2 container">
 
-        
-        <div class="row" data-bind="foreach: posts">
-            <div class="col-md-4" style="border: 1px solid black;">
-                <p data-bind="click: $parent.showPost, text: title"></p>
+    <h1 style="margin-bottom: 1em; text-align: center;">Posts</h1>
+    
+    <!--<table class="table table-striped">
+        <tbody>
+            <div data-bind="foreach: posts">
+                <tr>
+                    <td data-bind="text: title"></td>
+                </tr>
             </div>
-        </div>
+        </tbody>
+    </table>-->
+
+
+    <div class="row row2" data-bind="foreach: posts">
+            <div class="col-md-12" style="margin: 0.5em; text-align: center">
+                <a href="#" data-bind="click: $parent.showPost, text: title"></a>
+            </div>
+    </div>
 
 </div>
 
