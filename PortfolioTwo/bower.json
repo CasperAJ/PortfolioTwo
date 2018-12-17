@@ -6,7 +6,8 @@
     "jQuery": "3.3.1",
     "bootstrap": "v4.1.3",
     "knockout": "v3.4.2",
-    "text": "requirejs-text#2.0.15"
+    "text": "requirejs-text#2.0.15",
+    "jqcloud2": "v2.0.3"
   },
   "resolutions": {
     "jQuery": "3.3.1"

@@ -51,6 +51,24 @@
         });
     }
 
+    var getWords = function(callback){
+
+        var jsondata = {
+            searchstring: vm.currentListSearchValue()
+        };
+
+        $.ajax({
+            url:'/api/searches/cloud/simple',
+            type:"POST",
+            data:JSON.stringify(jsondata),
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
+    }
+
 
     return {
         getPosts,
@@ -58,6 +76,7 @@
         GetAnswers,
         GetComments,
         GetMarks,
-        getSearches
+        getSearches,
+        getWords
     };
 });

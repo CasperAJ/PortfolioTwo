@@ -126,7 +126,7 @@ namespace DataServiceLayer
             // searches
             modelBuilder.Query<ExactSearchResult>().Property(x => x.Id).HasColumnName("id");
 
-            modelBuilder.Query<CloudSimple>().Property(x => x.Word).HasColumnName("word");
+            modelBuilder.Query<CloudSimple>().Property(x => x.Text).HasColumnName("word");
             modelBuilder.Query<CloudSimple>().Property(x => x.Rank).HasColumnName("rank");
 
             modelBuilder.Query<CloudTFIDF>().Property(x => x.Word).HasColumnName("word");

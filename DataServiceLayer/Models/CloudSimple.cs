@@ -6,7 +6,7 @@ namespace DataServiceLayer.Models
 {
     public class CloudSimple
     {
-        public string Word { get; set; }
+        public string Text { get; set; }
         public int Rank { get; set; }
     }
 }

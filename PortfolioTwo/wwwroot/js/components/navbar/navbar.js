@@ -31,6 +31,10 @@
             postman.publish('changeComponent', 'searches');
         }
 
+        var goToCloud = function(){
+            postman.publish('changeComponent', 'cloud');
+        }
+
 
         return {
             inputSearch,
@@ -39,7 +43,8 @@
             changeDropdown,
             dropdownButton,
             changeComponent,
-            goToSearchComponent
+            goToSearchComponent,
+            goToCloud
         };
     };
 });

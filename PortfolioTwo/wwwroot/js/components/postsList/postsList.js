@@ -49,6 +49,11 @@
         callPosts();
 
 
+        var goToCloud = function(){
+            postman.publish("changeComponent", 'cloud');
+        }
+
+
         return {
             posts,
             next,
@@ -56,7 +61,8 @@
             clickNextPrev,
             prevEnable,
             nextEnable,
-            showPost
+            showPost,
+            goToCloud
         };
     };
 });
