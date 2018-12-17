@@ -60,6 +60,12 @@ require(['knockout'], function (ko) {
             viewModel: { require: 'components/cloud/cloud'},
             template: { require: 'text!components/cloud/cloudView.html'}
         });   
+
+    ko.components.register('login',
+        {
+            viewModel: { require: 'components/login/login'},
+            template: { require: 'text!components/login/loginView.html'}
+        });  
 });
 
 
@@ -143,6 +149,11 @@ require(['knockout', 'app', 'postman'], function (ko, vm, postman) {
     postman.subscribe("postListStateChanged", function(link) {
         vm.currentListting(link);
         
+    });
+
+    postman.subscribe("tokenUpdated", function(token){
+        vm.token(token);
+        console.log(vm.token());
     });
     
 

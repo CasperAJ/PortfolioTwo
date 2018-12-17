@@ -1,0 +1,10 @@
+<div data-bind="if: loginstate">
+    <input class="form-control" type="text" data-bind="textInput: username" placeholder="username" />
+    <input class="form-control" type="password" data-bind="textInput: password" placeholder="password" />
+    <button class="btn btn-primary" data-bind="click: authenticate">Login</button>
+</div>
+
+<div data-bind="ifnot: loginstate">
+    <p>You are logged in</p>
+    <button class="btn btn-primary" data-bind="click: logOut">Log out</button>
+</div>

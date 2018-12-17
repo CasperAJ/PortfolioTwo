@@ -69,6 +69,44 @@
           });
     }
 
+    var authenticate = function(callback, username, password){
+        var jsondata = {
+            username: username,
+            password: password
+        };
+
+        $.ajax({
+            url:'/api/users/login',
+            type:"POST",
+            data:JSON.stringify(jsondata),
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
+    }
+
+
+    var createUser = function(callback){
+        var jsondata = {
+            email: "mikkped@ruc.dk",
+            username: "nage31",
+            password: "root"
+        };
+
+        $.ajax({
+            url:'/api/users',
+            type:"POST",
+            data:JSON.stringify(jsondata),
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
+    }
+
 
     return {
         getPosts,
@@ -77,6 +115,8 @@
         GetComments,
         GetMarks,
         getSearches,
-        getWords
+        getWords,
+        authenticate,
+        createUser
     };
 });
