@@ -108,6 +108,58 @@
     }
 
 
+    var createMark = function(callback, note){
+
+        var postid = vm.currentPost().split("/").slice(-1)[0];
+
+        var jsondata = {
+            postid: postid,
+            note: note
+        };
+
+        $.ajax({
+            url:'/api/markings',
+            type:"POST",
+            data:JSON.stringify(jsondata),
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
+    }
+
+    var deleteMark = function(callback){
+
+        var postid = vm.currentPost().split("/").slice(-1)[0];
+
+        var jsondata = {
+            postid: postid
+        };
+
+        $.ajax({
+            url:'/api/markings',
+            type:"DELETE",
+            data:JSON.stringify(jsondata),
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
+    }
+
+
+    var checkPostMark = function(callback){
+        var postid = vm.currentPost().split("/").slice(-1)[0];
+
+        $.getJSON('api/markings/'+postid, function(data) {
+            callback(data);
+        });
+
+    }
+
+
     return {
         getPosts,
         getSinglePost,
@@ -117,6 +169,9 @@
         getSearches,
         getWords,
         authenticate,
-        createUser
+        createUser,
+        createMark,
+        deleteMark,
+        checkPostMark
     };
 });

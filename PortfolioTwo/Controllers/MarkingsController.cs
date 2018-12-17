@@ -24,11 +24,14 @@ namespace PortfolioTwo.Controllers
             _dataservice = dataservice;
         }
 
-        //TODO: routing doesnt make sense. fix.
-        [HttpGet("{id}",Name = nameof(GetMarkById))]
-        public IActionResult GetMarkById(int postId, int userId, int marktypeId)
+
+        [HttpGet("{postid}", Name = nameof(GetMarkById))]
+        public IActionResult GetMarkById(int postId)
         {
-            var mark = _dataservice.GetMarkByIdForUser(postId, userId, marktypeId);
+            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userid = 2;
+
+            var mark = _dataservice.GetMarkByIdForUser(postId, userid, 1);
             if (mark == null) return NotFound();
 
             var model = Mapper.Map<MarkingViewModel>(mark);
@@ -39,6 +42,8 @@ namespace PortfolioTwo.Controllers
             return Ok(model);
         }
 
+
+        //TODO: doesnt need userid in route.
         [HttpGet]
         [Route("{id}/user", Name = nameof(GetAllMarksByUserId))]
         public IActionResult GetAllMarksByUserId(int id, int page = 0, int pagesize = 10)
@@ -73,13 +78,15 @@ namespace PortfolioTwo.Controllers
         [HttpPost]
         public IActionResult Create(Mark mark)
         {
+            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userid = 2;
 
-            if (mark.PostId == 0 || mark.UserId == 0 || mark.Type == 0)
+            if (mark.PostId == 0)
             {
                 return BadRequest();
             }
 
-            var newmark = _dataservice.CreateMark(mark.PostId, mark.UserId, mark.Type, mark.Note);
+            var newmark = _dataservice.CreateMark(mark.PostId, userid, 1, mark.Note);
 
             if (!newmark)
             {
@@ -91,10 +98,11 @@ namespace PortfolioTwo.Controllers
 
 
         [HttpDelete]
-        [Route("{id}")]
         public IActionResult Delete(Mark mark)
         {
-            var check = _dataservice.DeleteMark(mark.PostId, mark.UserId, mark.Type);
+            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userid = 2;
+            var check = _dataservice.DeleteMark(mark.PostId, userid, 1);
             if (check) return Ok();
             return NotFound();
         }

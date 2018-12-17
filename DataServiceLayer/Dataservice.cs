@@ -509,6 +509,7 @@ namespace DataServiceLayer
             if (markToDelete != null)
             {
                 db.Marks.Remove(markToDelete);
+                db.SaveChanges();
                 return true;
             }
             return false;
