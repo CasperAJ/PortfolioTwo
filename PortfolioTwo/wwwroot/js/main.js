@@ -65,7 +65,13 @@ require(['knockout'], function (ko) {
         {
             viewModel: { require: 'components/login/login'},
             template: { require: 'text!components/login/loginView.html'}
-        });  
+        });
+
+    ko.components.register('user',
+        {
+            viewModel: { require: 'components/user/user'},
+            template: { require: 'text!components/user/userView.html'}
+        }); 
 });
 
 
@@ -140,6 +146,10 @@ require(['knockout', 'app', 'postman'], function (ko, vm, postman) {
 
     postman.subscribe("changeComponent", function(newcomponent){
         vm.currentComponent(newcomponent);
+    });
+
+    postman.subscribe("changeUserComponent", function(newcomponent){
+        vm.userComponent(newcomponent);
     });
 
     postman.subscribe("currentPostChanged", function(link) {

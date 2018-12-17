@@ -88,11 +88,11 @@
     }
 
 
-    var createUser = function(callback){
+    var createUser = function(callback, username, password, email){
         var jsondata = {
-            email: "mikkped@ruc.dk",
-            username: "nage31",
-            password: "root"
+            email: email,
+            username: username,
+            password: password
         };
 
         $.ajax({

@@ -16,12 +16,17 @@ define(["jquery", "knockout", 'dataService', 'postman'], function($, ko, ds, pos
             loginstate(true);
         }
 
+        var createUser = function(){
+            postman.publish("changeUserComponent", "user");
+        }
+
         return {
           authenticate,
           username,
           password,
           loginstate,
-          logOut
+          logOut,
+          createUser
         };
     };
 });

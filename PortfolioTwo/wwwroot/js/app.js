@@ -9,6 +9,7 @@ define(['knockout'], function (ko) {
     var currentPostList = ko.observable();
     var userid = ko.observable("2");
     var token = ko.observable();
+    var userComponent = ko.observable("login");
 
     return {
         title,
@@ -20,6 +21,7 @@ define(['knockout'], function (ko) {
         currentListSearchValue,
         currentPostList,
         userid,
-        token
+        token,
+        userComponent
     };
 });
