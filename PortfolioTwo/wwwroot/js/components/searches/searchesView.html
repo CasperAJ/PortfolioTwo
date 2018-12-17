@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="row">
+        <div data-bind="foreach: searches">
+            <div style="border: 0.5em solid black;" class="col-xs-12">
+                <div data-bind="click: $parent.goToSearch">
+                <p data-bind="text: searchstring"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

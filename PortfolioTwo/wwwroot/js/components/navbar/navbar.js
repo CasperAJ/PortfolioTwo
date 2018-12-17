@@ -27,6 +27,10 @@
             postman.publish('changeComponent', 'markings');
         }
 
+        var goToSearchComponent = function(){
+            postman.publish('changeComponent', 'searches');
+        }
+
 
         return {
             inputSearch,
@@ -34,7 +38,8 @@
             searchMode,
             changeDropdown,
             dropdownButton,
-            changeComponent
+            changeComponent,
+            goToSearchComponent
         };
     };
 });

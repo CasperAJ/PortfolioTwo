@@ -18,6 +18,11 @@
           });
     }
     
+    var getSearches = function(callback) {
+        $.getJSON("api/searches/"+vm.userid(), function(data) {
+            callback(data);
+        });
+    };
 
     var getSinglePost = function(callback){
         $.getJSON(vm.currentPost(), function(data) {
@@ -52,6 +57,7 @@
         getSinglePost,
         GetAnswers,
         GetComments,
-        GetMarks
+        GetMarks,
+        getSearches
     };
 });

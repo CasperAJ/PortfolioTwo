@@ -1,6 +1,6 @@
 define(["jquery", "knockout", 'dataService', 'postman'], function($, ko, ds, postman) {
     return function(params){
-        var markings = ko.observable();
+        var markings = ko.observableArray();
         
         ds.GetMarks(function(data) {
             markings(data.data);
