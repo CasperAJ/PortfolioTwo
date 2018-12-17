@@ -16,6 +16,7 @@
         });
 
         var clickNextPrev = function (link) {
+            console.log("clicked value: " + next());
             getPostsApi(link);
             callPosts();
         };
@@ -29,14 +30,12 @@
         };
 
         function callPosts() {
-            var jsondata = {
-                searchstring: "solutions"
-            };
-            
+            postman.publish("postListStateChanged", getPostsApi());
             ds.getPosts(function (data) {
+                
                 posts(data.data);
-                postman.publish("postListStateChanged", getPostsApi());
                 next(data.paging.next);
+                console.log("new value: " + next());
                 prev(data.paging.prev);
             });    
         }
