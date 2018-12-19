@@ -74,7 +74,7 @@ require(['knockout'], function (ko) {
         }); 
 });
 
-
+// shamelessly stolen from Henrik
 // custum bindings
 require(['jquery', 'knockout', 'jqcloud'], function($, ko) {
     ko.bindingHandlers.cloud = {

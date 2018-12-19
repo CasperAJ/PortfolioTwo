@@ -23,10 +23,8 @@
 
         var showPost = function (data) {
             var postlink = 'api/posts/' + data.id;
-            //vm.currentPost(postlink);
             postman.publish("currentPostChanged", postlink);
             postman.publish("changeComponent", 'post');
-
         };
 
         function callPosts() {
