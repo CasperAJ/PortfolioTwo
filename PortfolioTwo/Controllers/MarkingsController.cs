@@ -43,12 +43,12 @@ namespace PortfolioTwo.Controllers
         }
 
 
-        //TODO: doesnt need userid in route.
         [HttpGet]
-        [Route("{id}/user", Name = nameof(GetAllMarksByUserId))]
-        public IActionResult GetAllMarksByUserId(int id, int page = 0, int pagesize = 10)
+        [Route("marks/user", Name = nameof(GetAllMarksByUserId))]
+        public IActionResult GetAllMarksByUserId(int page = 0, int pagesize = 10)
         {
-            var markings = _dataservice.GetAllMarksByUser(id, page, pagesize);
+            var userid = User.Identity.Name;
+            var markings = _dataservice.GetAllMarksByUser(Convert.ToInt32(userid), page, pagesize);
             List<MarkingViewModel> markingsList = new List<MarkingViewModel>();
 
             foreach (var mark in markings)
@@ -65,7 +65,7 @@ namespace PortfolioTwo.Controllers
 
             var returnObj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllMarksByUserId), page, pagesize, _dataservice.GetNumberOfMarksByUser(id)),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetAllMarksByUserId), page, pagesize, _dataservice.GetNumberOfMarksByUser(Convert.ToInt32(userid))),
                 data = markingsList
             };
 

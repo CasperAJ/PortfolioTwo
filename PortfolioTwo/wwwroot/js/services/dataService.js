@@ -30,7 +30,7 @@
             beforeSend: function(request) {
                 request.setRequestHeader("Authorization", "bearer " + vm.token());
             },
-            url:"api/searches/"+vm.userid(),
+            url:"api/searches/user",
             type:"GET",
             contentType:"application/json",
             dataType:"json",
@@ -103,7 +103,7 @@
             beforeSend: function(request) {
                 request.setRequestHeader("Authorization", "bearer " + vm.token());
             },
-            url:"api/markings/"+vm.userid()+"/user",
+            url:"api/markings/marks/user",
             type:"GET",
             contentType:"application/json",
             dataType:"json",

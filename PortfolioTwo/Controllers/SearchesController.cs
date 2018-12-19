@@ -48,10 +48,11 @@ namespace PortfolioTwo.Controllers
             return Ok(returnobj);
         }
 
-        [HttpGet("{id}", Name = nameof(GetSearchesForUser))]
-        public IActionResult GetSearchesForUser(int id, int page = 0, int pagesize = 10) 
+        [HttpGet("user", Name = nameof(GetSearchesForUser))]
+        public IActionResult GetSearchesForUser(int page = 0, int pagesize = 10) 
         {
-            var searches = _dataservice.GetAllSearchesByUserId(id, page, pagesize);
+            var userid = User.Identity.Name;
+            var searches = _dataservice.GetAllSearchesByUserId(Convert.ToInt32(userid), page, pagesize);
             List<SearchViewModel> searchList = new List<SearchViewModel>();
 
             if (searches == null)
@@ -68,7 +69,7 @@ namespace PortfolioTwo.Controllers
 
             var returnobj = new
             {
-                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetSearchesForUser), page, pagesize, _dataservice.GetNumberOfSearchByUser(id)),
+                paging = LinkBuilder.CreatePageLink(Url.Link, nameof(GetSearchesForUser), page, pagesize, _dataservice.GetNumberOfSearchByUser(Convert.ToInt32(userid))),
                 data = searchList
             };
             return Ok(returnobj);
