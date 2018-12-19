@@ -17,12 +17,13 @@
         </tbody>
     </table>-->
 
-
-    <div class="row row2" data-bind="foreach: posts">
+    <container>
+        <div class="row row2" data-bind="foreach: posts">
             <div class="col-md-12" style="margin: 0.5em; text-align: center">
                 <a href="#" data-bind="click: $parent.showPost, text: title"></a>
             </div>
-    </div>
+        </div>
+    </container>
 
 </div>
 
