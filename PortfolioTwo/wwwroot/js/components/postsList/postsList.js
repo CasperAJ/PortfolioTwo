@@ -28,9 +28,9 @@
         };
 
         function callPosts() {
-            postman.publish("postListStateChanged", getPostsApi());
+            
             ds.getPosts(function (data) {
-                
+                postman.publish("postListStateChanged", getPostsApi());
                 posts(data.data);
                 next(data.paging.next);
                 console.log("new value: " + next());

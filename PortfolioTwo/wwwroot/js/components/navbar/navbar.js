@@ -19,8 +19,9 @@
         };
 
         var changeDropdown = function(data) {
-
+            vm.currentListting(data.link);
             dropdownButton(data);
+            console.log("listing val: " + vm.currentListting());
         };
 
         var changeComponent = function(){
