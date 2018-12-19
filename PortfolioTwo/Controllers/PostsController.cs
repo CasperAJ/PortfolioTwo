@@ -15,7 +15,7 @@ namespace PortfolioTwo.Controllers
 
     [Route("api/posts")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class PostsController : ControllerBase
     {
 

@@ -16,7 +16,7 @@ namespace PortfolioTwo.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class SearchesController : Controller
     {
         private IDataService _dataservice;
@@ -116,8 +116,9 @@ namespace PortfolioTwo.Controllers
         [HttpPost("bestrank", Name = nameof(BestRank))]
         public IActionResult BestRank(Search search, int page = 0, int pagesize = 10)
         {
-            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userid = "2";
+            // NOTE: this doesnt work anymore. doesnt find the name identifier.
+            //var uid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userid = User.Identity.Name;
             var numberOfPosts = 0;
             var results = _dataservice.SearchBestRank(search.SearchString, int.Parse(userid), page, pagesize, out numberOfPosts);
 
@@ -135,8 +136,7 @@ namespace PortfolioTwo.Controllers
         [HttpPost("exact", Name = nameof(Exact))]
         public IActionResult Exact(Search search, int page = 0, int pagesize = 10)
         {
-            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userid = "2";
+            var userid = User.Identity.Name;
 
             var numberOfPosts = 0;
             var results = _dataservice.SearchExact(search.SearchString, int.Parse(userid), page, pagesize, out numberOfPosts);
@@ -153,10 +153,10 @@ namespace PortfolioTwo.Controllers
         [HttpPost("besttfidf", Name = nameof(BestTFIDF))]
         public IActionResult BestTFIDF(Search search, int page = 0, int pagesize = 10)
         {
-            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userid = User.Identity.Name;
 
             var numberOfPosts = 0;
-            var userid = "2";
+            //var userid = "2";
             var results = _dataservice.SearchBestTFIDF(search.SearchString, int.Parse(userid), page, pagesize, out numberOfPosts);
 
             var returnobj = new

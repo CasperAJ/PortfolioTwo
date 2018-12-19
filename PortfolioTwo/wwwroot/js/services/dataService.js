@@ -2,11 +2,16 @@
 
 
     var getPosts = function (callback) {
+        console.log("listing: ", vm.currentListting());
+        console.log("searchValue: ", vm.currentListSearchValue());
 
         var jsondata = {
             searchstring: vm.currentListSearchValue()
         };
         $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
+            },
             url:vm.currentListting(),
             type:"POST",
             data:JSON.stringify(jsondata),
@@ -23,7 +28,7 @@
 
         $.ajax({
             beforeSend: function(request) {
-                request.setRequestHeader("bearer", vm.token());
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
             },
             url:"api/searches/"+vm.userid(),
             type:"GET",
@@ -38,11 +43,12 @@
     };
 
     var getSinglePost = function(callback){
+        console.log("token: ", vm.token());
         $.ajax({
             beforeSend: function(request) {
-                request.setRequestHeader("bearer", vm.token());
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
             },
-            url:vm.currentListting(),
+            url:vm.currentPost(),
             type:"GET",
             contentType:"application/json",
             dataType:"json",
@@ -58,7 +64,7 @@
 
         $.ajax({
             beforeSend: function(request) {
-                request.setRequestHeader("bearer", vm.token());
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
             },
             url:url,
             type:"GET",
@@ -76,7 +82,7 @@
 
         $.ajax({
             beforeSend: function(request) {
-                request.setRequestHeader("bearer", vm.token());
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
             },
             url:url,
             type:"GET",
@@ -95,7 +101,7 @@
 
         $.ajax({
             beforeSend: function(request) {
-                request.setRequestHeader("bearer", vm.token());
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
             },
             url:"api/markings/"+vm.userid()+"/user",
             type:"GET",
@@ -115,6 +121,9 @@
         };
 
         $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
+            },
             url:'/api/searches/cloud/simple',
             type:"POST",
             data:JSON.stringify(jsondata),
@@ -175,6 +184,9 @@
         };
 
         $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
+            },
             url:'/api/markings',
             type:"POST",
             data:JSON.stringify(jsondata),
@@ -195,6 +207,9 @@
         };
 
         $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
+            },
             url:'/api/markings',
             type:"DELETE",
             data:JSON.stringify(jsondata),
@@ -212,7 +227,7 @@
 
         $.ajax({
             beforeSend: function(request) {
-                request.setRequestHeader("bearer", vm.token());
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
             },
             url:"api/markings/"+postid,
             type:"GET",

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using DataServiceLayer;
@@ -14,7 +15,7 @@ namespace PortfolioTwo.Controllers
 {
     [Route("api/markings")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class MarkingsController : ControllerBase
     {
         private IDataService _dataservice;
@@ -28,10 +29,9 @@ namespace PortfolioTwo.Controllers
         [HttpGet("{postid}", Name = nameof(GetMarkById))]
         public IActionResult GetMarkById(int postId)
         {
-            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userid = 2;
+            var userid = User.Identity.Name;
 
-            var mark = _dataservice.GetMarkByIdForUser(postId, userid, 1);
+            var mark = _dataservice.GetMarkByIdForUser(postId, Convert.ToInt32(userid), 1);
             if (mark == null) return NotFound();
 
             var model = Mapper.Map<MarkingViewModel>(mark);
@@ -78,15 +78,14 @@ namespace PortfolioTwo.Controllers
         [HttpPost]
         public IActionResult Create(Mark mark)
         {
-            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userid = 2;
+            var userid = User.Identity.Name;
 
             if (mark.PostId == 0)
             {
                 return BadRequest();
             }
 
-            var newmark = _dataservice.CreateMark(mark.PostId, userid, 1, mark.Note);
+            var newmark = _dataservice.CreateMark(mark.PostId, Convert.ToInt32(userid), 1, mark.Note);
 
             if (!newmark)
             {
@@ -100,9 +99,8 @@ namespace PortfolioTwo.Controllers
         [HttpDelete]
         public IActionResult Delete(Mark mark)
         {
-            //var userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var userid = 2;
-            var check = _dataservice.DeleteMark(mark.PostId, userid, 1);
+            var userid = User.Identity.Name;
+            var check = _dataservice.DeleteMark(mark.PostId, Convert.ToInt32(userid), 1);
             if (check) return Ok();
             return NotFound();
         }
