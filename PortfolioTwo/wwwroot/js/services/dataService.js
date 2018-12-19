@@ -19,9 +19,22 @@
     }
     
     var getSearches = function(callback) {
-        $.getJSON("api/searches/"+vm.userid(), function(data) {
-            callback(data);
-        });
+        //TODO: change the searches to not need the user id in the url
+
+        $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("bearer", vm.token());
+            },
+            url:"api/searches/"+vm.userid(),
+            type:"GET",
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
+
+
     };
 
     var getSinglePost = function(callback){
@@ -42,22 +55,57 @@
     var GetAnswers = function(callback){
         var postid = vm.currentPost().split("/").slice(-1)[0];
         var url = 'api/posts/' + postid + '/children';
-        $.getJSON(url, function(data) {
-            callback(data);
-        });
+
+        $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("bearer", vm.token());
+            },
+            url:url,
+            type:"GET",
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
     };
 
 
     var GetComments = function(callback, url){
-        $.getJSON(url, function(data) {
-            callback(data);
-        });
+
+
+        $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("bearer", vm.token());
+            },
+            url:url,
+            type:"GET",
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
+
+
+
     };
 
     var GetMarks = function(callback) {
-        $.getJSON("api/markings/"+vm.userid()+"/user", function(data){
-            callback(data);
-        });
+
+        $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("bearer", vm.token());
+            },
+            url:"api/markings/"+vm.userid()+"/user",
+            type:"GET",
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
+
     }
 
     var getWords = function(callback){
@@ -162,9 +210,18 @@
     var checkPostMark = function(callback){
         var postid = vm.currentPost().split("/").slice(-1)[0];
 
-        $.getJSON('api/markings/'+postid, function(data) {
-            callback(data);
-        });
+        $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("bearer", vm.token());
+            },
+            url:"api/markings/"+postid,
+            type:"GET",
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
 
     }
 

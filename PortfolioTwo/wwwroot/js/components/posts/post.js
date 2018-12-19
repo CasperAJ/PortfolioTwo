@@ -2,6 +2,7 @@
     return function(params){
         var singlePost = ko.observable();
         var marking = ko.observable(false);
+        var noteVal = ko.observable();
         
 
         ds.getSinglePost(function(data) {
@@ -11,6 +12,7 @@
         ds.checkPostMark(function(data) {
             if(data != ""){
                 marking(true);
+                noteVal(data.note);
             }
         });
 
@@ -25,7 +27,7 @@
         var MarkPost = function(){
             ds.createMark(function(){
                 marking(true);
-            });
+            }, noteVal());
         }
 
         var UnMarkPost = function(){
@@ -43,7 +45,8 @@
             BackToList,
             MarkPost,
             marking,
-            UnMarkPost
+            UnMarkPost,
+            noteVal
         };
     };
 });
