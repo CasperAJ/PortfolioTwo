@@ -1,21 +1,4 @@
 <div class="container">
-        <!-- <div class="row" data-bind="foreach: searches">
-
-            <div class="col-md-3">
-                <div data-bind="click: $parent.goToSearch" class="card markStyle2" style="width: 18rem; margin: 1em;">
-                    <div class="card-body">
-                        <div>
-                            <h5 data-bind="text: searchstring"></h5>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            
-
-
-        </div> -->
-
         <table class="table table-striped table-hover" >
             <thead>
                 <tr>
@@ -28,4 +11,8 @@
                     </tr>
             </tbody>
         </table>
+
+        <button class="btn btn-outline-dark my-2 my-sm-0" data-bind="click: pagingPrevClick, enable: prevEnable">Prev</button>
+        <button class="btn btn-outline-dark my-2 my-sm-0" data-bind="click: pagingNextClick, enable: nextEnable">Next</button>
+
 </div>

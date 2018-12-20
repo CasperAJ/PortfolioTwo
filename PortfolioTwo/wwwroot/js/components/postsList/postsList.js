@@ -16,7 +16,6 @@
         });
 
         var clickNextPrev = function (link) {
-            console.log("clicked value: " + next());
             getPostsApi(link);
             callPosts();
         };

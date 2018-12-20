@@ -42,6 +42,25 @@
 
     };
 
+    var getSearchesPages = function(callback, url) {
+        //TODO: change the searches to not need the user id in the url
+
+        $.ajax({
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", "bearer " + vm.token());
+            },
+            url:url,
+            type:"GET",
+            contentType:"application/json",
+            dataType:"json",
+            success: function(data){
+              callback(data);
+            }
+          });
+
+
+    };
+
     var getSinglePost = function(callback){
         console.log("token: ", vm.token());
         $.ajax({
@@ -253,6 +272,7 @@
         createUser,
         createMark,
         deleteMark,
-        checkPostMark
+        checkPostMark,
+        getSearchesPages
     };
 });
